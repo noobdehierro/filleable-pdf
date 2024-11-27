@@ -251,12 +251,14 @@
             <div class="row mb-3">
                 <!-- Campo de entrada para Tipo de Crédito -->
                 <div class="col-md-4">
-                    <label for="tipocredito" class="form-label text-muted fs-6 fw-bold">Tipo de Crédito</label>
-                    <input type="text" class="form-control @error('tipocredito') is-invalid @enderror"
-                        id="tipocredito" name="tipocredito" value="{{ old('tipocredito') ?? 'Crédito Simple ' }}"
-                        aria-label="Tipo de Crédito" aria-describedby="tipocreditoError">
-                    @error('tipocredito')
-                        <div id="tipocreditoError" class="invalid-feedback">
+                    <label for="tipocreditoproducto" class="form-label text-muted fs-6 fw-bold">Tipo de
+                        Crédito</label>
+                    <input type="text" class="form-control @error('tipocreditoproducto') is-invalid @enderror"
+                        id="tipocreditoproducto" name="tipocreditoproducto"
+                        value="{{ old('tipocreditoproducto') ?? 'Crédito Simple ' }}" aria-label="Tipo de Crédito"
+                        aria-describedby="tipocreditoproductoError">
+                    @error('tipocreditoproducto')
+                        <div id="tipocreditoproductoError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -447,7 +449,7 @@
                     <label for="nombrearrendador" class="form-label text-muted fs-6 fw-bold"> Arrendador</label>
                     <input type="text" class="form-control @error('nombrearrendador') is-invalid @enderror"
                         id="nombrearrendador" name="nombrearrendador" value="{{ old('nombrearrendador') }}"
-                        placeholder=Arrendador" aria-label="Nombre del Arrendador"
+                        placeholder="Arrendador" aria-label="Nombre del Arrendador"
                         aria-describedby="nombrearrendadorError">
                     @error('nombrearrendador')
                         <div id="nombrearrendadorError" class="invalid-feedback">
@@ -459,7 +461,8 @@
 
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="apellidopaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido 1</label>
+                    <label for="apellidopaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido
+                        1</label>
                     <input type="text"
                         class="form-control @error('apellidopaternoarrendador') is-invalid @enderror"
                         id="apellidopaternoarrendador" name="apellidopaternoarrendador"
@@ -473,7 +476,8 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <label for="apellidomaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido 2</label>
+                    <label for="apellidomaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido
+                        2</label>
                     <input type="text"
                         class="form-control @error('apellidomaternoarrendador') is-invalid @enderror"
                         id="apellidomaternoarrendador" name="apellidomaternoarrendador"
@@ -557,8 +561,8 @@
                 <div class="col-md-4">
                     <label for="sueldo" class="form-label text-muted fs-6 fw-bold">Sueldo</label>
                     <input type="text" class="form-control @error('sueldo') is-invalid @enderror" id="sueldo"
-                        name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo"
-                        aria-label="Sueldo" aria-describedby="sueldoError">
+                        name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo" aria-label="Sueldo"
+                        aria-describedby="sueldoError">
                     @error('sueldo')
                         <div id="sueldoError" class="invalid-feedback">
                             {{ $message }}
@@ -584,8 +588,7 @@
                     <label for="nombrereflaboral" class="form-label text-muted fs-6 fw-bold">Nombre</label>
                     <input type="text" class="form-control @error('nombrereflaboral') is-invalid @enderror"
                         id="nombrereflaboral" name="nombrereflaboral" value="{{ old('nombrereflaboral') }}"
-                        placeholder="Nombre" aria-label="Nombre"
-                        aria-describedby="nombrereflaboralError">
+                        placeholder="Nombre" aria-label="Nombre" aria-describedby="nombrereflaboralError">
                     @error('nombrereflaboral')
                         <div id="nombrereflaboralError" class="invalid-feedback">
                             {{ $message }}
@@ -593,7 +596,8 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="apellidopaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido 1</label>
+                    <label for="apellidopaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
+                        1</label>
                     <input type="text"
                         class="form-control @error('apellidopaternoreflaboral') is-invalid @enderror"
                         id="apellidopaternoreflaboral" name="apellidopaternoreflaboral"
@@ -609,7 +613,8 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="apellidomaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido 2</label>
+                    <label for="apellidomaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
+                        2</label>
                     <input type="text"
                         class="form-control @error('apellidomaternoreflaboral') is-invalid @enderror"
                         id="apellidomaternoreflaboral" name="apellidomaternoreflaboral"
@@ -625,8 +630,7 @@
                     <label for="celularreflaboral" class="form-label text-muted fs-6 fw-bold">Célular</label>
                     <input type="text" class="form-control @error('celularreflaboral') is-invalid @enderror"
                         id="celularreflaboral" name="celularreflaboral" value="{{ old('celularreflaboral') }}"
-                        placeholder="Célular" aria-label="Célular"
-                        aria-describedby="celularreflaboralError">
+                        placeholder="Célular" aria-label="Célular" aria-describedby="celularreflaboralError">
                     @error('celularreflaboral')
                         <div id="celularreflaboralError" class="invalid-feedback">
                             {{ $message }}
@@ -637,9 +641,10 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="telefonofijoreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono fijo</label>
+                    <label for="telefonofijoreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono
+                        fijo</label>
                     <input type="text" class="form-control @error('telefonofijoreflaboral') is-invalid @enderror"
-                        id="telefonofijorefLaboral" name="telefonofijoreflaboral"
+                        id="telefonofijoreflaboral" name="telefonofijoreflaboral"
                         value="{{ old('telefonofijoreflaboral') }}" placeholder="Teléfono fijo"
                         aria-label="Teléfono fijo" aria-describedby="telefonofijoreflaboralError">
                     @error('telefonofijoreflaboral')
@@ -722,7 +727,7 @@
                             está otorgando?</legend>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="tipocredito" id="tipocredito1"
-                                value="Opción8" checked>
+                                value="asd" checked>
                             <label class="form-check-label" for="tipocredito1">Tradicional (Nómina)</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -830,19 +835,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
-                    <label for="montosolicitadotexto" class="form-label text-muted fs-6 fw-bold">Monto solicitado
-                        texto</label>
-                    <input type="text" class="form-control @error('montosolicitadotexto') is-invalid @enderror"
-                        id="montosolicitadotexto" name="montosolicitadotexto"
-                        value="{{ old('montosolicitadotexto') }}" placeholder="Monto solicitado texto"
-                        aria-label="Monto solicitado texto" aria-describedby="montosolicitadotextoError">
-                    @error('montosolicitadotexto')
-                        <div id="montosolicitadotextoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
             </div>
 
             <div class="row mb-3">
@@ -855,19 +848,6 @@
                         aria-describedby="montototalpagarError">
                     @error('montototalpagar')
                         <div id="montototalpagarError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="montototalpagartexto" class="form-label text-muted fs-6 fw-bold">Monto total a pagar
-                        texto</label>
-                    <input type="text" class="form-control @error('montototalpagartexto') is-invalid @enderror"
-                        id="montototalpagartexto" name="montototalpagartexto"
-                        value="{{ old('montototalpagartexto') }}" placeholder="Monto total a pagar texto"
-                        aria-label="Monto total a pagar texto" aria-describedby="montototalpagartextoError">
-                    @error('montototalpagartexto')
-                        <div id="montototalpagartextoError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -901,20 +881,27 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
-
             <div class="row mb-3">
                 <div class="col">
-                    <label for="aseguradora" class="form-label text-muted fs-6 fw-bold">Aseguradora</label>
-                    <input type="text" class="form-control @error('aseguradora') is-invalid @enderror"
-                        id="aseguradora" name="aseguradora" value="{{ old('aseguradora') }}"
-                        placeholder="Aseguradora" aria-label="Aseguradora" aria-describedby="aseguradoraError">
-                    @error('aseguradora')
-                        <div id="aseguradoraError" class="invalid-feedback">
+                    {{-- fechaprimerpago --}}
+                    <label for="fechaprimerpago" class="form-label text-muted fs-6 fw-bold">Fecha de
+                        primer pago</label>
+                    <input type="date" class="form-control @error('fechaprimerpago') is-invalid @enderror"
+                        id="fechaprimerpago" name="fechaprimerpago" value="{{ old('fechaprimerpago') }}"
+                        placeholder="Fecha de primer pago" aria-label="Fecha de primer pago"
+                        aria-describedby="fechaprimerpagoError">
+                    @error('fechaprimerpago')
+                        <div id="fechaprimerpagoError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+            </div>
+
+            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
+
+            <div class="row mb-3">
+
                 <div class="col">
                     <fieldset class="form-group">
                         {{-- <legend class="form-label text-muted fs-6 text-uppercase text-center">Enviar a domicilio</legend> --}}
@@ -1148,66 +1135,7 @@
                     </fieldset>
                 </div>
             </div>
-
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">PAGARÉ</h3>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="montopagareletra" class="form-label text-muted fs-6 fw-bold">Monto pagaré
-                        letra</label>
-                    <input type="text" class="form-control @error('montopagareletra') is-invalid @enderror"
-                        id="montopagareletra" name="montopagareletra" value="{{ old('montopagareletra') }}"
-                        placeholder="Monto pagaré letra" aria-label="Monto pagaré letra"
-                        aria-describedby="montopagareletraError">
-                    @error('montopagareletra')
-                        <div id="montopagareletraError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="fechapagere" class="form-label text-muted fs-6 fw-bold">Fecha que suscribe el
-                        pagaré</label>
-                    <input type="date" class="form-control @error('fechapagere') is-invalid @enderror"
-                        id="fechapagere" name="fechapagere" value="{{ old('fechapagere') }}"
-                        placeholder="Fecha primer pago" aria-label="Fecha primer pago"
-                        aria-describedby="fechapagereError">
-                    @error('fechapagere')
-                        <div id="fechapagereError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
             <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">FORMATO PARA SOLICITAR LA DOMICILIACIÓN</h3>
-            <div class="row mb-3">
-
-                <div class="col">
-                    <label for="fechadomiciliacion" class="form-label text-muted fs-6 fw-bold">Fecha solicitar la
-                        domiciliación</label>
-                    <input type="date" class="form-control @error('fechadomiciliacion') is-invalid @enderror"
-                        id="fechadomiciliacion" name="fechadomiciliacion"
-                        value="{{ old('fechadomiciliacion') }}" placeholder="Fecha solicitar la domiciliación"
-                        aria-label="Fecha solicitar la domiciliación" aria-describedby="fechadomiciliacionError">
-                    @error('fechadomiciliacion')
-                        <div id="fechadomiciliacionError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="biencredito" class="form-label text-muted fs-6 fw-bold">Crédito simple</label>
-                    <input type="text" class="form-control @error('biencredito') is-invalid @enderror"
-                        id="biencredito" name="biencredito" value="{{ old('biencredito') ?? 'SIN' }}"
-                        placeholder="Crédito simple" aria-label="Crédito simple"
-                        aria-describedby="biencreditoError">
-                    @error('biencredito')
-                        <div id="biencreditoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
 
             <div class="row mb-3">
                 <div class="col">
@@ -1259,8 +1187,8 @@
                     <input type="text"
                         class="form-control @error('montopagarirrevocabletexto') is-invalid @enderror"
                         id="montopagarirrevocabletexto" name="montopagarirrevocabletexto"
-                        aria-describedby="montopagarirrevocabletextoError" placeholder="Aval con folio"
-                        aria-label="Aval con folio">{{ old('montopagarirrevocabletexto') }}</input>
+                        aria-describedby="montopagarirrevocabletextoError" placeholder="Monto a pagar IRREVOCABLE"
+                        aria-label="Monto a pagar IRREVOCABLE">{{ old('montopagarirrevocabletexto') }}</input>
                     @error('montopagarirrevocabletexto')
                         <div id="montopagarirrevocabletextoError" class="invalid-feedback">
                             {{ $message }}
@@ -1281,76 +1209,6 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">AUTORIZACIÓN DE CONSULTA EN PLATAFORMA NOMI-PAY</h3>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="fechaautorizacion" class="form-label text-muted fs-6 fw-bold">Fecha de
-                        autorización</label>
-                    <input type="date" class="form-control @error('fechaautorizacion') is-invalid @enderror"
-                        id="fechaautorizacion" name="fechaautorizacion" aria-describedby="fechaautorizacionError"
-                        placeholder="Aval con folio"
-                        aria-label="Aval con folio">{{ old('fechaautorizacion') }}</input>
-                    @error('fechaautorizacion')
-                        <div id="fechaautorizacionError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="nombrequeautoriza" class="form-label text-muted fs-6 fw-bold">Nombre que
-                        autoriza</label>
-                    <input type="text" class="form-control @error('nombrequeautoriza') is-invalid @enderror"
-                        id="nombrequeautoriza" name="nombrequeautoriza" aria-describedby="nombrequeautorizaError"
-                        placeholder="Nombre que autoriza"
-                        aria-label="Nombre que autoriza">{{ old('nombrequeautoriza') }}</input>
-                    @error('nombrequeautoriza')
-                        <div id="nombrequeautorizaError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="numeroempleado" class="form-label text-muted fs-6 fw-bold">Numero de
-                        empleado</label>
-                    <input type="text" class="form-control @error('numeroempleado') is-invalid @enderror"
-                        id="numeroempleado" name="numeroempleado" aria-describedby="numeroempleadoError"
-                        placeholder="Numero de empleado"
-                        aria-label="Numero de empleado">{{ old('numeroempleado') }}</input>
-                    @error('numeroempleado')
-                        <div id="numeroempleadoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="numerofolio" class="form-label text-muted fs-6 fw-bold">Numero de folio</label>
-                    <input type="text" class="form-control @error('numerofolio') is-invalid @enderror"
-                        id="numerofolio" name="numerofolio" aria-describedby="numerofolioError"
-                        placeholder="Numero de folio"
-                        aria-label="Numero de folio">{{ old('numerofolio') }}</input>
-                    @error('numerofolio')
-                        <div id="numerofolioError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="usoexclusivo" class="form-label text-muted fs-6 fw-bold">Uso exclusivo de</label>
-                    <input type="text" class="form-control @error('usoexclusivo') is-invalid @enderror"
-                        id="usoexclusivo" name="usoexclusivo" aria-describedby="usoexclusivoError"
-                        placeholder="Uso exclusivo de"
-                        aria-label="Uso exclusivo de">{{ old('usoexclusivo') }}</input>
-                    @error('usoexclusivo')
-                        <div id="usoexclusivoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
             <!-- Botón de envío -->
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>

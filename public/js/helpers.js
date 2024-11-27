@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('#curp').mask('AAAAAAAAAAAAAAAAAA'); // CURP 18
     $('#rfc').mask('AAAAAAAAAAAAA'); // RFC 13
@@ -8,4 +8,7 @@ $(document).ready(function() {
     $('#celulararrendador').mask('0000000000'); // celulararrendador 10
     $('#telefonolaboral').mask('0000000000'); // telefonolaboral 10
     $('#celularreflaboral').mask('0000000000'); // celularreflaboral 10
+    $('#telefonofijoreflaboral').mask('0000000000'); // telefonofijoreflaboral 10
+
+
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Luecano\NumeroALetras\NumeroALetras;
 use mikehaertl\pdftk\Pdf;
 
 class FormController extends Controller
@@ -44,6 +45,16 @@ class FormController extends Controller
         //     dd("Localización aplicada: $locale <br/>");
         // }
         // dd($request->all());
+
+        $montosolicitadotexto = isset($request->montosolicitado)
+            ? $this->numberToLetters(floatval($request->montosolicitado))
+            : '';
+
+        $montototalpagartexto = isset($request->montototalpagar)
+            ? $this->numberToLetters(floatval($request->montototalpagar))
+            : '';
+
+
         $curp = $request->curp; // Variable para curp 
         $Text2 = $request->nombresolicitante; // Variable para Text2
         $Text3 = $request->apellidopaterno; // Variable para Text3
@@ -57,7 +68,8 @@ class FormController extends Controller
         $cel = $request->celular; // Variable para cel
         $Group13 = $request->tiposolicitud; // Variable para Group13
         $Group14 = $request->frecuencia; // Variable para Group14
-        $tipo_credito = $request->tipocredito; // Variable para tipo de credito
+        // $tipo_credito = $request->tipocredito; // Variable para tipo de credito
+        $tipo_credito = $request->tipocreditoproducto; // Variable para tipo de credito
         $Group15 = $request->genero; // Variable para Group15
         $tel_fijo = $request->telefonofijo; // Variable para tel fijo
         $fecha_nac =  date('dmY', strtotime($request->fechanacimiento)); // Variable para fecha nac cambiar fromato a solo nuemros
@@ -121,7 +133,8 @@ class FormController extends Controller
         $Opcion29_14 = "Opción29"; // Variable para 14
         $Opcion30_15 = $request->autorizacion; // Variable para 15
         $cp = $request->codigopostal; // Variable para cp
-        $Nombre_y_Firma_del_Servidor_Publico = $request->nombreservidorpublico; // Variable para Nombre y Firma del Servidor Público
+        // $Nombre_y_Firma_del_Servidor_Publico = $request->nombreservidorpublico; // Variable para Nombre y Firma del Servidor Público
+        $Nombre_y_Firma_del_Servidor_Publico = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Nombre y Firma del Servidor Público
         $fecha = strftime('%A %d de %B de %Y');
         $funciones = $request->funciones; // Variable para funciones
         // $na = $request->noaplicafunciones; // Variable para na
@@ -129,9 +142,11 @@ class FormController extends Controller
         $titular =  $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para titular
         $cat = $request->cat; // Variable para cat
         $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
-        $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
+        // $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
+        $monto_solicitado_texto = $montosolicitadotexto; // Variable para monto solicitado texto
         $Plazo = $request->plazo; // Variable para plazo
-        $Texto198765432345678 = $request->aseguradora; // Variable para Texto198765432345678
+        // $Texto198765432345678 = $request->aseguradora; // Variable para Texto198765432345678
+        $Texto198765432345678 = 'NO APLICA'; // Variable para Texto198765432345678
         $Texto1982347365736748RFJEHGF = isset($request->enviardomicilio) ? 'X' : ''; // Variable para Texto1982347365736748RFJEHGF
         $Texto234567FDGJHKJ = isset($request->consultarinternet) ? 'X' : ''; // Variable para Texto234567FDGJHKJ
         $Texto3Y54YTFHGV = isset($request->enviarcorreoelectronico) ? 'X' : ''; // Variable para Texto3Y54YTFHGV
@@ -167,27 +182,37 @@ class FormController extends Controller
         $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
         $Texto712233DHGGHHH = isset($request->faculto) ? '' : 'X'; // Variable para Texto712233DHGGHHH
         $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
-        $año = substr(date('Y', strtotime($request->fechapagere)), -1); // Variable para año
+        $año = substr(date('Y'), -1); // Variable para año
         $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
         $parcialidades = $request->parcialidades; // Variable para parcialidades
         $Text86 = date('d/m/Y', strtotime($request->fechaprimerpago)); // Variable para Text86
         $fecha_vencimiento = date('d/m/Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
-        $dia = date('d', strtotime($request->fechapagere)); // Variable para dia
-        $mes = date('m', strtotime($request->fechapagere)); // Variable para mes
-        $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
+        $dia = date('d'); // Variable para dia
+        $mes = date('m'); // Variable para mes
+        // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
+        $Bien_servicio_o_credito_a_pagar_Credito_Simple = ""; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Aval_con_folio = $request->avalconfolio; // Variable para Aval con folio
         $undefined = $request->montomaximo; // Variable para undefined
         $cien_MN_Incluye_IVA = $request->cienmn; // Variable para 100 MN Incluye IVA
-        $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
-        $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
-        $Número_de_folio = $request->numerofolio; // Variable para Número de folio
-        $Para_uso_exclusivo_de = $request->usoexclusivo; // Variable para Para uso exclusivo de
-        $año3 = substr(date('Y', strtotime($request->fechaautorizacion)), -2); // Variable para año        // Variable para año3
-        $año2 = date('Y', strtotime($request->fechadomiciliacion)); // Variable para año2
+        // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
+        $Por_este_conducto_autorizo_expresamente = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Por este conducto autorizo expresamente
+        // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
+        $Número_de_empleado = ""; // Variable para Número de empleado
+        // $Número_de_folio = $request->numerofolio; // Variable para Número de folio
+        $Número_de_folio = ""; // Variable para Número de folio
+        // $Para_uso_exclusivo_de = $request->usoexclusivo; // Variable para Para uso exclusivo de
+        $Para_uso_exclusivo_de = "ID Financiero"; // Variable para Para uso exclusivo de
+        // $año3 = substr(date('Y', strtotime($request->fechaautorizacion)), -2); // Variable para año        // Variable para año3
+        // $año3 = substr(date('Y', strtotime($fecha)), -2); // Variable para año        // Variable para año3
+        $año3 = substr(date('Y'), -2); // Variable para año        // Variable para año3
+        // $año2 = date('Y', strtotime($request->fechadomiciliacion)); // Variable para año2
+        $año2 = date('Y'); // Variable para año2
         $parcialidades_texto = $request->parcialidadestexto; // Variable para parcialidades texto
-        $Texto8PAGARE_MONTO_TOTAL_LETRA = $request->montopagareletra; // Variable para Texto8PAGARE MONTO TOTAL LETRA
+        // $Texto8PAGARE_MONTO_TOTAL_LETRA = $request->montopagareletra; // Variable para Texto8PAGARE MONTO TOTAL LETRA
+        $Texto8PAGARE_MONTO_TOTAL_LETRA = $montototalpagartexto; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Número_de_nómina = $request->numeronomina; // Variable para Número de nómina
-        $monto_total_a_pagar_texto = $request->montototalpagartexto; // Variable para monto total a pagar texto
+        // $monto_total_a_pagar_texto = $request->montototalpagartexto; // Variable para monto total a pagar texto
+        $monto_total_a_pagar_texto = $montototalpagartexto; // Variable para monto total a pagar texto
         $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
 
         $data = [
@@ -374,5 +399,15 @@ class FormController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function numberToLetters($number)
+    {
+        $formatter = new NumeroALetras();
+        $decimals = 2;
+        $currency = 'pesos';
+        $cents = 'centavos';
+
+        return $formatter->toMoney($number, $decimals, $currency, $cents);
     }
 }
