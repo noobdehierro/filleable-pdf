@@ -7,6 +7,9 @@
     <title>Formulario de solicitud de crédito</title>
     <!-- Incluir Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- agregar jquery --}}
+    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.mask.js') }}"></script>
 </head>
 
 <body>
@@ -203,10 +206,11 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="lugaryfecha" class="form-label text-muted fs-6 fw-bold">Lugar y fecha</label>
+                    <label for="lugaryfecha" class="form-label text-muted fs-6 fw-bold">Fecha del llenado</label>
                     <input type="text" class="form-control @error('lugaryfecha') is-invalid @enderror"
                         id="lugaryfecha" name="lugaryfecha" value="{{ old('lugaryfecha') }}"
-                        placeholder="Lugar y Fecha" aria-label="Lugar y Fecha" aria-describedby="lugaryfechaError">
+                        placeholder="Fecha del llenado" aria-label="Fecha del llenado"
+                        aria-describedby="lugaryfechaError">
                     @error('lugaryfecha')
                         <div id="lugaryfechaError" class="invalid-feedback">
                             {{ $message }}
@@ -249,7 +253,7 @@
                 <div class="col-md-4">
                     <label for="tipocredito" class="form-label text-muted fs-6 fw-bold">Tipo de Crédito</label>
                     <input type="text" class="form-control @error('tipocredito') is-invalid @enderror"
-                        id="tipocredito" name="tipocredito" value="{{ old('tipocredito') ?? 'CREDITO SIMPLE' }}"
+                        id="tipocredito" name="tipocredito" value="{{ old('tipocredito') ?? 'Crédito Simple ' }}"
                         aria-label="Tipo de Crédito" aria-describedby="tipocreditoError">
                     @error('tipocredito')
                         <div id="tipocreditoError" class="invalid-feedback">
@@ -299,7 +303,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS DE IDENTIFICACIÓN DE SOLICITANTE</h3>
+            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">SOLICITANTE:</h3>
             <div class="row mb-3">
                 <div class="col">
                     <label for="banco" class="form-label text-muted fs-6 fw-bold">Banco</label>
@@ -374,18 +378,6 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="paisnacimiento" class="form-label text-muted fs-6 fw-bold">Pais de Nacimiento</label>
-                    <input type="text" class="form-control @error('paisnacimiento') is-invalid @enderror"
-                        id="paisnacimiento" name="paisnacimiento" value="{{ old('paisnacimiento') ?? 'MEXICO' }}"
-                        placeholder="Pais de Nacimiento" aria-label="Pais de Nacimiento"
-                        aria-describedby="paisnacimientoError">
-                    @error('paisnacimiento')
-                        <div id="paisnacimientoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
                     <label for="entidadfederativa" class="form-label text-muted fs-6 fw-bold">Entidad
                         Federativa</label>
                     <input type="text" class="form-control @error('entidadfederativa') is-invalid @enderror"
@@ -394,20 +386,6 @@
                         aria-describedby="entidadfederativaError">
                     @error('entidadfederativa')
                         <div id="entidadfederativaError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="nacionalidad" class="form-label text-muted fs-6 fw-bold">Nacionalidad</label>
-                    <input type="text" class="form-control @error('nacionalidad') is-invalid @enderror"
-                        id="nacionalidad" name="nacionalidad" value="{{ old('nacionalidad') ?? 'MEXICANA' }}"
-                        placeholder="Nacionalidad" aria-label="Nacionalidad" aria-describedby="nacionalidadError">
-                    @error('nacionalidad')
-                        <div id="nacionalidadError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -421,32 +399,6 @@
                         aria-describedby="correoelectronicoError">
                     @error('correoelectronico')
                         <div id="correoelectronicoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="fiel" class="form-label text-muted fs-6 fw-bold">FIEL (opcional)</label>
-                    <input type="text" class="form-control @error('fiel') is-invalid @enderror" id="fiel"
-                        name="fiel" value="{{ old('fiel') }}" placeholder="FIEL (opcional)"
-                        aria-label="FIEL (opcional)" aria-describedby="fielError">
-                    @error('fiel')
-                        <div id="fielError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="sexoynformamigratoria" class="form-label text-muted fs-6 fw-bold">Tipo y Número de
-                        Forma Migratoria</label>
-                    <input type="text" class="form-control @error('tipoynformamigratoria') is-invalid @enderror"
-                        id="tipoynformamigratoria" name="tipoynformamigratoria"
-                        value="{{ old('tipoynformamigratoria') }}" placeholder="Tipo y Número de Forma Migratoria"
-                        aria-label="Tipo y Número de Forma Migratoria" aria-describedby="tipoynformamigratoriaError">
-                    @error('tipoynformamigratoria')
-                        <div id="tipoynformamigratoriaError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -492,11 +444,10 @@
 
                 <!-- Campo de entrada para nombre arrendador -->
                 <div class="col-md-4">
-                    <label for="nombrearrendador" class="form-label text-muted fs-6 fw-bold">Nombre del
-                        Arrendador</label>
+                    <label for="nombrearrendador" class="form-label text-muted fs-6 fw-bold"> Arrendador</label>
                     <input type="text" class="form-control @error('nombrearrendador') is-invalid @enderror"
                         id="nombrearrendador" name="nombrearrendador" value="{{ old('nombrearrendador') }}"
-                        placeholder="Nombre del Arrendador" aria-label="Nombre del Arrendador"
+                        placeholder=Arrendador" aria-label="Nombre del Arrendador"
                         aria-describedby="nombrearrendadorError">
                     @error('nombrearrendador')
                         <div id="nombrearrendadorError" class="invalid-feedback">
@@ -508,12 +459,11 @@
 
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="apellidopaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido paterno
-                        del arrendador</label>
+                    <label for="apellidopaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido 1</label>
                     <input type="text"
                         class="form-control @error('apellidopaternoarrendador') is-invalid @enderror"
                         id="apellidopaternoarrendador" name="apellidopaternoarrendador"
-                        value="{{ old('apellidopaternoarrendador') }}" placeholder="Apellido paterno del arrendador"
+                        value="{{ old('apellidopaternoarrendador') }}" placeholder="Apellido 1"
                         aria-label="Apellido paterno del arrendador"
                         aria-describedby="apellidopaternoarrendadorError">
                     @error('apellidopaternoarrendador')
@@ -523,12 +473,11 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <label for="apellidomaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido materno
-                        del arrendador</label>
+                    <label for="apellidomaternoarrendador" class="form-label text-muted fs-6 fw-bold">Apellido 2</label>
                     <input type="text"
                         class="form-control @error('apellidomaternoarrendador') is-invalid @enderror"
                         id="apellidomaternoarrendador" name="apellidomaternoarrendador"
-                        value="{{ old('apellidomaternoarrendador') }}" placeholder="Apellido materno del arrendador"
+                        value="{{ old('apellidomaternoarrendador') }}" placeholder="Apellido 2"
                         aria-label="Apellido materno del arrendador"
                         aria-describedby="apellidomaternoarrendadorError">
                     @error('apellidomaternoarrendador')
@@ -538,11 +487,10 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <label for="celulararrendador" class="form-label text-muted fs-6 fw-bold">Celular del
-                        arrendador</label>
+                    <label for="celulararrendador" class="form-label text-muted fs-6 fw-bold">Celular</label>
                     <input type="text" class="form-control @error('celulararrendador') is-invalid @enderror"
                         id="celulararrendador" name="celulararrendador" value="{{ old('celulararrendador') }}"
-                        placeholder="Celular del arrendador" aria-label="Celular del arrendador"
+                        placeholder="Celular" aria-label="Celular del arrendador"
                         aria-describedby="celulararrendadorError">
                     @error('celulararrendador')
                         <div id="celulararrendadorError" class="invalid-feedback">
@@ -551,19 +499,9 @@
                     @enderror
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS LABORALES DEL SOLICITANTE</h3>
+            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS LABORALES</h3>
             <div class="row mb-3">
-                <div class="col">
-                    <label for="convenio" class="form-label text-muted fs-6 fw-bold">Convenio</label>
-                    <input type="text" class="form-control @error('convenio') is-invalid @enderror"
-                        id="convenio" name="convenio" value="{{ old('convenio') }}" placeholder="Empresa"
-                        aria-label="Empresa" aria-describedby="convenioError">
-                    @error('convenio')
-                        <div id="convenioError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
                 <div class="col">
                     <label for="centrotrabajo" class="form-label text-muted fs-6 fw-bold">Centro de Trabajo</label>
                     <input type="text" class="form-control @error('centrotrabajo') is-invalid @enderror"
@@ -617,11 +555,10 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <label for="suelda" class="form-label text-muted fs-6 fw-bold">Sueldo (libre de
-                        impuestos)</label>
+                    <label for="sueldo" class="form-label text-muted fs-6 fw-bold">Sueldo</label>
                     <input type="text" class="form-control @error('sueldo') is-invalid @enderror" id="sueldo"
-                        name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo (libre de impuestos)"
-                        aria-label="Sueldo (libre de impuestos)" aria-describedby="sueldoError">
+                        name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo"
+                        aria-label="Sueldo" aria-describedby="sueldoError">
                     @error('sueldo')
                         <div id="sueldoError" class="invalid-feedback">
                             {{ $message }}
@@ -644,11 +581,10 @@
             <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">REFERENCIA LABORAL</h3>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="nombrereflaboral" class="form-label text-muted fs-6 fw-bold">Nombre del referente
-                        laboral</label>
+                    <label for="nombrereflaboral" class="form-label text-muted fs-6 fw-bold">Nombre</label>
                     <input type="text" class="form-control @error('nombrereflaboral') is-invalid @enderror"
                         id="nombrereflaboral" name="nombrereflaboral" value="{{ old('nombrereflaboral') }}"
-                        placeholder="Nombre del referente laboral" aria-label="Nombre del referente laboral"
+                        placeholder="Nombre" aria-label="Nombre"
                         aria-describedby="nombrereflaboralError">
                     @error('nombrereflaboral')
                         <div id="nombrereflaboralError" class="invalid-feedback">
@@ -657,13 +593,12 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="apellidopaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
-                        paterno</label>
+                    <label for="apellidopaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido 1</label>
                     <input type="text"
                         class="form-control @error('apellidopaternoreflaboral') is-invalid @enderror"
                         id="apellidopaternoreflaboral" name="apellidopaternoreflaboral"
-                        value="{{ old('apellidopaternoreflaboral') }}" placeholder="Apellido paterno"
-                        aria-label="Apellido paterno" aria-describedby="apellidopaternoreflaboralError">
+                        value="{{ old('apellidopaternoreflaboral') }}" placeholder="Apellido 1"
+                        aria-label="Apellido 1" aria-describedby="apellidopaternoreflaboralError">
                     @error('apellidopaternoreflaboral')
                         <div id="apellidopaternoreflaboralError" class="invalid-feedback">
                             {{ $message }}
@@ -674,13 +609,12 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="apellidomaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
-                        materno</label>
+                    <label for="apellidomaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido 2</label>
                     <input type="text"
                         class="form-control @error('apellidomaternoreflaboral') is-invalid @enderror"
                         id="apellidomaternoreflaboral" name="apellidomaternoreflaboral"
-                        value="{{ old('apellidomaternoreflaboral') }}" placeholder="Apellido materno"
-                        aria-label="Apellido materno" aria-describedby="apellidomaternoreflaboralError">
+                        value="{{ old('apellidomaternoreflaboral') }}" placeholder="Apellido 2"
+                        aria-label="Apellido 2" aria-describedby="apellidomaternoreflaboralError">
                     @error('apellidomaternoreflaboral')
                         <div id="apellidomaternoreflaboralError" class="invalid-feedback">
                             {{ $message }}
@@ -688,11 +622,10 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="celularreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono celular (10
-                        dígitos)</label>
+                    <label for="celularreflaboral" class="form-label text-muted fs-6 fw-bold">Célular</label>
                     <input type="text" class="form-control @error('celularreflaboral') is-invalid @enderror"
                         id="celularreflaboral" name="celularreflaboral" value="{{ old('celularreflaboral') }}"
-                        placeholder="Teléfono celular (10 dígitos)" aria-label="Teléfono celular (10 dígitos)"
+                        placeholder="Célular" aria-label="Célular"
                         aria-describedby="celularreflaboralError">
                     @error('celularreflaboral')
                         <div id="celularreflaboralError" class="invalid-feedback">
@@ -704,12 +637,11 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="telefonofijoreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono fijo (10
-                        dígitos)</label>
+                    <label for="telefonofijoreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono fijo</label>
                     <input type="text" class="form-control @error('telefonofijoreflaboral') is-invalid @enderror"
                         id="telefonofijorefLaboral" name="telefonofijoreflaboral"
-                        value="{{ old('telefonofijoreflaboral') }}" placeholder="Teléfono fijo (10 dígitos)"
-                        aria-label="Teléfono fijo (10 dígitos)" aria-describedby="telefonofijoreflaboralError">
+                        value="{{ old('telefonofijoreflaboral') }}" placeholder="Teléfono fijo"
+                        aria-label="Teléfono fijo" aria-describedby="telefonofijoreflaboralError">
                     @error('telefonofijoreflaboral')
                         <div id="telefonofijoreflaboralError" class="invalid-feedback">
                             {{ $message }}
@@ -737,48 +669,6 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Cuál es el origen de los recursos
-                            para pago del (los) crédito(s)?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago1" value="Opción1">
-                            <label class="form-check-label" for="origenrecursospago1">Ahorros propios</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago2" value="Opción2" checked>
-                            <label class="form-check-label" for="origenrecursospago2">Sueldos/Salarios</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago3" value="Opción3">
-                            <label class="form-check-label" for="origenrecursospago3">Arrendamiento de
-                                inmuebles</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago4" value="Opción4">
-                            <label class="form-check-label" for="origenrecursospago3">Inversiones</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago5" value="Opción5">
-                            <label class="form-check-label" for="origenrecursospago3">Negocio propio</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago6" value="Opción6">
-                            <label class="form-check-label" for="origenrecursospago3">Recursos de terceros</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="origenrecursospago"
-                                id="origenrecursospago7" value="Opción7">
-                            <label class="form-check-label" for="origenrecursospago3">Honorarios</label>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">¿Cuál es el destino de los
                             recursos otorgados en crédito?</legend>
                         <div class="form-check form-check-inline">
@@ -799,52 +689,9 @@
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿De qué forma pagará el (los crédito(s)
-                            (tipo de
-                            operaciones)?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="formapago" id="formapago1"
-                                value="Opción8" checked>
-                            <label class="form-check-label" for="formapago1">Transferencia</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="formapago" id="formapago2"
-                                value="Opción9">
-                            <label class="form-check-label" for="formapago2">Efectivo</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="formapago" id="formapago3"
-                                value="Opción10">
-                            <label class="form-check-label" for="formapago3">Cheque</label>
-                        </div>
-                    </fieldset>
-                </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Sobre qué montos realizará
-                            pagos al mes?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="montopago" id="montopago1"
-                                value="Opción11" checked>
-                            <label class="form-check-label" for="montopago1">$0 a $50,000</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="montopago" id="montopago2"
-                                value="Opción12">
-                            <label class="form-check-label" for="montopago2">$50,001 a $100,000</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="montopago" id="montopago3"
-                                value="Opción13">
-                            <label class="form-check-label" for="montopago3">Más de $100,001</label>
-                        </div>
-                    </fieldset>
-                </div>
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">¿Cuántas operaciones estima
@@ -864,34 +711,6 @@
                                 id="operacionesestimadas3" value="Opción3">
                             <label class="form-check-label" for="operacionesestimadas3">Más de 10</label>
                         </div>
-                    </fieldset>
-                </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Cuál es su ocupación o
-                            actividad económica?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ocupacioneconomica"
-                                id="ocupacioneconomica1" value="Opción4" checked>
-                            <label class="form-check-label" for="ocupacioneconomica1">Empleado público</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ocupacioneconomica"
-                                id="ocupacioneconomica2" value="Opción5">
-                            <label class="form-check-label" for="ocupacioneconomica2">Empleado privado</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ocupacioneconomica"
-                                id="ocupacioneconomica3" value="Opción6">
-                            <label class="form-check-label" for="ocupacioneconomica3">Estudiante, jubilado, pensionado
-                                o desesmpleado</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ocupacioneconomica"
-                                id="ocupacioneconomica4" value="Opción7">
-                            <label class="form-check-label" for="ocupacioneconomica3">Otro(especificar)</label>
-                        </div>
-
                     </fieldset>
                 </div>
             </div>
@@ -918,155 +737,19 @@
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Usted desempeña o ha desempeñado funciones
-                            públicas
-                            destacadas en un país extrenjero o en territorio nacional,
-                            considerando entre otros, a los jefes de Estado o de gobierno, líderes políticos,
-                            funcionarios gubernamentales,
-                            judiciales o militares de alta jerarquía, altos ejecutivos de empresas estatales o
-                            funcionarios o miembros importantes
-                            de partidos POLITICOs?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="funcionespublicas"
-                                id="funcionespublicas1" value="Opción14">
-                            <label class="form-check-label" for="funcionespublicas1">Si</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="funcionespublicas"
-                                id="funcionespublicas2" value="Opción15" checked>
-                            <label class="form-check-label" for="funcionespublicas2">No</label>
-                        </div>
-
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="funcionespublicasnacionalidad"
-                                id="funcionespublicasnacionalidad" value="Opción16">
-                            <label class="form-check-label" for="funcionespublicasnacionalidad">Extranjera</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="funcionespublicasnacionalidad"
-                                id="funcionespublicasnacionalidad2" value="Opción17">
-                            <label class="form-check-label" for="funcionespublicasnacionalidad2">Nacional</label>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Qué Nacionalidad tiene?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nacionalidad" id="nacionalidad1"
-                                value="Opción18" checked>
-                            <label class="form-check-label" for="nacionalidad1">Mexicano</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nacionalidad"
-                                id="nacionalidad2" value="Opción19">
-                            <label class="form-check-label" for="nacionalidad2">Extranjero</label>
-                        </div>
-                    </fieldset>
-                </div>
             </div>
-
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Usted tiene algún proveedor de Recursos o
-                            Propietario Real?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="algunprovedor"
-                                id="algunprovedor1" value="Opción20">
-                            <label class="form-check-label" for="algunprovedor1">Si</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="algunprovedor"
-                                id="algunprovedor2" value="Opción21" checked>
-                            <label class="form-check-label" for="algunprovedor2">No</label>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">¿Su conyuge o algun pariente por
-                            consanguinidad o
-                            afinidad hasta el segundo grado del apoderado legal
-                            desempeña actualmente o desempeñó durante el año inmediato anterior algún cargo público a
-                            nivel federal, estatal
-                            o municipal en México o en algún país extranjero?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="parientespublicos"
-                                id="parientespublicos1" value="Opción22">
-                            <label class="form-check-label" for="parientespublicos1">Si</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="parientespublicos"
-                                id="parientespublicos2" value="Opción23" checked>
-                            <label class="form-check-label" for="parientespublicos2">No</label>
-                        </div>
-
-                    </fieldset>
-                </div>
-                {{-- agregar 4 checkbox --}}
-
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 text-uppercase text-center">DOCUMENTOS</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                value="Opción24" name="inlineCheckbox1" checked>
-                            <label class="form-check-label" for="inlineCheckbox1">ID personal oficial
-                                vigente</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                value="Opción25" name="inlineCheckbox2" checked>
-                            <label class="form-check-label" for="inlineCheckbox2">Comp. de domicilio</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                value="Opción26" name="inlineCheckbox3" checked>
-                            <label class="form-check-label" for="inlineCheckbox3">Comp. de ingreso</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4"
-                                value="Opción27" name="inlineCheckbox4" checked>
-                            <label class="form-check-label" for="inlineCheckbox4">Edo. de cuenta bancario</label>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 fw-bold">En caso de requerir factura
-                            integrar los siguientes docs.</legend>
-                        <legend class="form-label text-muted fs-6 fw-bold">Constancia de Situación Fiscal</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requierefactura"
-                                id="requierefactura1" value="Opción28">
-                            <label class="form-check-label" for="requierefactura1">Si</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requierefactura"
-                                id="requierefactura2" value="Opción29" checked>
-                            <label class="form-check-label" for="requierefactura2">No</label>
-                        </div>
-                    </fieldset>
-                </div>
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Mercadotecnia y Publicidad.</legend>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="autorizacion"
-                                id="autorizacion1" value="Opción30" checked>
+                            <input class="form-check-input" type="radio" name="autorizacion" id="autorizacion1"
+                                value="Opción30" checked>
                             <label class="form-check-label" for="autorizacion1">Si</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="autorizacion"
-                                id="autorizacion2" value="Opción31">
+                            <input class="form-check-input" type="radio" name="autorizacion" id="autorizacion2"
+                                value="Opción31">
                             <label class="form-check-label" for="autorizacion2">No</label>
                         </div>
 
@@ -1074,8 +757,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS COMPLEMENTARIOS (APARTADO II LLENARSE EN TODOS LOS
-                CASOS)</h3>
+            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS:</h3>
 
             <div class="row mb-3">
                 <div class="col">
@@ -1089,44 +771,18 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
-                    <label for="noaplicafunciones" class="form-label text-muted fs-6 fw-bold">Otras
-                        funciones</label>
-                    <input type="text" class="form-control @error('noaplicafunciones') is-invalid @enderror"
-                        id="noaplicafunciones" name="noaplicafunciones"
-                        value="{{ old('noaplicafunciones') ?? 'NO APLICA' }}" placeholder="Otras funciones"
-                        aria-label="Otras funciones" aria-describedby="noaplicafuncionesError">
-                    @error('noaplicafunciones')
-                        <div id="noaplicafuncionesError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col">
                     <label for="nombreservidorpublico" class="form-label text-muted fs-6 fw-bold">Nombre del
-                        servidor publico</label>
+                        cliente</label>
                     <input type="text" class="form-control @error('nombreservidorpublico') is-invalid @enderror"
                         id="nombreservidorpublico" name="nombreservidorpublico"
-                        value="{{ old('nombreservidorpublico') }}" placeholder="Nombre del servidor publico"
-                        aria-label="Nombre del servidor publico" aria-describedby="nombreservidorpublicoError">
+                        value="{{ old('nombreservidorpublico') }}" placeholder="Nombre del cliente"
+                        aria-label="Nombre del cliente" aria-describedby="nombreservidorpublicoError">
                     @error('nombreservidorpublico')
                         <div id="nombreservidorpublicoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col">
-                    <label for="lugarelaboracion" class="form-label text-muted fs-6 fw-bold">Lugar de
-                        laboracion</label>
-                    <input type="text" class="form-control @error('lugarelaboracion') is-invalid @enderror"
-                        id="lugarelaboracion" name="lugarelaboracion" value="{{ old('lugarelaboracion') }}"
-                        placeholder="Lugar de laboracion" aria-label="Lugar de laboracion"
-                        aria-describedby="lugarelaboracionError">
-                    @error('lugarelaboracion')
-                        <div id="lugarelaboracionError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -1236,8 +892,7 @@
                     <label for="fechacorte" class="form-label text-muted fs-6 fw-bold">Fecha de corte</label>
                     <input type="date" class="form-control @error('fechacorte') is-invalid @enderror"
                         id="fechacorte" name="fechacorte" value="{{ old('fechacorte') }}"
-                        placeholder="Fecha de corte" aria-label="Fecha de corte"
-                        aria-describedby="fechacorteError">
+                        placeholder="Fecha de corte" aria-label="Fecha de corte" aria-describedby="fechacorteError">
                     @error('fechacorte')
                         <div id="fechacorteError" class="invalid-feedback">
                             {{ $message }}
@@ -1293,29 +948,18 @@
                 <div class="col">
                     <label for="seidentificacon" class="form-label text-muted fs-6 fw-bold">Se identifica
                         con</label>
-                    <input type="text" class="form-control @error('seidentificacon') is-invalid @enderror"
-                        id="seidentificacon" name="seidentificacon" value="{{ old('seidentificacon') }}"
-                        placeholder="Se identifica con" aria-label="Se identifica con"
-                        aria-describedby="seidentificaconError">
+                    <select class="form-select" aria-label="Default select example" name="seidentificacon">
+                        <option selected>--Seleccione--</option>
+                        <option value="INE">INE</option>
+                        <option value="Licencia">Licencia</option>
+                    </select>
                     @error('seidentificacon')
                         <div id="seidentificaconError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="col">
-                    <label for="domiciliogeneral" class="form-label text-muted fs-6 fw-bold">Domicilio
-                        general</label>
-                    <input type="text" class="form-control @error('domiciliogeneral') is-invalid @enderror"
-                        id="domiciliogeneral" name="domiciliogeneral" value="{{ old('domiciliogeneral') }}"
-                        placeholder="Domicilio general" aria-label="Domicilio general"
-                        aria-describedby="domiciliogeneralError">
-                    @error('domiciliogeneral')
-                        <div id="domiciliogeneralError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
             </div>
 
             <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">IV. DISPOSICIÓN Y DOCUMENTACIÓN</h3>
@@ -1334,17 +978,6 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
-                    <label for="sucursal" class="form-label text-muted fs-6 fw-bold">Sucursal</label>
-                    <input type="text" class="form-control @error('sucursal') is-invalid @enderror"
-                        id="sucursal" name="sucursal" value="{{ old('sucursal') }}" placeholder="Sucursal"
-                        aria-label="Sucursal" aria-describedby="sucursalError">
-                    @error('sucursal')
-                        <div id="sucursalError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
             </div>
             <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">V. PLAZO Y CONDICIONES DE PAGO DEL CRÉDITO</h3>
 
@@ -1353,8 +986,7 @@
                     <label for="parcialidades" class="form-label text-muted fs-6 fw-bold">Parcialidades</label>
                     <input type="text" class="form-control @error('parcialidades') is-invalid @enderror"
                         id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
-                        placeholder="Parcialidades" aria-label="Parcialidades"
-                        aria-describedby="parcialidadesError">
+                        placeholder="Parcialidades" aria-label="Parcialidades" aria-describedby="parcialidadesError">
                     @error('parcialidades')
                         <div id="parcialidadesError" class="invalid-feedback">
                             {{ $message }}
@@ -1365,9 +997,9 @@
                     <label for="parcialidadestexto" class="form-label text-muted fs-6 fw-bold">Parcialidades
                         Texto</label>
                     <input type="text" class="form-control @error('parcialidadestexto') is-invalid @enderror"
-                        id="parcialidadestexto" name="parcialidadestexto"
-                        value="{{ old('parcialidadestexto') }}" placeholder="Parcialidades Texto"
-                        aria-label="Parcialidades Texto" aria-describedby="parcialidadestextoError">
+                        id="parcialidadestexto" name="parcialidadestexto" value="{{ old('parcialidadestexto') }}"
+                        placeholder="Parcialidades Texto" aria-label="Parcialidades Texto"
+                        aria-describedby="parcialidadestextoError">
                     @error('parcialidadestexto')
                         <div id="parcialidadestextoError" class="invalid-feedback">
                             {{ $message }}
@@ -1682,11 +1314,11 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <label for="numeroempleado" class="form-label text-muted fs-6 fw-bold">Numero de empleado</label>
-                    <input type="text"
-                        class="form-control @error('numeroempleado') is-invalid @enderror"
-                        id="numeroempleado" name="numeroempleado"
-                        aria-describedby="numeroempleadoError" placeholder="Numero de empleado"
+                    <label for="numeroempleado" class="form-label text-muted fs-6 fw-bold">Numero de
+                        empleado</label>
+                    <input type="text" class="form-control @error('numeroempleado') is-invalid @enderror"
+                        id="numeroempleado" name="numeroempleado" aria-describedby="numeroempleadoError"
+                        placeholder="Numero de empleado"
                         aria-label="Numero de empleado">{{ old('numeroempleado') }}</input>
                     @error('numeroempleado')
                         <div id="numeroempleadoError" class="invalid-feedback">
@@ -1710,7 +1342,8 @@
                     <label for="usoexclusivo" class="form-label text-muted fs-6 fw-bold">Uso exclusivo de</label>
                     <input type="text" class="form-control @error('usoexclusivo') is-invalid @enderror"
                         id="usoexclusivo" name="usoexclusivo" aria-describedby="usoexclusivoError"
-                        placeholder="Uso exclusivo de" aria-label="Uso exclusivo de">{{ old('usoexclusivo') }}</input>
+                        placeholder="Uso exclusivo de"
+                        aria-label="Uso exclusivo de">{{ old('usoexclusivo') }}</input>
                     @error('usoexclusivo')
                         <div id="usoexclusivoError" class="invalid-feedback">
                             {{ $message }}
@@ -1727,41 +1360,7 @@
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script para manejar los mensajes de éxito, error y clases inválidas -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ocultar mensaje de éxito después de 5 segundos
-            var successMessage = document.getElementById('success-message');
-            if (successMessage) {
-                setTimeout(function() {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }
-
-            // Ocultar mensaje de error después de 5 segundos
-            // var errorMessage = document.getElementById('error-message');
-            // if (errorMessage) {
-            //     setTimeout(function() {
-            //         errorMessage.style.display = 'none';
-            //     }, 3000);
-            // }
-
-            // Eliminar clases 'is-invalid' después de que el usuario empiece a escribir
-            var invalidFields = document.querySelectorAll('.is-invalid');
-
-            // Función para eliminar la clase 'is-invalid' al escribir en el campo
-            function clearInvalidState(event) {
-                event.target.classList.remove('is-invalid');
-            }
-
-            // Añadir el evento 'input' a cada campo que tenga la clase 'is-invalid'
-            invalidFields.forEach(function(field) {
-                field.addEventListener('input', clearInvalidState);
-            });
-
-        });
-    </script>
+    <script src="{{ asset('js/helpers.js') }}"></script>
 
 </body>
 
