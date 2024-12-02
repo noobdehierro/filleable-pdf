@@ -13,35 +13,15 @@
 </head>
 
 <body>
-    <div class="container mt-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-        <h2 class="text-center mb-4">Formulario de solicitud de crédito</h2>
+    <form action="{{ route('form.store') }}" method="POST" novalidate>
 
-        <!-- Mostrar mensajes de éxito -->
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-message">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-        @endif
-
-        <!-- Mostrar errores de validación -->
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-message">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-        @endif
-
-        <!-- Formulario -->
-        <form action="{{ route('form.store') }}" method="POST" novalidate>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+            <h2 class="text-center mb-4">Formulario de solicitud de crédito</h2>
+            <!-- Formulario -->
             @csrf
             <!-- Primera fila de dos campos -->
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="asesor" class="form-label text-muted fs-6 fw-bold">Asesor</label>
                     <input type="text" class="form-control @error('asesor') is-invalid @enderror" id="asesor"
                         name="asesor" value="{{ old('asesor') }}" placeholder="Asesor" aria-label="Asesor"
@@ -52,7 +32,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="solicitante" class="form-label text-muted fs-6 fw-bold">Solicitante</label>
                     <input type="text" class="form-control @error('nombresolicitante') is-invalid @enderror"
                         id="nombresolicitante" name="nombresolicitante" value="{{ old('nombresolicitante') }}"
@@ -66,7 +46,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="apellidopaterno" class="form-label text-muted fs-6 fw-bold">Apellido Paterno</label>
                     <input type="text" class="form-control @error('apellidopaterno') is-invalid @enderror"
                         id="apellidopaterno" name="apellidopaterno" value="{{ old('apellidopaterno') }}"
@@ -78,7 +58,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="apellidomaterno" class="form-label text-muted fs-6 fw-bold">Apellido Materno</label>
                     <input type="text" class="form-control @error('apellidomaterno') is-invalid @enderror"
                         id="apellidomaterno" name="apellidomaterno" value="{{ old('apellidomaterno') }}"
@@ -92,7 +72,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="curp" class="form-label text-muted fs-6 fw-bold">CURP</label>
                     <input type="text" class="form-control @error('curp') is-invalid @enderror" id="curp"
                         name="curp" value="{{ old('curp') }}" placeholder="CURP" aria-label="CURP"
@@ -103,7 +83,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="rfc" class="form-label text-muted fs-6 fw-bold">RFC</label>
                     <input type="text" class="form-control @error('rfc') is-invalid @enderror" id="rfc"
                         name="rfc" value="{{ old('rfc') }}" placeholder="RFC" aria-label="RFC"
@@ -117,19 +97,18 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="domicilio" class="form-label text-muted fs-6 fw-bold">Domicilio</label>
-                    <input type="text" class="form-control @error('domicilio') is-invalid @enderror"
-                        id="domicilio" name="domicilio" value="{{ old('domicilio') }}"
-                        placeholder="Domicilio (calle y número)" aria-label="Domicilio"
-                        aria-describedby="domicilioError">
+                    <input type="text" class="form-control @error('domicilio') is-invalid @enderror" id="domicilio"
+                        name="domicilio" value="{{ old('domicilio') }}" placeholder="Domicilio (calle y número)"
+                        aria-label="Domicilio" aria-describedby="domicilioError">
                     @error('domicilio')
                         <div id="domicilioError" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="colonia" class="form-label text-muted fs-6 fw-bold">Colonia</label>
                     <input type="text" class="form-control @error('colonia') is-invalid @enderror" id="colonia"
                         name="colonia" value="{{ old('colonia') }}" placeholder="Colonia" aria-label="Colonia"
@@ -142,7 +121,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="delegacion" class="form-label text-muted fs-6 fw-bold">Delegación o municipio</label>
                     <input type="text" class="form-control @error('delegacion') is-invalid @enderror"
                         id="delegacion" name="delegacion" value="{{ old('delegacion') }}"
@@ -154,7 +133,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="ciudad" class="form-label text-muted fs-6 fw-bold">Ciudad</label>
                     <input type="text" class="form-control @error('ciudad') is-invalid @enderror" id="ciudad"
                         name="ciudad" value="{{ old('ciudad') }}" placeholder="Ciudad" aria-label="Ciudad"
@@ -168,7 +147,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="estado" class="form-label text-muted fs-6 fw-bold">Estado</label>
                     <input type="text" class="form-control @error('estado') is-invalid @enderror" id="estado"
                         name="estado" value="{{ old('estado') }}" placeholder="Estado" aria-label="Estado"
@@ -179,7 +158,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="codigopostal" class="form-label text-muted fs-6 fw-bold">Código Postal</label>
                     <input type="text" class="form-control @error('codigopostal') is-invalid @enderror"
                         id="codigopostal" name="codigopostal" value="{{ old('codigopostal') }}"
@@ -194,7 +173,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="celular" class="form-label text-muted fs-6 fw-bold">Celular</label>
                     <input type="text" class="form-control @error('celular') is-invalid @enderror" id="celular"
                         name="celular" value="{{ old('celular') }}" placeholder="Celular" aria-label="Celular"
@@ -205,7 +184,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="lugaryfecha" class="form-label text-muted fs-6 fw-bold">Fecha del llenado</label>
                     <input type="text" class="form-control @error('lugaryfecha') is-invalid @enderror"
                         id="lugaryfecha" name="lugaryfecha" value="{{ old('lugaryfecha') }}"
@@ -218,11 +197,14 @@
                     @enderror
                 </div>
             </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">CRÉDITO SOLICITADO</h3>
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CRÉDITO SOLICITADO</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="montosolicitado" class="form-label text-muted fs-6 fw-bold">Monto solicitado</label>
                     <input type="text" class="form-control @error('montosolicitado') is-invalid @enderror"
                         id="montosolicitado" name="montosolicitado" value="{{ old('montosolicitado') }}"
@@ -234,7 +216,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="plazo" class="form-label text-muted fs-6 fw-bold">Plazo</label>
                     <input type="text" class="form-control @error('plazo') is-invalid @enderror" id="plazo"
                         name="plazo" value="{{ old('plazo') }}" placeholder="Plazo" aria-label="Plazo"
@@ -268,16 +250,12 @@
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Frecuencia de pago</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="frecuencia"
-                                id="frecuenciaQuincenal" value="Opción4" checked>
-                            <label class="form-check-label" for="frecuenciaQuincenal">Quincenal</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="frecuencia" id="frecuenciaMensual"
-                                value="Opción1">
-                            <label class="form-check-label" for="frecuenciaMensual">Mensual</label>
-                        </div>
+                        <select class="form-select" aria-label="Frecuencia de pago" name="frecuencia"
+                            id="frecuencia">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción4">Quincenal</option>
+                            <option value="Opción1">Mensual</option>
+                        </select>
                     </fieldset>
                 </div>
 
@@ -285,29 +263,23 @@
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Tipo de solicitud</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tiposolicitud"
-                                id="tiposolicitudapertura" value="Opción1" checked>
-                            <label class="form-check-label" for="tiposolicitudapertura">Apertura</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tiposolicitud"
-                                id="tiposolicitudrefinanciamiento" value="Opción2">
-                            <label class="form-check-label"
-                                for="tiposolicitudrefinanciamiento">Refinanciamiento</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tiposolicitud" id="tiposolicitudcc"
-                                value="Opción3">
-                            <label class="form-check-label" for="tiposolicitudcc">CC</label>
-                        </div>
+                        <select class="form-select" aria-label="Tipo de solicitud" name="tiposolicitud"
+                            id="tiposolicitud">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción1">Apertura</option>
+                            <option value="Opción2">Refinanciamiento</option>
+                            <option value="Opción3">CC</option>
+                        </select>
                     </fieldset>
                 </div>
             </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">SOLICITANTE:</h3>
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">SOLICITANTE:</h3>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="banco" class="form-label text-muted fs-6 fw-bold">Banco</label>
                     <input type="text" class="form-control @error('banco') is-invalid @enderror" id="banco"
                         name="banco" value="{{ old('banco') }}" placeholder="Banco" aria-label="Banco"
@@ -318,7 +290,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="ctaclabe" class="form-label text-muted fs-6 fw-bold">Cuenta CLABE</label>
                     <input type="text" class="form-control @error('ctaclabe') is-invalid @enderror"
                         id="ctaclabe" name="ctaclabe" value="{{ old('ctaclabe') }}" placeholder="Cuenta CLABE"
@@ -336,16 +308,12 @@
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Genero</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="genero" id="generomasculino"
-                                value="Opción2">
-                            <label class="form-check-label" for="generomasculino">Masculino</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="genero" id="generofemenino"
-                                value="Opción1">
-                            <label class="form-check-label" for="generofemenino">Femenino</label>
-                        </div>
+
+                        <select class="form-select" aria-label="Genero" name="genero" id="genero">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción2">Masculino</option>
+                            <option value="Opción1">Femenino</option>
+                        </select>
                     </fieldset>
                 </div>
                 <!-- Campo de entrada para telefonofijo -->
@@ -379,7 +347,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="entidadfederativa" class="form-label text-muted fs-6 fw-bold">Entidad
                         Federativa</label>
                     <input type="text" class="form-control @error('entidadfederativa') is-invalid @enderror"
@@ -392,7 +360,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="correoelectronico" class="form-label text-muted fs-6 fw-bold">Correo
                         Electrônico</label>
                     <input type="text" class="form-control @error('correoelectronico') is-invalid @enderror"
@@ -412,21 +380,12 @@
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Tipo de vivienda</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipovivienda" id="tipovivienda1"
-                                value="Opción3" checked">
-                            <label class="form-check-label" for="tipovivienda1">Propia</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipovivienda" id="tipovivienda2"
-                                value="Opción1">
-                            <label class="form-check-label" for="tipovivienda2">Rentada</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipovivienda" id="tipovivienda3"
-                                value="Opción2">
-                            <label class="form-check-label" for="tipovivienda3">Vive con papás</label>
-                        </div>
+                        <select class="form-select" aria-label="tipovivienda" name="tipovivienda">
+                            <option value="" selected>Seleccione una opción</option>
+                            <option value="Opción3">Propia</option>
+                            <option value="Opción1">Rentada</option>
+                            <option value="Opción2">Vive con papás</option>
+                        </select>
                     </fieldset>
                 </div>
                 <!-- Campo de entrada para tiempo de residir  -->
@@ -503,10 +462,14 @@
                     @enderror
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS LABORALES</h3>
+
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">DATOS LABORALES</h3>
             <div class="row mb-3">
 
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="centrotrabajo" class="form-label text-muted fs-6 fw-bold">Centro de Trabajo</label>
                     <input type="text" class="form-control @error('centrotrabajo') is-invalid @enderror"
                         id="centrotrabajo" name="centrotrabajo" value="{{ old('centrotrabajo') }}"
@@ -518,10 +481,22 @@
                         </div>
                     @enderror
                 </div>
+
+                <div class="col-12 col-md-6">
+                    <label for="puesto" class="form-label text-muted fs-6 fw-bold">Puesto</label>
+                    <input type="text" class="form-control @error('puesto') is-invalid @enderror" id="puesto"
+                        name="puesto" value="{{ old('puesto') }}" placeholder="Puesto" aria-label="Puesto"
+                        aria-describedby="puestoError">
+                    @error('puesto')
+                        <div id="puestoError" class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="telefonolaboral" class="form-label text-muted fs-6 fw-bold">Telefono laboral</label>
                     <input type="text" class="form-control @error('telefonolaboral') is-invalid @enderror"
                         id="telefonolaboral" name="telefonolaboral" value="{{ old('telefonolaboral') }}"
@@ -533,7 +508,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="extencion" class="form-label text-muted fs-6 fw-bold">Extencion</label>
                     <input type="text" class="form-control @error('extencion') is-invalid @enderror"
                         id="extencion" name="extencion" value="{{ old('extencion') }}" placeholder="Extencion"
@@ -547,18 +522,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="puesto" class="form-label text-muted fs-6 fw-bold">Puesto</label>
-                    <input type="text" class="form-control @error('puesto') is-invalid @enderror" id="puesto"
-                        name="puesto" value="{{ old('puesto') }}" placeholder="Puesto" aria-label="Puesto"
-                        aria-describedby="puestoError">
-                    @error('puesto')
-                        <div id="puestoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
                     <label for="sueldo" class="form-label text-muted fs-6 fw-bold">Sueldo</label>
                     <input type="text" class="form-control @error('sueldo') is-invalid @enderror" id="sueldo"
                         name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo" aria-label="Sueldo"
@@ -569,7 +533,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
                     <label for="fechaingreso" class="form-label text-muted fs-6 fw-bold">Fecha de ingreso</label>
                     <input type="date" class="form-control @error('fechaingreso') is-invalid @enderror"
                         id="fechaingreso" name="fechaingreso" value="{{ old('fechaingreso') }}"
@@ -582,9 +546,12 @@
                     @enderror
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">REFERENCIA LABORAL</h3>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">REFERENCIA LABORAL</h3>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="nombrereflaboral" class="form-label text-muted fs-6 fw-bold">Nombre</label>
                     <input type="text" class="form-control @error('nombrereflaboral') is-invalid @enderror"
                         id="nombrereflaboral" name="nombrereflaboral" value="{{ old('nombrereflaboral') }}"
@@ -595,7 +562,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="apellidopaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
                         1</label>
                     <input type="text"
@@ -612,7 +579,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="apellidomaternoreflaboral" class="form-label text-muted fs-6 fw-bold">Apellido
                         2</label>
                     <input type="text"
@@ -626,7 +593,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="celularreflaboral" class="form-label text-muted fs-6 fw-bold">Célular</label>
                     <input type="text" class="form-control @error('celularreflaboral') is-invalid @enderror"
                         id="celularreflaboral" name="celularreflaboral" value="{{ old('celularreflaboral') }}"
@@ -640,7 +607,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="telefonofijoreflaboral" class="form-label text-muted fs-6 fw-bold">Teléfono
                         fijo</label>
                     <input type="text" class="form-control @error('telefonofijoreflaboral') is-invalid @enderror"
@@ -653,7 +620,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="direccionreflaboral" class="form-label text-muted fs-6 fw-bold">Dirección (Calle /
                         Colonia / Municipio / Ciudad / Estado / CP)</label>
                     <input type="text" class="form-control @error('direccionreflaboral') is-invalid @enderror"
@@ -668,136 +635,95 @@
                     @enderror
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">CONOCIMIENTO DEL CLIENTE</h3>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CONOCIMIENTO DEL CLIENTE</h3>
 
             {{-- fila de 3 radios butones --}}
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
+
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">¿Cuál es el destino de los
                             recursos otorgados en crédito?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="destinorecursos"
-                                id="destinorecursos1" value="Opción8" checked>
-                            <label class="form-check-label" for="destinorecursos1">Gastos personales</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="destinorecursos"
-                                id="destinorecursos2" value="Opción9">
-                            <label class="form-check-label" for="destinorecursos2">Pago de créditos</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="destinorecursos"
-                                id="destinorecursos3" value="Opción10">
-                            <label class="form-check-label" for="destinorecursos3">Administración de
-                                inversiones</label>
-                        </div>
+                        <select class="form-select" aria-label="destinorecursos" name="destinorecursos">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción8">Gastos personales</option>
+                            <option value="Opción9">Pago de créditos</option>
+                            <option value="Opción10">Administración de inversiones</option>
+                        </select>
                     </fieldset>
                 </div>
-            </div>
+                <div class="col-12 col-md-6">
 
-            <div class="row mb-3">
-                <div class="col-md-4">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">¿Cuántas operaciones estima
                             realizar por mes?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="operacionesestimadas"
-                                id="operacionesestimadas1" value="Opción1" checked>
-                            <label class="form-check-label" for="operacionesestimadas1">De 0 a 4</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="operacionesestimadas"
-                                id="operacionesestimadas2" value="Opción2">
-                            <label class="form-check-label" for="operacionesestimadas2">De 4 a 10</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="operacionesestimadas"
-                                id="operacionesestimadas3" value="Opción3">
-                            <label class="form-check-label" for="operacionesestimadas3">Más de 10</label>
-                        </div>
+
+                        <select class="form-select" aria-label="operacionesestimadas" name="operacionesestimadas">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción1">De 0 a 4</option>
+                            <option value="Opción2">De 4 a 10</option>
+                            <option value="Opción3">Más de 10</option>
+                        </select>
+
                     </fieldset>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
+
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">¿Qué tipo de crédito se le
                             está otorgando?</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipocredito" id="tipocredito1"
-                                value="asd" checked>
-                            <label class="form-check-label" for="tipocredito1">Tradicional (Nómina)</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipocredito" id="tipocredito2"
-                                value="Opción9">
-                            <label class="form-check-label" for="tipocredito2">Compra de cartera</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipocredito" id="tipocredito3"
-                                value="Opción10">
-                            <label class="form-check-label" for="tipocredito3">Refinanciamiento</label>
-                        </div>
+                        <select class="form-select" aria-label="tipocredito" name="tipocredito">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción8">Tradicional (Nómina)</option>
+                            <option value="Opción9">Compra de cartera</option>
+                            <option value="Opción10">Refinanciamiento</option>
+                        </select>
                     </fieldset>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
+
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 fw-bold">Mercadotecnia y Publicidad.</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="autorizacion" id="autorizacion1"
-                                value="Opción30" checked>
-                            <label class="form-check-label" for="autorizacion1">Si</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="autorizacion" id="autorizacion2"
-                                value="Opción31">
-                            <label class="form-check-label" for="autorizacion2">No</label>
-                        </div>
+
+                        <select class="form-select" aria-label="autorizacion" name="autorizacion">
+                            <option selected>Seleccione una opción</option>
+                            <option value="Opción30">Si</option>
+                            <option value="Opción31">No</option>
+                        </select>
 
                     </fieldset>
                 </div>
             </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">DATOS:</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">DATOS:</h3>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="funciones" class="form-label text-muted fs-6 fw-bold">Funciones</label>
-                    <input type="text" class="form-control @error('funciones') is-invalid @enderror"
-                        id="funciones" name="funciones" value="{{ old('funciones') }}" placeholder="Funciones"
-                        aria-label="Funciones" aria-describedby="funcionesError">
-                    @error('funciones')
-                        <div id="funcionesError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            <div>
+                <label for="funciones" class="form-label text-muted fs-6 fw-bold">Funciones</label>
+                <textarea class="form-control @error('funciones') is-invalid @enderror" id="funciones" name="funciones"
+                    value="{{ old('funciones') }}" placeholder="Funciones" aria-label="Funciones"
+                    aria-describedby="funcionesError"></textarea>
+                @error('funciones')
+                    <div id="funcionesError" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="nombreservidorpublico" class="form-label text-muted fs-6 fw-bold">Nombre del
-                        cliente</label>
-                    <input type="text" class="form-control @error('nombreservidorpublico') is-invalid @enderror"
-                        id="nombreservidorpublico" name="nombreservidorpublico"
-                        value="{{ old('nombreservidorpublico') }}" placeholder="Nombre del cliente"
-                        aria-label="Nombre del cliente" aria-describedby="nombreservidorpublicoError">
-                    @error('nombreservidorpublico')
-                        <div id="nombreservidorpublicoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">CARATULA DE CRÉDITO</h3>
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CARATULA DE CRÉDITO</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="cat" class="form-label text-muted fs-6 fw-bold">CAT</label>
                     <input type="text" class="form-control @error('cat') is-invalid @enderror" id="cat"
                         name="cat" value="{{ old('cat') }}" placeholder="CAT" aria-label="CAT"
@@ -808,7 +734,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="tasaordinaria" class="form-label text-muted fs-6 fw-bold">Tasa ordinaria</label>
                     <input type="text" class="form-control @error('tasaordinaria') is-invalid @enderror"
                         id="tasaordinaria" name="tasaordinaria" value="{{ old('tasaordinaria') }}"
@@ -823,7 +749,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="tasamoratoria" class="form-label text-muted fs-6 fw-bold">Tasa moratoria</label>
                     <input type="text" class="form-control @error('tasamoratoria') is-invalid @enderror"
                         id="tasamoratoria" name="tasamoratoria" value="{{ old('tasamoratoria') }}"
@@ -835,11 +761,7 @@
                         </div>
                     @enderror
                 </div>
-
-            </div>
-
-            <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="montototalpagar" class="form-label text-muted fs-6 fw-bold">Monto total a
                         pagar</label>
                     <input type="text" class="form-control @error('montototalpagar') is-invalid @enderror"
@@ -855,7 +777,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="fechavencimiento" class="form-label text-muted fs-6 fw-bold">Fecha de
                         vencimiento</label>
                     <input type="date" class="form-control @error('fechavencimiento') is-invalid @enderror"
@@ -868,7 +790,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="fechacorte" class="form-label text-muted fs-6 fw-bold">Fecha de corte</label>
                     <input type="date" class="form-control @error('fechacorte') is-invalid @enderror"
                         id="fechacorte" name="fechacorte" value="{{ old('fechacorte') }}"
@@ -882,7 +804,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     {{-- fechaprimerpago --}}
                     <label for="fechaprimerpago" class="form-label text-muted fs-6 fw-bold">Fecha de
                         primer pago</label>
@@ -898,11 +820,11 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
 
             <div class="row mb-3">
 
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         {{-- <legend class="form-label text-muted fs-6 text-uppercase text-center">Enviar a domicilio</legend> --}}
                         <div class="form-check form-switch">
@@ -928,15 +850,18 @@
                     </fieldset>
                 </div>
             </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">II. DATOS GENERALES DE EL CLIENTE</h3>
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">II. DATOS GENERALES DE EL CLIENTE</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="seidentificacon" class="form-label text-muted fs-6 fw-bold">Se identifica
                         con</label>
                     <select class="form-select" aria-label="Default select example" name="seidentificacon">
-                        <option selected>--Seleccione--</option>
+                        <option selected>Seleccione una opción</option>
                         <option value="INE">INE</option>
                         <option value="Licencia">Licencia</option>
                     </select>
@@ -949,10 +874,10 @@
 
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">IV. DISPOSICIÓN Y DOCUMENTACIÓN</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">IV. DISPOSICIÓN Y DOCUMENTACIÓN</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="fechasdisposicion" class="form-label text-muted fs-6 fw-bold">Fecha(s) de
                         disposición</label>
                     <input type="text" class="form-control @error('fechasdisposicion') is-invalid @enderror"
@@ -966,10 +891,10 @@
                     @enderror
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">V. PLAZO Y CONDICIONES DE PAGO DEL CRÉDITO</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">V. PLAZO Y CONDICIONES DE PAGO DEL CRÉDITO</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="parcialidades" class="form-label text-muted fs-6 fw-bold">Parcialidades</label>
                     <input type="text" class="form-control @error('parcialidades') is-invalid @enderror"
                         id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
@@ -980,7 +905,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="parcialidadestexto" class="form-label text-muted fs-6 fw-bold">Parcialidades
                         Texto</label>
                     <input type="text" class="form-control @error('parcialidadestexto') is-invalid @enderror"
@@ -995,7 +920,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="plazocredito" class="form-label text-muted fs-6 fw-bold">Plazo del credito</label>
                     <input type="text" class="form-control @error('plazocredito') is-invalid @enderror"
                         id="plazocredito" name="plazocredito" value="{{ old('plazocredito') }}"
@@ -1007,7 +932,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="periodicidadpagos" class="form-label text-muted fs-6 fw-bold">Periodicidad de
                         pagos</label>
                     <input type="text" class="form-control @error('periodicidadpagos') is-invalid @enderror"
@@ -1023,7 +948,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="fechacortecredito" class="form-label text-muted fs-6 fw-bold">Fecha corte
                         credito</label>
                     <input type="date" class="form-control @error('fechacortecredito') is-invalid @enderror"
@@ -1036,11 +961,10 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="fechavencimientocredito" class="form-label text-muted fs-6 fw-bold">Fecha
                         vencimiento credito</label>
-                    <input type="date"
-                        class="form-control @error('fechavencimientocredito') is-invalid @enderror"
+                    <input type="date" class="form-control @error('fechavencimientocredito') is-invalid @enderror"
                         id="fechavencimientocredito" name="fechavencimientocredito"
                         value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento credito"
                         aria-label="Fecha vencimiento credito" aria-describedby="fechavencimientocreditoError">
@@ -1051,11 +975,14 @@
                     @enderror
                 </div>
             </div>
+        </div>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">AUTORIZACIONES ADICIONALES</h3>
+
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">AUTORIZACIONES ADICIONALES</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 text-uppercase text-center">El CLIENTE autoriza a
                             que la FINANCIERA emita un estado de cuenta de forma mensual dentro de los 10 días
@@ -1068,7 +995,7 @@
                         </div>
                     </fieldset>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="seg1" class="form-label text-muted fs-6 fw-bold">Primer Seguro</label>
                     <input type="text" class="form-control @error('seg1') is-invalid @enderror" id="seg1"
                         name="seg1" value="{{ old('seg1') }}" placeholder="Primer Seguro"
@@ -1082,7 +1009,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="seg2" class="form-label text-muted fs-6 fw-bold">Segundo Seguro</label>
                     <input type="text" class="form-control @error('seg2') is-invalid @enderror" id="seg2"
                         name="seg2" value="{{ old('seg2') }}" placeholder="Segundo Seguro"
@@ -1093,7 +1020,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="seg3" class="form-label text-muted fs-6 fw-bold">Tercer Seguro</label>
                     <input type="text" class="form-control @error('seg3') is-invalid @enderror" id="seg3"
                         name="seg3" value="{{ old('seg3') }}" placeholder="Tercer Seguro"
@@ -1107,7 +1034,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="na2" class="form-label text-muted fs-6 fw-bold">Los seguros antes mencionados
                         se contratarán con:</label>
                     <input type="text" class="form-control @error('na2') is-invalid @enderror" id="na2"
@@ -1120,7 +1047,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 text-uppercase text-center">Facultó expresamente a
                             la FINANCIERA para ceder o descontar los documentos originados como consecuencia de la
@@ -1135,10 +1062,10 @@
                     </fieldset>
                 </div>
             </div>
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">FORMATO PARA SOLICITAR LA DOMICILIACIÓN</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">FORMATO PARA SOLICITAR LA DOMICILIACIÓN</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="avalconfolio" class="form-label text-muted fs-6 fw-bold">Aval con folio</label>
                     <input type="text" class="form-control @error('avalconfolio') is-invalid @enderror"
                         id="avalconfolio" name="avalconfolio" aria-describedby="avalconfolioError"
@@ -1149,7 +1076,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="montomaximo" class="form-label text-muted fs-6 fw-bold">Monto máximo fijo del cargo
                         autorizado letra</label>
                     <input type="text" class="form-control @error('montomaximo') is-invalid @enderror"
@@ -1165,10 +1092,10 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="cienmn" class="form-label text-muted fs-6 fw-bold">100 MN</label>
-                    <input type="text" class="form-control @error('cienmn') is-invalid @enderror"
-                        id="cienmn" name="cienmn" aria-describedby="cienmnError" placeholder="100 MN"
+                    <input type="text" class="form-control @error('cienmn') is-invalid @enderror" id="cienmn"
+                        name="cienmn" aria-describedby="cienmnError" placeholder="100 MN"
                         aria-label="100 MN">{{ old('cienmn') }}</input>
                     @error('cienmn')
                         <div id="cienmnError" class="invalid-feedback">
@@ -1178,10 +1105,10 @@
                 </div>
             </div>
 
-            <h3 class="mt-5 text-center mb-3 fw-bold fs-5 ">MANDATO DE DESCUENTO IRREVOCABLE</h3>
+            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">MANDATO DE DESCUENTO IRREVOCABLE</h3>
 
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="montopagarirrevocabletexto" class="form-label text-muted fs-6 fw-bold">Monto a pagar
                         IRREVOCABLE</label>
                     <input type="text"
@@ -1195,7 +1122,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <label for="numeronomina" class="form-label text-muted fs-6 fw-bold">Numero de nomina</label>
                     <input type="text" class="form-control @error('numeronomina') is-invalid @enderror"
                         id="numeronomina" name="numeronomina" aria-describedby="numeronominaError"
@@ -1213,7 +1140,7 @@
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>
             </div>
-        </form>
+    </form>
     </div>
 
     <!-- Scripts de Bootstrap -->
