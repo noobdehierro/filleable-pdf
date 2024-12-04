@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layout.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de solicitud de crédito</title>
-    <!-- Incluir Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    {{-- agregar jquery --}}
-    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.mask.js') }}"></script>
-</head>
-
-<body>
+@section('content')
     <form action="{{ route('form.store') }}" method="POST" novalidate>
 
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
@@ -113,10 +101,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Domicilio</span>
-                        <input type="text" class="form-control @error('domicilio') is-invalid @enderror"
-                            id="domicilio" name="domicilio" value="{{ old('domicilio') }}"
-                            placeholder="Domicilio (calle y número)" aria-label="Domicilio"
-                            aria-describedby="domicilioError">
+                        <input type="text" class="form-control @error('domicilio') is-invalid @enderror" id="domicilio"
+                            name="domicilio" value="{{ old('domicilio') }}" placeholder="Domicilio (calle y número)"
+                            aria-label="Domicilio" aria-describedby="domicilioError">
                         @error('domicilio')
                             <div id="domicilioError" class="invalid-feedback">
                                 {{ $message }}
@@ -127,9 +114,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Colonia</span>
-                        <input type="text" class="form-control @error('colonia') is-invalid @enderror"
-                            id="colonia" name="colonia" value="{{ old('colonia') }}" placeholder="Colonia"
-                            aria-label="Colonia" aria-describedby="coloniaError">
+                        <input type="text" class="form-control @error('colonia') is-invalid @enderror" id="colonia"
+                            name="colonia" value="{{ old('colonia') }}" placeholder="Colonia" aria-label="Colonia"
+                            aria-describedby="coloniaError">
                         @error('colonia')
                             <div id="coloniaError" class="invalid-feedback">
                                 {{ $message }}
@@ -156,9 +143,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Ciudad</span>
-                        <input type="text" class="form-control @error('ciudad') is-invalid @enderror"
-                            id="ciudad" name="ciudad" value="{{ old('ciudad') }}" placeholder="Ciudad"
-                            aria-label="Ciudad" aria-describedby="ciudadError">
+                        <input type="text" class="form-control @error('ciudad') is-invalid @enderror" id="ciudad"
+                            name="ciudad" value="{{ old('ciudad') }}" placeholder="Ciudad" aria-label="Ciudad"
+                            aria-describedby="ciudadError">
                         @error('ciudad')
                             <div id="ciudadError" class="invalid-feedback">
                                 {{ $message }}
@@ -172,9 +159,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Estado</span>
-                        <input type="text" class="form-control @error('estado') is-invalid @enderror"
-                            id="estado" name="estado" value="{{ old('estado') }}" placeholder="Estado"
-                            aria-label="Estado" aria-describedby="estadoError">
+                        <input type="text" class="form-control @error('estado') is-invalid @enderror" id="estado"
+                            name="estado" value="{{ old('estado') }}" placeholder="Estado" aria-label="Estado"
+                            aria-describedby="estadoError">
                         @error('estado')
                             <div id="estadoError" class="invalid-feedback">
                                 {{ $message }}
@@ -253,9 +240,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Plazo</span>
-                        <input type="text" class="form-control @error('plazo') is-invalid @enderror"
-                            id="plazo" name="plazo" value="{{ old('plazo') }}" placeholder="Plazo"
-                            aria-label="Plazo" aria-describedby="plazoError">
+                        <input type="text" class="form-control @error('plazo') is-invalid @enderror" id="plazo"
+                            name="plazo" value="{{ old('plazo') }}" placeholder="Plazo" aria-label="Plazo"
+                            aria-describedby="plazoError">
                         @error('plazo')
                             <div id="plazoError" class="invalid-feedback">
                                 {{ $message }}
@@ -274,8 +261,8 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de Crédito</span>
                         <input type="text" class="form-control @error('tipocreditoproducto') is-invalid @enderror"
                             id="tipocreditoproducto" name="tipocreditoproducto"
-                            value="{{ old('tipocreditoproducto') ?? 'Crédito Simple ' }}"
-                            aria-label="Tipo de Crédito" aria-describedby="tipocreditoproductoError">
+                            value="{{ old('tipocreditoproducto') ?? 'Crédito Simple ' }}" aria-label="Tipo de Crédito"
+                            aria-describedby="tipocreditoproductoError">
                         @error('tipocreditoproducto')
                             <div id="tipocreditoproductoError" class="invalid-feedback">
                                 {{ $message }}
@@ -324,9 +311,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Banco</span>
-                        <input type="text" class="form-control @error('banco') is-invalid @enderror"
-                            id="banco" name="banco" value="{{ old('banco') }}" placeholder="Banco"
-                            aria-label="Banco" aria-describedby="bancoError">
+                        <input type="text" class="form-control @error('banco') is-invalid @enderror" id="banco"
+                            name="banco" value="{{ old('banco') }}" placeholder="Banco" aria-label="Banco"
+                            aria-describedby="bancoError">
                         @error('banco')
                             <div id="bancoError" class="invalid-feedback">
                                 {{ $message }}
@@ -434,7 +421,7 @@
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de vivienda</span>
-                            <select class="form-select" aria-label="tipovivienda" name="tipovivienda">
+                            <select class="form-select" aria-label="tipovivienda" name="tipovivienda" id="tipovivienda">
                                 <option value="" selected>Seleccione una opción</option>
                                 <option value="Opción3">Propia</option>
                                 <option value="Opción1">Rentada</option>
@@ -553,9 +540,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Puesto</span>
-                        <input type="text" class="form-control @error('puesto') is-invalid @enderror"
-                            id="puesto" name="puesto" value="{{ old('puesto') }}" placeholder="Puesto"
-                            aria-label="Puesto" aria-describedby="puestoError">
+                        <input type="text" class="form-control @error('puesto') is-invalid @enderror" id="puesto"
+                            name="puesto" value="{{ old('puesto') }}" placeholder="Puesto" aria-label="Puesto"
+                            aria-describedby="puestoError">
                         @error('puesto')
                             <div id="puestoError" class="invalid-feedback">
                                 {{ $message }}
@@ -599,9 +586,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Sueldo</span>
-                        <input type="text" class="form-control @error('sueldo') is-invalid @enderror"
-                            id="sueldo" name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo"
-                            aria-label="Sueldo" aria-describedby="sueldoError">
+                        <input type="text" class="form-control @error('sueldo') is-invalid @enderror" id="sueldo"
+                            name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo" aria-label="Sueldo"
+                            aria-describedby="sueldoError">
                         @error('sueldo')
                             <div id="sueldoError" class="invalid-feedback">
                                 {{ $message }}
@@ -694,8 +681,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Teléfono fijo</span>
-                        <input type="text"
-                            class="form-control @error('telefonofijoreflaboral') is-invalid @enderror"
+                        <input type="text" class="form-control @error('telefonofijoreflaboral') is-invalid @enderror"
                             id="telefonofijoreflaboral" name="telefonofijoreflaboral"
                             value="{{ old('telefonofijoreflaboral') }}" placeholder="Teléfono fijo"
                             aria-label="Teléfono fijo" aria-describedby="telefonofijoreflaboralError">
@@ -711,8 +697,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Dirección (Calle / Colonia /
                             Municipio / Ciudad)</span>
                         <input type="text" class="form-control @error('direccionreflaboral') is-invalid @enderror"
-                            id="direccionreflaboral" name="direccionreflaboral"
-                            value="{{ old('direccionreflaboral') }}"
+                            id="direccionreflaboral" name="direccionreflaboral" value="{{ old('direccionreflaboral') }}"
                             placeholder="Dirección (Calle / Colonia / Municipio / Ciudad / Estado / CP)"
                             aria-label="Dirección (Calle / Colonia / Municipio / Ciudad / Estado / CP)"
                             aria-describedby="direccionreflaboralError">
@@ -737,7 +722,8 @@
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">¿Cuál es el destino de los
                                 recursos otorgados?</span>
-                            <select class="form-select" aria-label="destinorecursos" name="destinorecursos">
+                            <select class="form-select" aria-label="destinorecursos" name="destinorecursos"
+                                id="destinorecursos">
                                 <option selected>Seleccione una opción</option>
                                 <option value="Opción8">Gastos personales</option>
                                 <option value="Opción9">Pago de créditos</option>
@@ -753,8 +739,8 @@
                             <span class="input-group-text" id="inputGroup-sizing-sm">¿Cuántas operaciones
                                 estima realizar por mes?</span>
 
-                            <select class="form-select" aria-label="operacionesestimadas"
-                                name="operacionesestimadas">
+                            <select class="form-select" aria-label="operacionesestimadas" name="operacionesestimadas"
+                                id="operacionesestimadas">
                                 <option selected>Seleccione una opción</option>
                                 <option value="Opción1">De 0 a 4</option>
                                 <option value="Opción2">De 4 a 10</option>
@@ -770,7 +756,7 @@
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">¿Que tipo de crédito se le
                                 esta otorgando?</span>
-                            <select class="form-select" aria-label="tipocredito" name="tipocredito">
+                            <select class="form-select" aria-label="tipocredito" name="tipocredito" id="tipocredito">
                                 <option selected>Seleccione una opción</option>
                                 <option value="Opción8">Tradicional (Nómina)</option>
                                 <option value="Opción9">Compra de cartera</option>
@@ -784,7 +770,7 @@
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Mercadotecnia y
                                 Publicidad.</span>
-                            <select class="form-select" aria-label="autorizacion" name="autorizacion">
+                            <select class="form-select" aria-label="autorizacion" name="autorizacion" id="autorizacion">
                                 <option selected>Seleccione una opción</option>
                                 <option value="Opción30">Si</option>
                                 <option value="Opción31">No</option>
@@ -900,8 +886,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de corte</span>
                         <input type="date" class="form-control @error('fechacorte') is-invalid @enderror"
                             id="fechacorte" name="fechacorte" value="{{ old('fechacorte') }}"
-                            placeholder="Fecha de corte" aria-label="Fecha de corte"
-                            aria-describedby="fechacorteError">
+                            placeholder="Fecha de corte" aria-label="Fecha de corte" aria-describedby="fechacorteError">
                         @error('fechacorte')
                             <div id="fechacorteError" class="invalid-feedback">
                                 {{ $message }}
@@ -938,22 +923,22 @@
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Enviar a
                                 domicilio</label>
-                            <input class="form-check-input" type="checkbox" role="switch"
-                                id="flexSwitchCheckDefault" name="enviardomicilio">
+                            <input class="form-check-input" type="checkbox" role="switch" name="enviardomicilio"
+                                id="enviardomicilio">
                         </div>
 
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Consultar vía
                                 internet</label>
-                            <input class="form-check-input" type="checkbox" role="switch"
-                                id="flexSwitchCheckDefault" name="consultarinternet">
+                            <input class="form-check-input" type="checkbox" role="switch" name="consultarinternet"
+                                id="consultarinternet">
                         </div>
 
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Envío por correo
                                 electrónico</label>
                             <input class="form-check-input" type="checkbox" role="switch"
-                                id="flexSwitchCheckDefault" name="enviarcorreoelectronico" checked>
+                                name="enviarcorreoelectronico" checked id="enviarcorreoelectronico">
                         </div>
 
                     </fieldset>
@@ -970,7 +955,8 @@
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Se identifica con</span>
-                        <select class="form-select" aria-label="Default select example" name="seidentificacon">
+                        <select class="form-select" aria-label="Default select example" name="seidentificacon"
+                            id="seidentificacon">
                             <option selected>Seleccione una opción</option>
                             <option value="INE">INE</option>
                             <option value="Licencia">Licencia</option>
@@ -1012,8 +998,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades</span>
                         <input type="text" class="form-control @error('parcialidades') is-invalid @enderror"
                             id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
-                            placeholder="Parcialidades" aria-label="Parcialidades"
-                            aria-describedby="parcialidadesError">
+                            placeholder="Parcialidades" aria-label="Parcialidades" aria-describedby="parcialidadesError">
                         @error('parcialidades')
                             <div id="parcialidadesError" class="invalid-feedback">
                                 {{ $message }}
@@ -1025,9 +1010,9 @@
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades Texto</span>
                         <input type="text" class="form-control @error('parcialidadestexto') is-invalid @enderror"
-                            id="parcialidadestexto" name="parcialidadestexto"
-                            value="{{ old('parcialidadestexto') }}" placeholder="Parcialidades Texto"
-                            aria-label="Parcialidades Texto" aria-describedby="parcialidadestextoError">
+                            id="parcialidadestexto" name="parcialidadestexto" value="{{ old('parcialidadestexto') }}"
+                            placeholder="Parcialidades Texto" aria-label="Parcialidades Texto"
+                            aria-describedby="parcialidadestextoError">
                         @error('parcialidadestexto')
                             <div id="parcialidadestextoError" class="invalid-feedback">
                                 {{ $message }}
@@ -1057,9 +1042,8 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Periodicidad de pagos</span>
                         <input type="text" class="form-control @error('periodicidadpagos') is-invalid @enderror"
                             id="periodicidadpagos" name="periodicidadpagos"
-                            value="{{ old('periodicidadpagos') ?? 'Quincenal' }}"
-                            placeholder="Periodicidad de pagos" aria-label="Periodicidad de pagos"
-                            aria-describedby="periodicidadpagosError">
+                            value="{{ old('periodicidadpagos') ?? 'Quincenal' }}" placeholder="Periodicidad de pagos"
+                            aria-label="Periodicidad de pagos" aria-describedby="periodicidadpagosError">
                         @error('periodicidadpagos')
                             <div id="periodicidadpagosError" class="invalid-feedback">
                                 {{ $message }}
@@ -1089,8 +1073,7 @@
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento credito</span>
-                        <input type="date"
-                            class="form-control @error('fechavencimientocredito') is-invalid @enderror"
+                        <input type="date" class="form-control @error('fechavencimientocredito') is-invalid @enderror"
                             id="fechavencimientocredito" name="fechavencimientocredito"
                             value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento credito"
                             aria-label="Fecha vencimiento credito" aria-describedby="fechavencimientocreditoError">
@@ -1125,8 +1108,8 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Primer Seguro</span>
-                        <input type="text" class="form-control @error('seg1') is-invalid @enderror"
-                            id="seg1" name="seg1" value="{{ old('seg1') }}" placeholder="Primer Seguro"
+                        <input type="text" class="form-control @error('seg1') is-invalid @enderror" id="seg1"
+                            name="seg1" value="{{ old('seg1') }}" placeholder="Primer Seguro"
                             aria-label="Primer Seguro" aria-describedby="seg1Error">
                         @error('seg1')
                             <div id="seg1Error" class="invalid-feedback">
@@ -1141,8 +1124,8 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Segundo Seguro</span>
-                        <input type="text" class="form-control @error('seg2') is-invalid @enderror"
-                            id="seg2" name="seg2" value="{{ old('seg2') }}" placeholder="Segundo Seguro"
+                        <input type="text" class="form-control @error('seg2') is-invalid @enderror" id="seg2"
+                            name="seg2" value="{{ old('seg2') }}" placeholder="Segundo Seguro"
                             aria-label="Segundo Seguro" aria-describedby="seg2Error">
                         @error('seg2')
                             <div id="seg2Error" class="invalid-feedback">
@@ -1154,9 +1137,9 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tercer Seguro</span>
-                        <input type="text" class="form-control @error('seg3') is-invalid @enderror"
-                            id="seg3" name="seg3" value="{{ old('seg3') }}"
-                            placeholder="Tercer Seguro" aria-label="Tercer Seguro" aria-describedby="seg3Error">
+                        <input type="text" class="form-control @error('seg3') is-invalid @enderror" id="seg3"
+                            name="seg3" value="{{ old('seg3') }}" placeholder="Tercer Seguro"
+                            aria-label="Tercer Seguro" aria-describedby="seg3Error">
                         @error('seg3')
                             <div id="seg3Error" class="invalid-feedback">
                                 {{ $message }}
@@ -1171,11 +1154,10 @@
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">seguros antes
                             mencionados se contratarán con:</span>
-                        <input type="text" class="form-control @error('na2') is-invalid @enderror"
-                            id="na2" name="na2" value="{{ old('na2') }}"
+                        <input type="text" class="form-control @error('na2') is-invalid @enderror" id="na2"
+                            name="na2" value="{{ old('na2') }}"
                             placeholder="los seguros antes mencionados se contratarán con:"
-                            aria-label="los seguros antes mencionados se contratarán con:"
-                            aria-describedby="na2Error">
+                            aria-label="los seguros antes mencionados se contratarán con:" aria-describedby="na2Error">
                         @error('na2')
                             <div id="na2Error" class="invalid-feedback">
                                 {{ $message }}
@@ -1207,8 +1189,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-sm">Aval con folio</span>
                         <input type="text" class="form-control @error('avalconfolio') is-invalid @enderror"
                             id="avalconfolio" name="avalconfolio" aria-describedby="avalconfolioError"
-                            placeholder="Aval con folio"
-                            aria-label="Aval con folio">{{ old('avalconfolio') }}</input>
+                            placeholder="Aval con folio" aria-label="Aval con folio">{{ old('avalconfolio') }}</input>
                         @error('avalconfolio')
                             <div id="avalconfolioError" class="invalid-feedback">
                                 {{ $message }}
@@ -1260,8 +1241,7 @@
                         <input type="text"
                             class="form-control @error('montopagarirrevocabletexto') is-invalid @enderror"
                             id="montopagarirrevocabletexto" name="montopagarirrevocabletexto"
-                            aria-describedby="montopagarirrevocabletextoError"
-                            placeholder="Monto a pagar IRREVOCABLE"
+                            aria-describedby="montopagarirrevocabletextoError" placeholder="Monto a pagar IRREVOCABLE"
                             aria-label="Monto a pagar IRREVOCABLE">{{ old('montopagarirrevocabletexto') }}</input>
                         @error('montopagarirrevocabletexto')
                             <div id="montopagarirrevocabletextoError" class="invalid-feedback">
@@ -1292,12 +1272,10 @@
                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>
             </div>
     </form>
-    </div>
+@endsection
 
-    <!-- Scripts de Bootstrap -->
+
+@section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/helpers.js') }}"></script>
-
-</body>
-
-</html>
+@endsection
