@@ -10,13 +10,36 @@
     {{-- agregar jquery --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.mask.js') }}"></script>
+    <style>
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #28a745 !important;
+            /* Color verde de Bootstrap */
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+            /* Sombra verde */
+            outline: none;
+            /* Opcional, elimina el borde adicional */
+        }
+
+        /* .shadow-green {
+            box-shadow: 0 1rem 3rem rgba(40, 167, 69, 0.175) !important;
+            /* Sombra verde */
+        }
+
+        */
+    </style>
 </head>
 
-<body>
+<body class="bg-success p-2 text-dark bg-opacity-25">
     <form action="{{ route('form.store') }}" method="POST" novalidate>
 
-        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-            <h2 class="text-center mb-4">Formulario de solicitud de crédito</h2>
+        <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded ">
+
+            <img style="display: block; margin: 0 auto" src="{{ asset('img/logo.png') }}" class="img-fluid"
+                alt="Logo">
+
+            <h2 class="text-center mb-4 mt-4">Formulario de solicitud de crédito</h2>
             <!-- Formulario -->
             @csrf
             <!-- Primera fila de dos campos -->
@@ -267,25 +290,24 @@
 
             {{-- radio buton --}}
             <div class="row mb-3">
-                <!-- Campo de entrada para Tipo de Crédito -->
-                <div class="col-md-4">
-
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de Crédito</span>
-                        <input type="text" class="form-control @error('tipocreditoproducto') is-invalid @enderror"
-                            id="tipocreditoproducto" name="tipocreditoproducto"
-                            value="{{ old('tipocreditoproducto') ?? 'Crédito Simple ' }}"
-                            aria-label="Tipo de Crédito" aria-describedby="tipocreditoproductoError">
-                        @error('tipocreditoproducto')
-                            <div id="tipocreditoproductoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                <!-- Grupo de radios para Tipo de solicitud -->
+                <div class="col-12 col-md-6">
+                    <fieldset class="form-group">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de crédito</span>
+                            <select class="form-select" aria-label="Tipo de solicitud" name="tiposolicitud"
+                                id="tiposolicitud">
+                                <option selected>Seleccione una opción</option>
+                                <option value="Opción1">Apertura</option>
+                                <option value="Opción2">Refinanciamiento</option>
+                                <option value="Opción3">CC</option>
+                            </select>
+                        </div>
+                    </fieldset>
                 </div>
 
                 <!-- Grupo de radios para Frecuencia de pago -->
-                <div class="col-md-4">
+                <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Frecuencia de pago</span>
@@ -294,22 +316,6 @@
                                 <option selected>Seleccione una opción</option>
                                 <option value="Opción4">Quincenal</option>
                                 <option value="Opción1">Mensual</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <!-- Grupo de radios para Tipo de solicitud -->
-                <div class="col-md-4">
-                    <fieldset class="form-group">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de solicitud</span>
-                            <select class="form-select" aria-label="Tipo de solicitud" name="tiposolicitud"
-                                id="tiposolicitud">
-                                <option selected>Seleccione una opción</option>
-                                <option value="Opción1">Apertura</option>
-                                <option value="Opción2">Refinanciamiento</option>
-                                <option value="Opción3">CC</option>
                             </select>
                         </div>
                     </fieldset>
@@ -358,8 +364,8 @@
 
                             <select class="form-select" aria-label="Genero" name="genero" id="genero">
                                 <option selected>Seleccione una opción</option>
-                                <option value="Opción2">Masculino</option>
-                                <option value="Opción1">Femenino</option>
+                                <option value="Opción1">Masculino</option>
+                                <option value="Opción2">Femenino</option>
                             </select>
                         </div>
                     </fieldset>
@@ -400,10 +406,11 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Entidad Federativa</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Entidad Federativa de
+                            nacimiento</span>
                         <input type="text" class="form-control @error('entidadfederativa') is-invalid @enderror"
                             id="entidadfederativa" name="entidadfederativa" value="{{ old('entidadfederativa') }}"
-                            placeholder="Entidad Federativa" aria-label="Entidad Federativa"
+                            placeholder="Entidad Federativa" aria-label="Entidad Federativa de nacimiento"
                             aria-describedby="entidadfederativaError">
                         @error('entidadfederativa')
                             <div id="entidadfederativaError" class="invalid-feedback">
@@ -765,20 +772,6 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <fieldset class="form-group">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">¿Que tipo de crédito se le
-                                esta otorgando?</span>
-                            <select class="form-select" aria-label="tipocredito" name="tipocredito">
-                                <option selected>Seleccione una opción</option>
-                                <option value="Opción8">Tradicional (Nómina)</option>
-                                <option value="Opción9">Compra de cartera</option>
-                                <option value="Opción10">Refinanciamiento</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                </div>
                 <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
@@ -1155,8 +1148,8 @@
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tercer Seguro</span>
                         <input type="text" class="form-control @error('seg3') is-invalid @enderror"
-                            id="seg3" name="seg3" value="{{ old('seg3') }}"
-                            placeholder="Tercer Seguro" aria-label="Tercer Seguro" aria-describedby="seg3Error">
+                            id="seg3" name="seg3" value="{{ old('seg3') }}" placeholder="Tercer Seguro"
+                            aria-label="Tercer Seguro" aria-describedby="seg3Error">
                         @error('seg3')
                             <div id="seg3Error" class="invalid-feedback">
                                 {{ $message }}
@@ -1171,8 +1164,8 @@
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">seguros antes
                             mencionados se contratarán con:</span>
-                        <input type="text" class="form-control @error('na2') is-invalid @enderror"
-                            id="na2" name="na2" value="{{ old('na2') }}"
+                        <input type="text" class="form-control @error('na2') is-invalid @enderror" id="na2"
+                            name="na2" value="{{ old('na2') }}"
                             placeholder="los seguros antes mencionados se contratarán con:"
                             aria-label="los seguros antes mencionados se contratarán con:"
                             aria-describedby="na2Error">
@@ -1289,7 +1282,7 @@
 
             <!-- Botón de envío -->
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                <button type="submit" class="btn btn-success btn-block">Enviar</button>
             </div>
     </form>
     </div>

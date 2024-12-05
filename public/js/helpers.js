@@ -9,6 +9,7 @@ $(document).ready(function () {
     $('#telefonolaboral').mask('0000000000'); // telefonolaboral 10
     $('#celularreflaboral').mask('0000000000'); // celularreflaboral 10
     $('#telefonofijoreflaboral').mask('0000000000'); // telefonofijoreflaboral 10
+    $('#codigopostal').mask('00000');
 
 
 });

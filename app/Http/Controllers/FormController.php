@@ -54,6 +54,18 @@ class FormController extends Controller
             ? $this->numberToLetters(floatval($request->montototalpagar))
             : '';
 
+        $tiposolicitud = '';
+        $tiposolicitudcodigo = '';
+        if ($request->tiposolicitud == 'Opción1') {
+            $tiposolicitud = "Credito tradicional";
+            $tiposolicitudcodigo = 'Opción8';
+        } elseif ($request->tiposolicitud == 'Opción2') {
+            $tiposolicitud = "Refinanciamiento";
+            $tiposolicitudcodigo = 'Opción10';
+        } elseif ($request->tiposolicitud == 'Opción3') {
+            $tiposolicitud = "Compra de cartera";
+            $tiposolicitudcodigo = 'Opción9';
+        }
 
         $curp = $request->curp; // Variable para curp 
         $Text2 = $request->nombresolicitante; // Variable para Text2
@@ -69,7 +81,8 @@ class FormController extends Controller
         $Group13 = $request->tiposolicitud; // Variable para Group13
         $Group14 = $request->frecuencia; // Variable para Group14
         // $tipo_credito = $request->tipocredito; // Variable para tipo de credito
-        $tipo_credito = $request->tipocreditoproducto; // Variable para tipo de credito
+        // $tipo_credito = $request->tipocreditoproducto; // Variable para tipo de credito
+        $tipo_credito = $tiposolicitud; // Variable para tipo de credito
         $Group15 = $request->genero; // Variable para Group15
         $tel_fijo = $request->telefonofijo; // Variable para tel fijo
         $fecha_nac =  date('dmY', strtotime($request->fechanacimiento)); // Variable para fecha nac cambiar fromato a solo nuemros
@@ -110,7 +123,7 @@ class FormController extends Controller
         $Opcion1_5 = $request->operacionesestimadas; // Variable para 5
         // $Opcion4_6 = $request->ocupacioneconomica; // Variable para 6
         $Opcion4_6 = "Opción4"; // Variable para 6
-        $Opcion8_7 = $request->tipocredito; // Variable para 7
+        $Opcion8_7 = $tiposolicitudcodigo; // Variable para 7
         // $Opcion15_8 = $request->funcionespublicas; // Variable para 8
         $Opcion15_8 = "Opción15"; // Variable para 8
         // $Opcion11_9 = $request->funcionespublicasnacionalidad; // Variable para 9
