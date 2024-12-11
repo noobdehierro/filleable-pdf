@@ -11,5 +11,14 @@ $(document).ready(function () {
     $('#telefonofijoreflaboral').mask('0000000000'); // telefonofijoreflaboral 10
     $('#codigopostal').mask('00000');
 
+    $('.arrendador').hide();
 
+    $('#tipovivienda').on('change', function () {
+        var tipovivienda = $(this).val();
+        if (tipovivienda == 'Opción1') {
+            $('.arrendador').show();
+        } else {
+            $('.arrendador').hide();
+        }
+    });
 });

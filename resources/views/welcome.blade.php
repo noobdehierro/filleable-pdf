@@ -239,7 +239,7 @@
                     <div class="col-12 col-md-6">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Fecha del llenado</span>
-                            <input type="text" class="form-control @error('lugaryfecha') is-invalid @enderror"
+                            <input type="date" class="form-control @error('lugaryfecha') is-invalid @enderror"
                                 id="lugaryfecha" name="lugaryfecha" value="{{ old('lugaryfecha') }}"
                                 placeholder="Fecha del llenado" aria-label="Fecha del llenado"
                                 aria-describedby="lugaryfechaError">
@@ -262,7 +262,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Monto solicitado</span>
-                        <input type="text" class="form-control @error('montosolicitado') is-invalid @enderror"
+                        <input type="number" class="form-control @error('montosolicitado') is-invalid @enderror"
                             id="montosolicitado" name="montosolicitado" value="{{ old('montosolicitado') }}"
                             placeholder="Monto solicitado" aria-label="Monto solicitado"
                             aria-describedby="montosolicitadoError">
@@ -441,7 +441,8 @@
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Tipo de vivienda</span>
-                            <select class="form-select" aria-label="tipovivienda" name="tipovivienda">
+                            <select class="form-select" aria-label="tipovivienda" name="tipovivienda"
+                                id="tipovivienda">
                                 <option value="" selected>Seleccione una opción</option>
                                 <option value="Opción3">Propia</option>
                                 <option value="Opción1">Rentada</option>
@@ -469,7 +470,7 @@
                 </div>
 
                 <!-- Campo de entrada para nombre arrendador -->
-                <div class="col-md-4">
+                <div class="col-md-4 arrendador">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Arrendador</span>
                         <input type="text" class="form-control @error('nombrearrendador') is-invalid @enderror"
@@ -485,7 +486,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 arrendador">
                 <div class="col-md-4">
 
                     <div class="input-group input-group-sm mb-3">
@@ -606,7 +607,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Sueldo</span>
-                        <input type="text" class="form-control @error('sueldo') is-invalid @enderror"
+                        <input type="number" class="form-control @error('sueldo') is-invalid @enderror"
                             id="sueldo" name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo"
                             aria-label="Sueldo" aria-describedby="sueldoError">
                         @error('sueldo')
@@ -754,6 +755,19 @@
                     </fieldset>
                 </div>
                 <div class="col-12 col-md-6">
+                    <fieldset class="form-group">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Mercadotecnia y
+                                Publicidad.</span>
+                            <select class="form-select" aria-label="autorizacion" name="autorizacion">
+                                <option selected>Seleccione una opción</option>
+                                <option value="Opción30">Si</option>
+                                <option value="Opción31">No</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+                {{-- <div class="col-12 col-md-6">
 
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
@@ -769,22 +783,7 @@
                             </select>
                         </div>
                     </fieldset>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <fieldset class="form-group">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Mercadotecnia y
-                                Publicidad.</span>
-                            <select class="form-select" aria-label="autorizacion" name="autorizacion">
-                                <option selected>Seleccione una opción</option>
-                                <option value="Opción30">Si</option>
-                                <option value="Opción31">No</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
@@ -859,7 +858,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Monto total a pagar</span>
-                        <input type="text" class="form-control @error('montototalpagar') is-invalid @enderror"
+                        <input type="number" class="form-control @error('montototalpagar') is-invalid @enderror"
                             id="montototalpagar" name="montototalpagar" value="{{ old('montototalpagar') }}"
                             placeholder="Monto total a pagar" aria-label="Monto total a pagar"
                             aria-describedby="montototalpagarError">
@@ -1003,7 +1002,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades</span>
-                        <input type="text" class="form-control @error('parcialidades') is-invalid @enderror"
+                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
                             id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
                             placeholder="Parcialidades" aria-label="Parcialidades"
                             aria-describedby="parcialidadesError">
@@ -1014,7 +1013,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades Texto</span>
                         <input type="text" class="form-control @error('parcialidadestexto') is-invalid @enderror"
@@ -1027,10 +1026,10 @@
                             </div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Plazo del credito</span>
                         <input type="text" class="form-control @error('plazocredito') is-invalid @enderror"
@@ -1043,7 +1042,7 @@
                             </div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
@@ -1101,8 +1100,8 @@
 
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">AUTORIZACIONES ADICIONALES</h3>
 
-            <div class="row mb-3">
-                <div class="col-12 col-md-6">
+            <div class="row">
+                {{-- <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 text-uppercase text-center">El CLIENTE autoriza a
                             que la FINANCIERA emita un estado de cuenta de forma mensual dentro de los 10 días
@@ -1114,7 +1113,7 @@
                                 name="aceptar">
                         </div>
                     </fieldset>
-                </div>
+                </div> --}}
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Primer Seguro</span>
@@ -1128,9 +1127,6 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-
-            <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Segundo Seguro</span>
@@ -1144,6 +1140,10 @@
                         @enderror
                     </div>
                 </div>
+            </div>
+
+            <div class="row mb-3">
+
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tercer Seguro</span>
@@ -1160,7 +1160,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
+                <div class="col-24">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">seguros antes
                             mencionados se contratarán con:</span>
@@ -1176,7 +1176,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <legend class="form-label text-muted fs-6 text-uppercase text-center">Facultó expresamente
                             a
@@ -1190,7 +1190,7 @@
                                 name="faculto">
                         </div>
                     </fieldset>
-                </div>
+                </div> --}}
             </div>
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">FORMATO PARA SOLICITAR LA DOMICILIACIÓN</h3>
 
@@ -1210,36 +1210,37 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Monto maximo fijo del cargo
-                            autorizado letra</span>
-                        <input type="text" class="form-control @error('montomaximo') is-invalid @enderror"
-                            id="montomaximo" name="montomaximo" aria-describedby="montomaximoError"
-                            placeholder="Monto máximo fijo del cargo autorizado letra"
-                            aria-label="Monto máximo fijo del cargo autorizado letra">{{ old('montomaximo') }}</input>
-                        @error('montomaximo')
-                            <div id="montomaximoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-12 col-md-6">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">100 MN</span>
+                            <input type="number" class="form-control @error('cienmn') is-invalid @enderror"
+                                id="cienmn" name="cienmn" aria-describedby="cienmnError" placeholder="100 MN"
+                                aria-label="100 MN">{{ old('cienmn') }}</input>
+                            @error('cienmn')
+                                <div id="cienmnError" class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
+
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">100 MN</span>
-                        <input type="text" class="form-control @error('cienmn') is-invalid @enderror"
-                            id="cienmn" name="cienmn" aria-describedby="cienmnError" placeholder="100 MN"
-                            aria-label="100 MN">{{ old('cienmn') }}</input>
-                        @error('cienmn')
-                            <div id="cienmnError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Monto maximo fijo del cargo
+                        autorizado letra</span>
+                    <input type="text" class="form-control @error('montomaximo') is-invalid @enderror"
+                        id="montomaximo" name="montomaximo" aria-describedby="montomaximoError"
+                        placeholder="Monto máximo fijo del cargo autorizado letra"
+                        aria-label="Monto máximo fijo del cargo autorizado letra">{{ old('montomaximo') }}</input>
+                    @error('montomaximo')
+                        <div id="montomaximoError" class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
 

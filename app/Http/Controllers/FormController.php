@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Luecano\NumeroALetras\NumeroALetras;
 use mikehaertl\pdftk\Pdf;
+use NumberFormatter;
 
 class FormController extends Controller
 {
@@ -48,6 +49,24 @@ class FormController extends Controller
 
         $montosolicitadotexto = isset($request->montosolicitado)
             ? $this->numberToLetters(floatval($request->montosolicitado))
+            : '';
+        $montosolicitadoformat = isset($request->montosolicitado)
+            ? $this->formatNumber(floatval($request->montosolicitado), 2)
+            : '';
+        $parcialidadesformat = isset($request->parcialidades)
+            ? $this->formatNumber(floatval($request->parcialidades), 2)
+            : '';
+
+        $montototalpagarformat = isset($request->montototalpagar)
+            ? $this->formatNumber(floatval($request->montototalpagar), 2)
+            : '';
+
+        $sueldoformat = isset($request->sueldo)
+            ? $this->formatNumber(floatval($request->sueldo), 2)
+            : '';
+
+        $parcialidadestexto = isset($request->parcialidades)
+            ? $this->numberToLetters(floatval($request->parcialidades))
             : '';
 
         $montototalpagartexto = isset($request->montototalpagar)
@@ -105,7 +124,8 @@ class FormController extends Controller
         $Text28 = $request->telefonolaboral; // Variable para Text28
         $Text29 = $request->extencion; // Variable para Text29
         $puesto = $request->puesto; // Variable para puesto
-        $Text31 = $request->sueldo; // Variable para Text31
+        // $Text31 = $request->sueldo; // Variable para Text31
+        $Text31 = $sueldoformat; // Variable para Text31
         $Text32 = date('dmY', strtotime($request->fechaingreso)); // Variable para Text32 cambiar fromato a solo nuemros $$request->fechaingreso; // Variable para Text32
         $Text33 = $request->nombrereflaboral; // Variable para Text33
         $Text34 = $request->apellidopaternoreflaboral; // Variable para Text34
@@ -120,7 +140,8 @@ class FormController extends Controller
         $Opcion8_3 = "Opción8";
         // $Opcion11_4 = $request->montopago; // Variable para 4
         $Opcion11_4 = "Opción11"; // Variable para 4
-        $Opcion1_5 = $request->operacionesestimadas; // Variable para 5
+        // $Opcion1_5 = $request->operacionesestimadas; // Variable para 5
+        $Opcion1_5 = "Opción1"; // Variable para 5
         // $Opcion4_6 = $request->ocupacioneconomica; // Variable para 6
         $Opcion4_6 = "Opción4"; // Variable para 6
         $Opcion8_7 = $tiposolicitudcodigo; // Variable para 7
@@ -154,7 +175,8 @@ class FormController extends Controller
         $na = "NO APLICA"; // Variable para na
         $titular =  $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para titular
         $cat = $request->cat; // Variable para cat
-        $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
+        // $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
+        $monto_solicitado = $montosolicitadoformat; // Variable para monto solicitado
         // $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
         $monto_solicitado_texto = $montosolicitadotexto; // Variable para monto solicitado texto
         $Plazo = $request->plazo; // Variable para plazo
@@ -180,24 +202,31 @@ class FormController extends Controller
         $cta_clabe = $request->ctaclabe; // Variable para cta clabe
         $banco = $request->banco; // Variable para banco
         $sucursal = "Corporporativo"; // Variable para sucursal
-        $plazo2 = $request->plazocredito; // Variable para plazo2
+        // $plazo2 = $request->plazocredito; // Variable para plazo2
+        $plazo2 = $request->plazo; // Variable para plazo2
         $fecha_corte = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
         $Lugar_de_elaboración = "Oaxaca"; // Variable para Lugar de elaboración
         $tasa_ordinaria = $request->tasaordinaria; // Variable para tasa ordinaria
         $tasa_moratoria = $request->tasamoratoria; // Variable para tasa moratoria
         $seg1 = $request->seg1; // Variable para seg1
         $seg2 = $request->seg2; // Variable para seg2
-        $Texto4BGFHGJGHTD655 = isset($request->aceptar) ? 'X' : ''; // Variable para Texto4BGFHGJGHTD655
-        $Texto5MHGHFHTO87554 = isset($request->aceptar) ? '' : 'X'; // Variable para Texto5MHGHFHTO87554
+        // $Texto4BGFHGJGHTD655 = isset($request->aceptar) ? 'X' : ''; // Variable para Texto4BGFHGJGHTD655
+        // $Texto5MHGHFHTO87554 = isset($request->aceptar) ? '' : 'X'; // Variable para Texto5MHGHFHTO87554
+        $Texto4BGFHGJGHTD655 = 'X'; // Variable para Texto4BGFHGJGHTD655
+        $Texto5MHGHFHTO87554 = ''; // Variable para Texto5MHGHFHTO87554
         $lugar_y_fecha = $request->lugaryfecha; // Variable para lugar y fecha
         $seg3 = $request->seg3; // Variable para seg3
         $na2 = $request->na2; // Variable para na2
-        $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
-        $Texto712233DHGGHHH = isset($request->faculto) ? '' : 'X'; // Variable para Texto712233DHGGHHH
-        $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
+        // $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
+        // $Texto712233DHGGHHH = isset($request->faculto) ? '' : 'X'; // Variable para Texto712233DHGGHHH
+        $Texto69878675 = 'X'; // Variable para Texto69878675
+        $Texto712233DHGGHHH = ''; // Variable para Texto712233DHGGHHH
+        // $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
+        $monto_total_a_pagar = $montototalpagarformat; // Variable para monto total a pagar
         $año = substr(date('Y'), -1); // Variable para año
         $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
-        $parcialidades = $request->parcialidades; // Variable para parcialidades
+        // $parcialidades = $request->parcialidades; // Variable para parcialidades
+        $parcialidades = $parcialidadesformat; // Variable para parcialidades
         $Text86 = date('d/m/Y', strtotime($request->fechaprimerpago)); // Variable para Text86
         $fecha_vencimiento = date('d/m/Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
         $dia = date('d'); // Variable para dia
@@ -206,7 +235,7 @@ class FormController extends Controller
         $Bien_servicio_o_credito_a_pagar_Credito_Simple = ""; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Aval_con_folio = $request->avalconfolio; // Variable para Aval con folio
         $undefined = $request->montomaximo; // Variable para undefined
-        $cien_MN_Incluye_IVA = $request->cienmn; // Variable para 100 MN Incluye IVA
+        $cien_MN_Incluye_IVA = '$ ' . $request->cienmn; // Variable para 100 MN Incluye IVA
         // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
         $Por_este_conducto_autorizo_expresamente = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Por este conducto autorizo expresamente
         // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
@@ -220,7 +249,7 @@ class FormController extends Controller
         $año3 = substr(date('Y'), -2); // Variable para año        // Variable para año3
         // $año2 = date('Y', strtotime($request->fechadomiciliacion)); // Variable para año2
         $año2 = date('Y'); // Variable para año2
-        $parcialidades_texto = $request->parcialidadestexto; // Variable para parcialidades texto
+        $parcialidades_texto = $parcialidadestexto; // Variable para parcialidades texto
         // $Texto8PAGARE_MONTO_TOTAL_LETRA = $request->montopagareletra; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Texto8PAGARE_MONTO_TOTAL_LETRA = $montototalpagartexto; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Número_de_nómina = $request->numeronomina; // Variable para Número de nómina
@@ -422,5 +451,23 @@ class FormController extends Controller
         $cents = 'centavos';
 
         return $formatter->toMoney($number, $decimals, $currency, $cents);
+    }
+
+    public function formatNumber($number)
+    {
+        // Obtener la parte entera del número
+        $integerPart = floor($number);
+
+        // Formatear solo la parte entera como moneda
+        $formatter = new NumberFormatter('es_MX', NumberFormatter::CURRENCY);
+        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);  // Sin decimales
+        $formattedNumber = $formatter->formatCurrency($integerPart, 'MXN');
+
+        // Captura la parte decimal original
+        $decimalPart = explode('.', (string)$number);
+        $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
+
+        // Devuelve el resultado con el formato adecuado
+        return $formattedNumber . ' ' . $decimal . '/100 MXN';
     }
 }
