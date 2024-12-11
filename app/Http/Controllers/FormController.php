@@ -39,7 +39,8 @@ class FormController extends Controller
     {
         // dd($request->fechapagere);
         // dd($request->all());
-        setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'spanish');
+        setlocale(LC_TIME, 'es_MX.UTF-8', 'es_MX', 'spanish');
+
         // if ($locale === false) {
         //     dd("No se pudo establecer la localización.");
         // } else {
