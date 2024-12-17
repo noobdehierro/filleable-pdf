@@ -259,37 +259,6 @@
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CRÉDITO SOLICITADO</h3>
 
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Monto solicitado</span>
-                        <input type="number" class="form-control @error('montosolicitado') is-invalid @enderror"
-                            id="montosolicitado" name="montosolicitado" value="{{ old('montosolicitado') }}"
-                            placeholder="Monto solicitado" aria-label="Monto solicitado"
-                            aria-describedby="montosolicitadoError">
-                        @error('montosolicitado')
-                            <div id="montosolicitadoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Plazo</span>
-                        <input type="text" class="form-control @error('plazo') is-invalid @enderror"
-                            id="plazo" name="plazo" value="{{ old('plazo') }}" placeholder="Plazo"
-                            aria-label="Plazo" aria-describedby="plazoError">
-                        @error('plazo')
-                            <div id="plazoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            {{-- radio buton --}}
-            <div class="row mb-3">
                 <!-- Grupo de radios para Tipo de solicitud -->
                 <div class="col-12 col-md-6">
                     <fieldset class="form-group">
@@ -305,7 +274,24 @@
                         </div>
                     </fieldset>
                 </div>
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Monto solicitado</span>
+                        <input type="number" class="form-control @error('montosolicitado') is-invalid @enderror"
+                            id="montosolicitado" name="montosolicitado" value="{{ old('montosolicitado') }}"
+                            placeholder="Monto solicitado" aria-label="Monto solicitado"
+                            aria-describedby="montosolicitadoError">
+                        @error('montosolicitado')
+                            <div id="montosolicitadoError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
 
+            {{-- radio buton --}}
+            <div class="row mb-3">
                 <!-- Grupo de radios para Frecuencia de pago -->
                 <div class="col-12 col-md-6">
                     <fieldset class="form-group">
@@ -319,6 +305,21 @@
                             </select>
                         </div>
                     </fieldset>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Plazo</span>
+                        {{-- <input type="text" class="form-control @error('plazo') is-invalid @enderror"
+                            id="plazo" name="plazo" value="{{ old('plazo') }}" placeholder="Plazo"
+                            aria-label="Plazo" aria-describedby="plazoError"> --}}
+                        <select class="form-select" aria-label="Plazo" name="plazo" id="plazo">
+                        </select>
+                        @error('plazo')
+                            <div id="plazoError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
             </div>
         </div>
@@ -1028,7 +1029,7 @@
                     </div>
                 </div> --}}
             </div>
-            <div class="row mb-3">
+            {{-- <div class="row mb-3"> --}}
                 {{-- <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Plazo del credito</span>
@@ -1043,7 +1044,7 @@
                         @enderror
                     </div>
                 </div> --}}
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Periodicidad de pagos</span>
@@ -1059,9 +1060,9 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
@@ -1093,7 +1094,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 

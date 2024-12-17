@@ -205,7 +205,7 @@ class FormController extends Controller
         $sucursal = "Corporporativo"; // Variable para sucursal
         // $plazo2 = $request->plazocredito; // Variable para plazo2
         $plazo2 = $request->plazo; // Variable para plazo2
-        $fecha_corte = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
+        $fecha_corte = date('d/m/Y', strtotime($request->fechacorte)); // Variable para fecha corte
         $Lugar_de_elaboración = "Oaxaca"; // Variable para Lugar de elaboración
         $tasa_ordinaria = $request->tasaordinaria; // Variable para tasa ordinaria
         $tasa_moratoria = $request->tasamoratoria; // Variable para tasa moratoria
@@ -225,11 +225,12 @@ class FormController extends Controller
         // $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
         $monto_total_a_pagar = $montototalpagarformat; // Variable para monto total a pagar
         $año = substr(date('Y'), -1); // Variable para año
-        $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
+        // $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
+        $periodicidad = $request->frecuencia == "Opción4" ? "Quincenal" : "Mensual"; // Variable para periodicidad
         // $parcialidades = $request->parcialidades; // Variable para parcialidades
         $parcialidades = $parcialidadesformat; // Variable para parcialidades
         $Text86 = date('d/m/Y', strtotime($request->fechaprimerpago)); // Variable para Text86
-        $fecha_vencimiento = date('d/m/Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
+        $fecha_vencimiento = date('d/m/Y', strtotime($request->fechavencimiento)); // Variable para fecha vencimiento
         $dia = date('d'); // Variable para dia
         $mes = date('m'); // Variable para mes
         // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
