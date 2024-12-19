@@ -77,13 +77,13 @@ class FormController extends Controller
         $tiposolicitud = '';
         $tiposolicitudcodigo = '';
         if ($request->tiposolicitud == 'Opción1') {
-            $tiposolicitud = "Credito tradicional";
+            $tiposolicitud = "CREDITO SIMPLE";
             $tiposolicitudcodigo = 'Opción8';
         } elseif ($request->tiposolicitud == 'Opción2') {
-            $tiposolicitud = "Refinanciamiento";
+            $tiposolicitud = "REFINANCIAMIENTO";
             $tiposolicitudcodigo = 'Opción10';
         } elseif ($request->tiposolicitud == 'Opción3') {
-            $tiposolicitud = "Compra de cartera";
+            $tiposolicitud = "COMPRA DE CARTERA";
             $tiposolicitudcodigo = 'Opción9';
         }
 
@@ -99,7 +99,8 @@ class FormController extends Controller
         $edo = $request->estado; // Variable para edo
         $cel = $request->celular; // Variable para cel
         $Group13 = $request->tiposolicitud; // Variable para Group13
-        $Group14 = $request->frecuencia; // Variable para Group14
+        // $Group14 = $request->frecuencia; // Variable para Group14
+        $Group14 = "Opción4"; // Variable para Group14
         // $tipo_credito = $request->tipocredito; // Variable para tipo de credito
         // $tipo_credito = $request->tipocreditoproducto; // Variable para tipo de credito
         $tipo_credito = $tiposolicitud; // Variable para tipo de credito
@@ -215,7 +216,7 @@ class FormController extends Controller
         // $Texto5MHGHFHTO87554 = isset($request->aceptar) ? '' : 'X'; // Variable para Texto5MHGHFHTO87554
         $Texto4BGFHGJGHTD655 = 'X'; // Variable para Texto4BGFHGJGHTD655
         $Texto5MHGHFHTO87554 = ''; // Variable para Texto5MHGHFHTO87554
-        $lugar_y_fecha = $request->lugaryfecha; // Variable para lugar y fecha
+        $lugar_y_fecha = "Oaxaca " . date('d/m/Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
         $seg3 = $request->seg3; // Variable para seg3
         $na2 = $request->na2; // Variable para na2
         // $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
@@ -385,9 +386,9 @@ class FormController extends Controller
             "monto total a pagar texto2" => $monto_total_a_pagar_texto2,
         ];
 
-        $fileName = 'pdf_' . rand(2000, 1200000) . '.pdf';
         $pdf = new Pdf('pdfs/sample_request.pdf');
-        $pdf->fillForm($data);
+        $pdf->fillForm($data)
+        ->needAppearances();
         // Descargar el PDF directamente
         // return response()->streamDownload(function () use ($pdf) {
         //     echo $pdf->send();
@@ -469,6 +470,7 @@ class FormController extends Controller
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
         // Devuelve el resultado con el formato adecuado
-        return $formattedNumber . ' ' . $decimal . '/100 MXN';
+        // return $formattedNumber . ' ' . $decimal . '/100 MXN';
+        return $formattedNumber;
     }
 }
