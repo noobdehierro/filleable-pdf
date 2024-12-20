@@ -170,7 +170,8 @@ class FormController extends Controller
         $Opcion30_15 = $request->autorizacion; // Variable para 15
         $cp = $request->codigopostal; // Variable para cp
         // $Nombre_y_Firma_del_Servidor_Publico = $request->nombreservidorpublico; // Variable para Nombre y Firma del Servidor Público
-        $Nombre_y_Firma_del_Servidor_Publico = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Nombre y Firma del Servidor Público
+        // $Nombre_y_Firma_del_Servidor_Publico = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Nombre y Firma del Servidor Público
+        $Nombre_y_Firma_del_Servidor_Publico = ""; // Variable para Nombre y Firma del Servidor Público
         $fecha = strftime('%A %d de %B de %Y');
         $funciones = $request->funciones; // Variable para funciones
         // $na = $request->noaplicafunciones; // Variable para na
@@ -187,26 +188,32 @@ class FormController extends Controller
         $Texto1982347365736748RFJEHGF = isset($request->enviardomicilio) ? 'X' : ''; // Variable para Texto1982347365736748RFJEHGF
         $Texto234567FDGJHKJ = isset($request->consultarinternet) ? 'X' : ''; // Variable para Texto234567FDGJHKJ
         $Texto3Y54YTFHGV = isset($request->enviarcorreoelectronico) ? 'X' : ''; // Variable para Texto3Y54YTFHGV
-        $diapor_definir = date('d', strtotime($request->fechavencimiento)); // Variable para diapor definir
-        $mes_por_definir = date('m', strtotime($request->fechavencimiento)); // Variable para mes por definir
-        $año_por_definir = date('Y', strtotime($request->fechavencimiento)); // Variable para año por definir
-        $diapor_definir2 = date('d', strtotime($request->fechacorte)); // Variable para diapor definir2
-        $mes_por_definir2 = date('m', strtotime($request->fechacorte)); // Variable para mes por definir2
-        $año_por_definir2 = date('Y', strtotime($request->fechacorte)); // Variable para año por definir2
+        // $diapor_definir = date('d', strtotime($request->fechavencimiento)); // Variable para diapor definir
+        // $mes_por_definir = date('m', strtotime($request->fechavencimiento)); // Variable para mes por definir
+        // $año_por_definir = date('Y', strtotime($request->fechavencimiento)); // Variable para año por definir
+        $diapor_definir = date('d', strtotime($request->fechavencimientocredito)); // Variable para diapor definir
+        $mes_por_definir = date('m', strtotime($request->fechavencimientocredito)); // Variable para mes por definir
+        $año_por_definir = date('Y', strtotime($request->fechavencimientocredito));
+        // $diapor_definir2 = date('d', strtotime($request->fechacorte)); // Variable para diapor definir2
+        // $mes_por_definir2 = date('m', strtotime($request->fechacorte)); // Variable para mes por definir2
+        // $año_por_definir2 = date('Y', strtotime($request->fechacorte)); // Variable para año por definir2
+        $diapor_definir2 = date('d', strtotime($request->fechacortecredito)); // Variable para diapor definir2
+        $mes_por_definir2 = date('m', strtotime($request->fechacortecredito)); // Variable para mes por definir2
+        $año_por_definir2 = date('Y', strtotime($request->fechacortecredito)); // Variable para año por definir2
         $Text48 = $request->seidentificacon; // Variable para Text48
         // $nacionalidad = $request->nacionalidad; // Variable para nacionalidad
         $nacionalidad = 'Mexicana'; // Variable para nacionalidad
         // $Text50 = $request->domiciliogeneral; // Variable para Text50
-        $Text50 = $request->domicilio; // Variable para Text50
+        $Text50 = $request->domicilio." ".$request->colonia." C.P. ".$request->codigopostal; // Variable para Text50
         $rfc = $request->rfc; // Variable para rfc
         $correo = $request->correoelectronico; // Variable para correo
-        $Text55 = $request->fechasdisposicion; // Variable para Text55
+        $Text55 = strftime('%d de %B de %Y', strtotime($request->fechasdisposicion)); // // Variable para Text55
         $cta_clabe = $request->ctaclabe; // Variable para cta clabe
         $banco = $request->banco; // Variable para banco
         $sucursal = "Corporporativo"; // Variable para sucursal
         // $plazo2 = $request->plazocredito; // Variable para plazo2
-        $plazo2 = $request->plazo; // Variable para plazo2
-        $fecha_corte = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
+        $plazo2 = $request->plazo." QUINCENAS"; // Variable para plazo2
+        $fecha_corte = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
         $Lugar_de_elaboración = "Oaxaca"; // Variable para Lugar de elaboración
         $tasa_ordinaria = $request->tasaordinaria; // Variable para tasa ordinaria
         $tasa_moratoria = $request->tasamoratoria; // Variable para tasa moratoria
@@ -216,7 +223,8 @@ class FormController extends Controller
         // $Texto5MHGHFHTO87554 = isset($request->aceptar) ? '' : 'X'; // Variable para Texto5MHGHFHTO87554
         $Texto4BGFHGJGHTD655 = 'X'; // Variable para Texto4BGFHGJGHTD655
         $Texto5MHGHFHTO87554 = ''; // Variable para Texto5MHGHFHTO87554
-        $lugar_y_fecha = "Oaxaca " . date('d/m/Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
+        // $lugar_y_fecha = "Oaxaca " . date('d/m/Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
+        $lugar_y_fecha = "Oaxaca " . strftime('%d de %B de %Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
         $seg3 = $request->seg3; // Variable para seg3
         $na2 = $request->na2; // Variable para na2
         // $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
@@ -226,11 +234,13 @@ class FormController extends Controller
         // $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
         $monto_total_a_pagar = $montototalpagarformat; // Variable para monto total a pagar
         $año = substr(date('Y'), -1); // Variable para año
-        $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
+        // $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
+        $periodicidad = "Quincenal"; // Variable para periodicidad
         // $parcialidades = $request->parcialidades; // Variable para parcialidades
         $parcialidades = $parcialidadesformat; // Variable para parcialidades
-        $Text86 = date('d/m/Y', strtotime($request->fechaprimerpago)); // Variable para Text86
-        $fecha_vencimiento = date('d/m/Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
+        // $Text86 = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para Text86
+        $Text86 = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para Text86
+        $fecha_vencimiento = strftime('%d de %B de %Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
         $dia = date('d'); // Variable para dia
         $mes = date('m'); // Variable para mes
         // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
@@ -448,26 +458,29 @@ class FormController extends Controller
     public function numberToLetters($number)
     {
         $formatter = new NumeroALetras();
-        $decimals = 2;
+        $decimals = 0;
         $currency = 'pesos';
         $cents = 'centavos';
 
-        return $formatter->toMoney($number, $decimals, $currency, $cents);
+        $decimalPart = explode('.', (string)$number);
+        $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
+
+        return $formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100 M.N.';
     }
 
     public function formatNumber($number)
     {
         // Obtener la parte entera del número
-        $integerPart = floor($number);
+        // $integerPart = floor($number);
 
         // Formatear solo la parte entera como moneda
         $formatter = new NumberFormatter('es_MX', NumberFormatter::CURRENCY);
-        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);  // Sin decimales
-        $formattedNumber = $formatter->formatCurrency($integerPart, 'MXN');
+        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);  // Sin decimales
+        $formattedNumber = $formatter->formatCurrency($number, 'MXN');
 
         // Captura la parte decimal original
-        $decimalPart = explode('.', (string)$number);
-        $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
+        // $decimalPart = explode('.', (string)$number);
+        // $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
         // Devuelve el resultado con el formato adecuado
         // return $formattedNumber . ' ' . $decimal . '/100 MXN';

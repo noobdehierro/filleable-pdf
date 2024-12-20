@@ -897,7 +897,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de vencimiento</span>
@@ -911,7 +911,7 @@
                             </div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de corte</span>
@@ -928,7 +928,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de primer pago</span>
@@ -943,7 +943,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
 
@@ -1009,7 +1009,7 @@
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha(s) de disposición</span>
-                        <input type="text" class="form-control @error('fechasdisposicion') is-invalid @enderror"
+                        <input type="date" class="form-control @error('fechasdisposicion') is-invalid @enderror"
                             id="fechasdisposicion" name="fechasdisposicion" value="{{ old('fechasdisposicion') }}"
                             placeholder="Fecha(s) de disposición" aria-label="Fecha(s) de disposición"
                             aria-describedby="fechasdisposicionError">
@@ -1068,7 +1068,7 @@
                         @enderror
                     </div>
                 </div> --}}
-                <div class="col-12 col-md-6">
+                {{-- <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Periodicidad de pagos</span>
@@ -1083,7 +1083,7 @@
                             </div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="row mb-3">
