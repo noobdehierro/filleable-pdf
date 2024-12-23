@@ -897,30 +897,32 @@
             </div>
 
             <div class="row mb-3">
-                {{-- <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de vencimiento</span>
-                        <input type="date" class="form-control @error('fechavencimiento') is-invalid @enderror"
-                            id="fechavencimiento" name="fechavencimiento" value="{{ old('fechavencimiento') }}"
-                            placeholder="Fecha de vencimiento" aria-label="Fecha de vencimiento"
-                            aria-describedby="fechavencimientoError">
-                        @error('fechavencimiento')
-                            <div id="fechavencimientoError" class="invalid-feedback">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha corte credito</span>
+                        <input type="date" class="form-control @error('fechacortecredito') is-invalid @enderror"
+                            id="fechacortecredito" name="fechacortecredito" value="{{ old('fechacortecredito') }}"
+                            placeholder="Fecha corte credito" aria-label="Fecha corte credito"
+                            aria-describedby="fechacortecreditoError">
+                        @error('fechacortecredito')
+                            <div id="fechacortecreditoError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                </div> --}}
+                </div>
                 <div class="col-12 col-md-6">
+
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de corte</span>
-                        <input type="date" class="form-control @error('fechacorte') is-invalid @enderror"
-                            id="fechacorte" name="fechacorte" value="{{ old('fechacorte') }}"
-                            placeholder="Fecha de corte" aria-label="Fecha de corte"
-                            aria-describedby="fechacorteError">
-                        @error('fechacorte')
-                            <div id="fechacorteError" class="invalid-feedback">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento credito</span>
+                        <input type="date"
+                            class="form-control @error('fechavencimientocredito') is-invalid @enderror"
+                            id="fechavencimientocredito" name="fechavencimientocredito"
+                            value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento credito"
+                            aria-label="Fecha vencimiento credito" aria-describedby="fechavencimientocreditoError">
+                        @error('fechavencimientocredito')
+                            <div id="fechavencimientocreditoError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -928,22 +930,22 @@
                 </div>
             </div>
 
-            {{-- <div class="row mb-3">
+            <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de primer pago</span>
-                        <input type="date" class="form-control @error('fechaprimerpago') is-invalid @enderror"
-                            id="fechaprimerpago" name="fechaprimerpago" value="{{ old('fechaprimerpago') }}"
-                            placeholder="Fecha de primer pago" aria-label="Fecha de primer pago"
-                            aria-describedby="fechaprimerpagoError">
-                        @error('fechaprimerpago')
-                            <div id="fechaprimerpagoError" class="invalid-feedback">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades</span>
+                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
+                            id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
+                            placeholder="Parcialidades" aria-label="Parcialidades"
+                            aria-describedby="parcialidadesError">
+                        @error('parcialidades')
+                            <div id="parcialidadesError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
 
@@ -1021,104 +1023,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">V. PLAZO Y CONDICIONES DE PAGO DEL CRÉDITO</h3>
 
-            <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades</span>
-                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
-                            id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
-                            placeholder="Parcialidades" aria-label="Parcialidades"
-                            aria-describedby="parcialidadesError">
-                        @error('parcialidades')
-                            <div id="parcialidadesError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                {{-- <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades Texto</span>
-                        <input type="text" class="form-control @error('parcialidadestexto') is-invalid @enderror"
-                            id="parcialidadestexto" name="parcialidadestexto"
-                            value="{{ old('parcialidadestexto') }}" placeholder="Parcialidades Texto"
-                            aria-label="Parcialidades Texto" aria-describedby="parcialidadestextoError">
-                        @error('parcialidadestexto')
-                            <div id="parcialidadestextoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div> --}}
-            </div>
-            <div class="row mb-3">
-                {{-- <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Plazo del credito</span>
-                        <input type="text" class="form-control @error('plazocredito') is-invalid @enderror"
-                            id="plazocredito" name="plazocredito" value="{{ old('plazocredito') }}"
-                            placeholder="Plazo del credito" aria-label="Plazo del credito"
-                            aria-describedby="plazocreditoError">
-                        @error('plazocredito')
-                            <div id="plazocreditoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div> --}}
-                {{-- <div class="col-12 col-md-6">
-
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Periodicidad de pagos</span>
-                        <input type="text" class="form-control @error('periodicidadpagos') is-invalid @enderror"
-                            id="periodicidadpagos" name="periodicidadpagos"
-                            value="{{ old('periodicidadpagos') ?? 'Quincenal' }}"
-                            placeholder="Periodicidad de pagos" aria-label="Periodicidad de pagos"
-                            aria-describedby="periodicidadpagosError">
-                        @error('periodicidadpagos')
-                            <div id="periodicidadpagosError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div> --}}
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-12 col-md-6">
-
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha corte credito</span>
-                        <input type="date" class="form-control @error('fechacortecredito') is-invalid @enderror"
-                            id="fechacortecredito" name="fechacortecredito" value="{{ old('fechacortecredito') }}"
-                            placeholder="Fecha corte credito" aria-label="Fecha corte credito"
-                            aria-describedby="fechacortecreditoError">
-                        @error('fechacortecredito')
-                            <div id="fechacortecreditoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento credito</span>
-                        <input type="date"
-                            class="form-control @error('fechavencimientocredito') is-invalid @enderror"
-                            id="fechavencimientocredito" name="fechavencimientocredito"
-                            value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento credito"
-                            aria-label="Fecha vencimiento credito" aria-describedby="fechavencimientocreditoError">
-                        @error('fechavencimientocredito')
-                            <div id="fechavencimientocreditoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
 
@@ -1234,61 +1139,12 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="col-12 col-md-6">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">100 MN</span>
-                            <input type="number" class="form-control @error('cienmn') is-invalid @enderror"
-                                id="cienmn" name="cienmn" aria-describedby="cienmnError" placeholder="100 MN"
-                                aria-label="100 MN">{{ old('cienmn') }}</input>
-                            @error('cienmn')
-                                <div id="cienmnError" class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row mb-3">
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Monto maximo fijo del cargo
-                        autorizado letra</span>
-                    <input type="text" class="form-control @error('montomaximo') is-invalid @enderror"
-                        id="montomaximo" name="montomaximo" aria-describedby="montomaximoError"
-                        placeholder="Monto máximo fijo del cargo autorizado letra"
-                        aria-label="Monto máximo fijo del cargo autorizado letra">{{ old('montomaximo') }}</input>
-                    @error('montomaximo')
-                        <div id="montomaximoError" class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
             </div>
 
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">MANDATO DE DESCUENTO IRREVOCABLE</h3>
 
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Monto a pagar
-                            IRREVOCABLE</span>
-                        <input type="text"
-                            class="form-control @error('montopagarirrevocabletexto') is-invalid @enderror"
-                            id="montopagarirrevocabletexto" name="montopagarirrevocabletexto"
-                            aria-describedby="montopagarirrevocabletextoError"
-                            placeholder="Monto a pagar IRREVOCABLE"
-                            aria-label="Monto a pagar IRREVOCABLE">{{ old('montopagarirrevocabletexto') }}</input>
-                        @error('montopagarirrevocabletexto')
-                            <div id="montopagarirrevocabletextoError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
+
                 <div class="col-12 col-md-6">
 
                     <div class="input-group input-group-sm mb-3">

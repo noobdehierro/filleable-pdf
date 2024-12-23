@@ -73,8 +73,9 @@ class FormController extends Controller
         $montototalpagartexto = isset($request->montototalpagar)
             ? $this->numberToLetters(floatval($request->montototalpagar))
             : '';
-
-        $tiposolicitud = '';
+        $decimal_parcialidades = isset($request->parcialidades)
+            ? $this->getDecimals(floatval($request->parcialidades))
+            : '';
         $tiposolicitudcodigo = '';
         if ($request->tiposolicitud == 'Opción1') {
             $tiposolicitud = "CREDITO SIMPLE";
@@ -121,7 +122,7 @@ class FormController extends Controller
         $migratoria = ""; // Variable para migratoria
         $Group16 = $request->tipovivienda; // Variable para Group16
         // $convenio = $request->convenio; // Variable para convenio
-        $convenio = "Gobierno Oaxaca"; // Variable para convenio
+        $convenio = "GOBIERNO OAXACA"; // Variable para convenio
         $lugar_de_trabajo = $request->centrotrabajo; // Variable para lugar de trabajo
         $Text28 = $request->telefonolaboral; // Variable para Text28
         $Text29 = $request->extencion; // Variable para Text29
@@ -181,7 +182,7 @@ class FormController extends Controller
         // $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
         $monto_solicitado = $montosolicitadoformat; // Variable para monto solicitado
         // $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
-        $monto_solicitado_texto = $montosolicitadotexto; // Variable para monto solicitado texto
+        $monto_solicitado_texto = $montosolicitadotexto."M.N."; // Variable para monto solicitado texto
         $Plazo = $request->plazo; // Variable para plazo
         // $Texto198765432345678 = $request->aseguradora; // Variable para Texto198765432345678
         $Texto198765432345678 = 'NO APLICA'; // Variable para Texto198765432345678
@@ -202,7 +203,7 @@ class FormController extends Controller
         $año_por_definir2 = date('Y', strtotime($request->fechacortecredito)); // Variable para año por definir2
         $Text48 = $request->seidentificacon; // Variable para Text48
         // $nacionalidad = $request->nacionalidad; // Variable para nacionalidad
-        $nacionalidad = 'Mexicana'; // Variable para nacionalidad
+        $nacionalidad = 'MEXICANA'; // Variable para nacionalidad
         // $Text50 = $request->domiciliogeneral; // Variable para Text50
         $Text50 = $request->domicilio." ".$request->colonia." C.P. ".$request->codigopostal; // Variable para Text50
         $rfc = $request->rfc; // Variable para rfc
@@ -246,8 +247,10 @@ class FormController extends Controller
         // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Bien_servicio_o_credito_a_pagar_Credito_Simple = ""; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Aval_con_folio = $request->avalconfolio; // Variable para Aval con folio
-        $undefined = $request->montomaximo; // Variable para undefined
-        $cien_MN_Incluye_IVA = '$ ' . $request->cienmn; // Variable para 100 MN Incluye IVA
+        // $undefined = $request->montomaximo; // Variable para undefined
+        $undefined = $parcialidadestexto; // Variable para undefined
+        // $cien_MN_Incluye_IVA = '$ ' . $request->cienmn; // Variable para 100 MN Incluye IVA
+        $cien_MN_Incluye_IVA = $decimal_parcialidades;
         // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
         $Por_este_conducto_autorizo_expresamente = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Por este conducto autorizo expresamente
         // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
@@ -266,8 +269,9 @@ class FormController extends Controller
         $Texto8PAGARE_MONTO_TOTAL_LETRA = $montototalpagartexto; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Número_de_nómina = $request->numeronomina; // Variable para Número de nómina
         // $monto_total_a_pagar_texto = $request->montototalpagartexto; // Variable para monto total a pagar texto
-        $monto_total_a_pagar_texto = $montototalpagartexto; // Variable para monto total a pagar texto
-        $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
+        $monto_total_a_pagar_texto = $montototalpagartexto." M.N."; // Variable para monto total a pagar texto
+        // $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
+        $monto_total_a_pagar_texto2 = $montototalpagartexto; // Variable para monto total a pagar texto2
 
         $data = [
             "curp" => $curp,
@@ -455,7 +459,7 @@ class FormController extends Controller
         //
     }
 
-    public function numberToLetters($number)
+    public function numberToLetters($number, $decimals = true)
     {
         $formatter = new NumeroALetras();
         $decimals = 0;
@@ -465,7 +469,11 @@ class FormController extends Controller
         $decimalPart = explode('.', (string)$number);
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
-        return $formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100 M.N.';
+        if (!$decimals) {
+            return $formatter->toMoney($number, $decimals, $currency, $cents);
+        }
+
+        return $formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100';
     }
 
     public function formatNumber($number)
@@ -485,5 +493,11 @@ class FormController extends Controller
         // Devuelve el resultado con el formato adecuado
         // return $formattedNumber . ' ' . $decimal . '/100 MXN';
         return $formattedNumber;
+    }
+
+    public function getDecimals($number) {
+        $decimalPart = explode('.', (string)$number);
+        $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
+        return $decimal;
     }
 }
