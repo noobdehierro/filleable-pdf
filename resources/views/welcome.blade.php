@@ -338,7 +338,7 @@
                             <select class="form-select" aria-label="Tipo de solicitud" name="tiposolicitud"
                                 id="tiposolicitud">
                                 <option selected>Seleccione una opción</option>
-                                <option value="Opción1">Apertura</option>
+                                <option value="Opción1" selected>Apertura</option>
                                 <option value="Opción2">Refinanciamiento</option>
                                 <option value="Opción3">CC</option>
                             </select>
@@ -1155,6 +1155,20 @@
                             aria-label="Numero de nomina">{{ old('numeronomina') }}</input>
                         @error('numeronomina')
                             <div id="numeronominaError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Numero de empleado</span>
+                        <input type="text" class="form-control @error('numerodeempleado') is-invalid @enderror"
+                            id="numerodeempleado" name="numerodeempleado" aria-describedby="numerodeempleadoError"
+                            placeholder="Numero de empleado"
+                            aria-label="Numero de empleado">{{ old('numerodeempleado') }}</input>
+                        @error('numerodeempleado')
+                            <div id="numerodeempleadoError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror

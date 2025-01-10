@@ -173,16 +173,17 @@ class FormController extends Controller
         // $Nombre_y_Firma_del_Servidor_Publico = $request->nombreservidorpublico; // Variable para Nombre y Firma del Servidor Público
         // $Nombre_y_Firma_del_Servidor_Publico = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Nombre y Firma del Servidor Público
         $Nombre_y_Firma_del_Servidor_Publico = ""; // Variable para Nombre y Firma del Servidor Público
-        $fecha = strftime('%A %d de %B de %Y');
+        // $fecha = strftime('%A %d de %B de %Y');
+        $fecha = strftime('%d de %B de %Y', strtotime($request->lugaryfecha));
         $funciones = $request->funciones; // Variable para funciones
         // $na = $request->noaplicafunciones; // Variable para na
         $na = "NO APLICA"; // Variable para na
         $titular =  $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para titular
-        $cat = $request->cat; // Variable para cat
+        $cat = $request->cat."%"; // Variable para cat
         // $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
         $monto_solicitado = $montosolicitadoformat; // Variable para monto solicitado
         // $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
-        $monto_solicitado_texto = $montosolicitadotexto."M.N."; // Variable para monto solicitado texto
+        $monto_solicitado_texto = $montosolicitadotexto; // Variable para monto solicitado texto
         $Plazo = $request->plazo; // Variable para plazo
         // $Texto198765432345678 = $request->aseguradora; // Variable para Texto198765432345678
         $Texto198765432345678 = 'NO APLICA'; // Variable para Texto198765432345678
@@ -216,8 +217,8 @@ class FormController extends Controller
         $plazo2 = $request->plazo." QUINCENAS"; // Variable para plazo2
         $fecha_corte = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
         $Lugar_de_elaboración = "Oaxaca"; // Variable para Lugar de elaboración
-        $tasa_ordinaria = $request->tasaordinaria; // Variable para tasa ordinaria
-        $tasa_moratoria = $request->tasamoratoria; // Variable para tasa moratoria
+        $tasa_ordinaria = $request->tasaordinaria."%"; // Variable para tasa ordinaria
+        $tasa_moratoria = $request->tasamoratoria."%"; // Variable para tasa moratoria
         $seg1 = $request->seg1; // Variable para seg1
         $seg2 = $request->seg2; // Variable para seg2
         // $Texto4BGFHGJGHTD655 = isset($request->aceptar) ? 'X' : ''; // Variable para Texto4BGFHGJGHTD655
@@ -234,7 +235,7 @@ class FormController extends Controller
         $Texto712233DHGGHHH = ''; // Variable para Texto712233DHGGHHH
         // $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
         $monto_total_a_pagar = $montototalpagarformat; // Variable para monto total a pagar
-        $año = substr(date('Y'), -1); // Variable para año
+        $año = substr(date('Y', strtotime($request->lugaryfecha)), -1); // Variable para año
         // $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
         $periodicidad = "Quincenal"; // Variable para periodicidad
         // $parcialidades = $request->parcialidades; // Variable para parcialidades
@@ -242,8 +243,8 @@ class FormController extends Controller
         // $Text86 = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para Text86
         $Text86 = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para Text86
         $fecha_vencimiento = strftime('%d de %B de %Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
-        $dia = date('d'); // Variable para dia
-        $mes = date('m'); // Variable para mes
+        $dia = date('d', strtotime($request->lugaryfecha)); // Variable para dia
+        $mes = date('m', strtotime($request->lugaryfecha)); // Variable para mes
         // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Bien_servicio_o_credito_a_pagar_Credito_Simple = ""; // Variable para Bien servicio o crédito a pagar Crédito Simple
         $Aval_con_folio = $request->avalconfolio; // Variable para Aval con folio
@@ -252,24 +253,24 @@ class FormController extends Controller
         // $cien_MN_Incluye_IVA = '$ ' . $request->cienmn; // Variable para 100 MN Incluye IVA
         $cien_MN_Incluye_IVA = $decimal_parcialidades;
         // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
-        $Por_este_conducto_autorizo_expresamente = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Por este conducto autorizo expresamente
+        $Por_este_conducto_autorizo_expresamente = "ID Financiero"; // Variable para Por este conducto autorizo expresamente
         // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
-        $Número_de_empleado = ""; // Variable para Número de empleado
+        $Número_de_empleado = $request->numerodeempleado; // Variable para Número de empleado
         // $Número_de_folio = $request->numerofolio; // Variable para Número de folio
         $Número_de_folio = ""; // Variable para Número de folio
         // $Para_uso_exclusivo_de = $request->usoexclusivo; // Variable para Para uso exclusivo de
         $Para_uso_exclusivo_de = "ID Financiero"; // Variable para Para uso exclusivo de
         // $año3 = substr(date('Y', strtotime($request->fechaautorizacion)), -2); // Variable para año        // Variable para año3
         // $año3 = substr(date('Y', strtotime($fecha)), -2); // Variable para año        // Variable para año3
-        $año3 = substr(date('Y'), -2); // Variable para año        // Variable para año3
+        $año3 = substr(date('Y', strtotime($request->lugaryfecha)), -2); // Variable para año        // Variable para año3
         // $año2 = date('Y', strtotime($request->fechadomiciliacion)); // Variable para año2
-        $año2 = date('Y'); // Variable para año2
+        $año2 = date('Y', strtotime($request->lugaryfecha)); // Variable para año2
         $parcialidades_texto = $parcialidadestexto; // Variable para parcialidades texto
         // $Texto8PAGARE_MONTO_TOTAL_LETRA = $request->montopagareletra; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Texto8PAGARE_MONTO_TOTAL_LETRA = $montototalpagartexto; // Variable para Texto8PAGARE MONTO TOTAL LETRA
         $Número_de_nómina = $request->numeronomina; // Variable para Número de nómina
         // $monto_total_a_pagar_texto = $request->montototalpagartexto; // Variable para monto total a pagar texto
-        $monto_total_a_pagar_texto = $montototalpagartexto." M.N."; // Variable para monto total a pagar texto
+        $monto_total_a_pagar_texto = $montototalpagartexto; // Variable para monto total a pagar texto
         // $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
         $monto_total_a_pagar_texto2 = $montototalpagartexto; // Variable para monto total a pagar texto2
 
@@ -469,11 +470,7 @@ class FormController extends Controller
         $decimalPart = explode('.', (string)$number);
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
-        if (!$decimals) {
-            return $formatter->toMoney($number, $decimals, $currency, $cents);
-        }
-
-        return $formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100';
+        return($formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100 M.N.');
     }
 
     public function formatNumber($number)
