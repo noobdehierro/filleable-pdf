@@ -202,7 +202,7 @@ class FormController extends Controller
         $diapor_definir2 = date('d', strtotime($request->fechacortecredito)); // Variable para diapor definir2
         $mes_por_definir2 = date('m', strtotime($request->fechacortecredito)); // Variable para mes por definir2
         $año_por_definir2 = date('Y', strtotime($request->fechacortecredito)); // Variable para año por definir2
-        $Text48 = $request->seidentificacon; // Variable para Text48
+        $Text48 = $request->seidentificacon. " ". $request->numero_identificacion; // Variable para Text48
         // $nacionalidad = $request->nacionalidad; // Variable para nacionalidad
         $nacionalidad = 'MEXICANA'; // Variable para nacionalidad
         // $Text50 = $request->domiciliogeneral; // Variable para Text50
@@ -273,6 +273,9 @@ class FormController extends Controller
         $monto_total_a_pagar_texto = $montototalpagartexto; // Variable para monto total a pagar texto
         // $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
         $monto_total_a_pagar_texto2 = $montototalpagartexto; // Variable para monto total a pagar texto2
+        $tazafijamensual = $request->tazafijamensual."%"; // Variable para tazafijamensual
+        $tazafijamensualmoratoria = $request->tazafijamensualmoratoria."%"; // Variable para tazafijamensualmoratoria
+
 
         $data = [
             "curp" => $curp,
@@ -399,6 +402,10 @@ class FormController extends Controller
             "Número de nómina" => $Número_de_nómina,
             "monto total a pagar texto" => $monto_total_a_pagar_texto,
             "monto total a pagar texto2" => $monto_total_a_pagar_texto2,
+            "plazo3" => "QUINCENAS",
+            "dias naturales" => "15",
+            "tfm" => $tazafijamensual,
+            "tfmm" => $tazafijamensualmoratoria,
         ];
 
         $pdf = new Pdf('pdfs/sample_request.pdf');

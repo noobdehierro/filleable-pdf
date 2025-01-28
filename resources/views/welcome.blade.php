@@ -945,6 +945,38 @@
                         @enderror
                     </div>
                 </div>
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual</span>
+                        <input type="number" class="form-control @error('tazafijamensual') is-invalid @enderror"
+                            id="tazafijamensual" name="tazafijamensual" value="{{ old('tazafijamensual') }}"
+                            placeholder="Taza fija mensual" aria-label="Taza fija mensual"
+                            aria-describedby="tazafijamensualError">
+                        @error('tazafijamensual')
+                            <div id="tazafijamensualError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual moratoria</span>
+                        <input type="number" class="form-control @error('tazafijamensualmoratoria') is-invalid @enderror"
+                            id="tazafijamensualmoratoria" name="tazafijamensualmoratoria"
+                            value="{{ old('tazafijamensualmoratoria') }}" placeholder="Taza fija mensual moratoria"
+                            aria-label="Taza fija mensual moratoria"
+                            aria-describedby="tazafijamensualmoratoriaError">
+                        @error('tazafijamensualmoratoria')
+                            <div id="tazafijamensualmoratoriaError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
             </div>
 
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
@@ -996,6 +1028,21 @@
                         </select>
                         @error('seidentificacon')
                             <div id="seidentificaconError" class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Número de identificación</span>
+                        <input type="text" class="form-control @error('numero_identificacion') is-invalid @enderror"
+                            id="numero_identificacion" name="numero_identificacion"
+                            value="{{ old('numero_identificacion') }}" placeholder="Número de identificación"
+                            aria-label="Numero de identificación" aria-describedby="numero_identificacionError">
+                        @error('numero_identificacion')
+                            <div id="numero_identificacionError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
