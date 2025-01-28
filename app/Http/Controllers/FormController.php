@@ -255,7 +255,7 @@ class FormController extends Controller
         // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
         $Por_este_conducto_autorizo_expresamente = "ID Financiero"; // Variable para Por este conducto autorizo expresamente
         // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
-        $Número_de_empleado = $request->numerodeempleado; // Variable para Número de empleado
+        $Número_de_empleado = $request->numeronomina; // Variable para Número de empleado
         // $Número_de_folio = $request->numerofolio; // Variable para Número de folio
         $Número_de_folio = ""; // Variable para Número de folio
         // $Para_uso_exclusivo_de = $request->usoexclusivo; // Variable para Para uso exclusivo de

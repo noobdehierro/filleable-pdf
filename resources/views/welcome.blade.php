@@ -15,37 +15,21 @@
         select:focus,
         textarea:focus {
             border-color: #28a745 !important;
-            /* Color verde de Bootstrap */
             box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
-            /* Sombra verde */
             outline: none;
-            /* Opcional, elimina el borde adicional */
         }
-
-        /* .shadow-green {
-            box-shadow: 0 1rem 3rem rgba(40, 167, 69, 0.175) !important;
-            /* Sombra verde */
-        }
-
-        */
     </style>
 </head>
 
 <body class="bg-success p-2 text-dark bg-opacity-25">
     <form action="{{ route('form.store') }}" method="POST" novalidate>
-
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded ">
-
             <img style="display: block; margin: 0 auto" src="{{ asset('img/logo.png') }}" class="img-fluid"
                 alt="Logo">
-
             <h2 class="text-center mb-4 mt-4">Formulario de solicitud de crédito</h2>
-            <!-- Formulario -->
             @csrf
-            <!-- Primera fila de dos campos -->
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
-                    {{-- <label for="asesor" class="form-label text-muted fs-6 fw-bold">Asesor</label> --}}
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Asesor</span>
                         <input type="text" class="form-control @error('asesor') is-invalid @enderror" id="asesor"
@@ -131,7 +115,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -190,7 +173,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -221,7 +203,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <div class="input-group input-group-sm mb-3">
@@ -254,10 +235,7 @@
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CRÉDITO SOLICITADO</h3>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -276,9 +254,6 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Plazo</span>
-                        {{-- <input type="text" class="form-control @error('plazo') is-invalid @enderror"
-                            id="plazo" name="plazo" value="{{ old('plazo') }}" placeholder="Plazo"
-                            aria-label="Plazo" aria-describedby="plazoError"> --}}
                         <select class="form-select" name="plazo" id="plazo">
                             <option selected>Seleccione una opcion</option>
                             <option value="12">12</option>
@@ -327,10 +302,7 @@
                     </div>
                 </div>
             </div>
-
-            {{-- radio buton --}}
             <div class="row mb-3">
-                <!-- Grupo de radios para Tipo de solicitud -->
                 <div class="col-12 col-md-6">
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
@@ -348,8 +320,6 @@
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">SOLICITANTE:</h3>
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
@@ -379,9 +349,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <!-- Grupo de radios para genero -->
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
@@ -395,8 +363,6 @@
                         </div>
                     </fieldset>
                 </div>
-                <!-- Campo de entrada para telefonofijo -->
-
                 <div class="col-md-4">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Teléfono Fijo</span>
@@ -411,8 +377,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Campo de entrada para fecha de nacimiento -->
                 <div class="col-md-4">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de Nacimiento</span>
@@ -427,7 +391,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -459,9 +422,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <!-- Grupo de radios para tipo de vivienda -->
                 <div class="col-md-4">
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
@@ -476,10 +437,7 @@
                         </div>
                     </fieldset>
                 </div>
-                <!-- Campo de entrada para tiempo de residir  -->
-
                 <div class="col-md-4">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tiempo de residir</span>
                         <input type="text" class="form-control @error('tiempoderesidir') is-invalid @enderror"
@@ -493,8 +451,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Campo de entrada para nombre arrendador -->
                 <div class="col-md-4 arrendador">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Arrendador</span>
@@ -510,10 +466,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3 arrendador">
                 <div class="col-md-4">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Apellido 1</span>
                         <input type="text"
@@ -530,7 +484,6 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Apellido 2</span>
                         <input type="text"
@@ -561,13 +514,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">DATOS LABORALES</h3>
             <div class="row mb-3">
-
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Centro de Trabajo</span>
@@ -582,7 +532,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Puesto</span>
@@ -597,7 +546,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -627,7 +575,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -659,7 +606,6 @@
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">REFERENCIA LABORAL</h3>
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
@@ -691,7 +637,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -722,7 +667,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -759,13 +703,9 @@
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CONOCIMIENTO DEL CLIENTE</h3>
-
-            {{-- fila de 3 radios butones --}}
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
-
                     <fieldset class="form-group">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">¿Cuál es el destino de los
@@ -792,29 +732,10 @@
                         </div>
                     </fieldset>
                 </div>
-                {{-- <div class="col-12 col-md-6">
-
-                    <fieldset class="form-group">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">¿Cuántas operaciones
-                                estima realizar por mes?</span>
-
-                            <select class="form-select" aria-label="operacionesestimadas"
-                                name="operacionesestimadas">
-                                <option selected>Seleccione una opción</option>
-                                <option value="Opción1">De 0 a 4</option>
-                                <option value="Opción2">De 4 a 10</option>
-                                <option value="Opción3">Más de 10</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                </div> --}}
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">DATOS:</h3>
-
             <div>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Funciones</span>
@@ -828,13 +749,9 @@
                     @enderror
                 </div>
             </div>
-
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">CARATULA DE CRÉDITO</h3>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -864,7 +781,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
@@ -895,10 +811,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha corte credito</span>
                         <input type="date" class="form-control @error('fechacortecredito') is-invalid @enderror"
@@ -913,7 +827,6 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento credito</span>
                         <input type="date"
@@ -929,22 +842,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <div class="col-12 col-md-6">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Parcialidades</span>
-                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
-                            id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
-                            placeholder="Parcialidades" aria-label="Parcialidades"
-                            aria-describedby="parcialidadesError">
-                        @error('parcialidades')
-                            <div id="parcialidadesError" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual</span>
@@ -960,16 +858,15 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual moratoria</span>
-                        <input type="number" class="form-control @error('tazafijamensualmoratoria') is-invalid @enderror"
+                        <input type="number"
+                            class="form-control @error('tazafijamensualmoratoria') is-invalid @enderror"
                             id="tazafijamensualmoratoria" name="tazafijamensualmoratoria"
                             value="{{ old('tazafijamensualmoratoria') }}" placeholder="Taza fija mensual moratoria"
-                            aria-label="Taza fija mensual moratoria"
-                            aria-describedby="tazafijamensualmoratoriaError">
+                            aria-label="Taza fija mensual moratoria" aria-describedby="tazafijamensualmoratoriaError">
                         @error('tazafijamensualmoratoria')
                             <div id="tazafijamensualmoratoriaError" class="invalid-feedback">
                                 {{ $message }}
@@ -978,47 +875,36 @@
                     </div>
                 </div>
             </div>
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">Seguros y estados de cuenta</h3>
-
             <div class="row mb-3">
-
                 <div class="col-12 col-md-6">
                     <fieldset class="form-group">
-                        {{-- <legend class="form-label text-muted fs-6 text-uppercase text-center">Enviar a domicilio</legend> --}}
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Enviar a
                                 domicilio</label>
                             <input class="form-check-input" type="checkbox" role="switch"
                                 id="flexSwitchCheckDefault" name="enviardomicilio">
                         </div>
-
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Consultar vía
                                 internet</label>
                             <input class="form-check-input" type="checkbox" role="switch"
                                 id="flexSwitchCheckDefault" name="consultarinternet">
                         </div>
-
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="flexSwitchCheckDefault">Envío por correo
                                 electrónico</label>
                             <input class="form-check-input" type="checkbox" role="switch"
                                 id="flexSwitchCheckDefault" name="enviarcorreoelectronico" checked>
                         </div>
-
                     </fieldset>
                 </div>
             </div>
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">II. DATOS GENERALES DE EL CLIENTE</h3>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Se identifica con</span>
                         <select class="form-select" aria-label="Default select example" name="seidentificacon">
@@ -1033,11 +919,11 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Número de identificación</span>
-                        <input type="text" class="form-control @error('numero_identificacion') is-invalid @enderror"
+                        <input type="text"
+                            class="form-control @error('numero_identificacion') is-invalid @enderror"
                             id="numero_identificacion" name="numero_identificacion"
                             value="{{ old('numero_identificacion') }}" placeholder="Número de identificación"
                             aria-label="Numero de identificación" aria-describedby="numero_identificacionError">
@@ -1048,11 +934,8 @@
                         @enderror
                     </div>
                 </div>
-
             </div>
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">IV. DISPOSICIÓN Y DOCUMENTACIÓN</h3>
-
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
 
@@ -1070,27 +953,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-
-
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">AUTORIZACIONES ADICIONALES</h3>
-
             <div class="row">
-                {{-- <div class="col-12 col-md-6">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 text-uppercase text-center">El CLIENTE autoriza a
-                            que la FINANCIERA emita un estado de cuenta de forma mensual dentro de los 10 días
-                            siguientes
-                        </legend>
-                        <div class="form-check form-switch">
-                            <label class="form-check-label" for="aceptar">Si</label>
-                            <input class="form-check-input" type="checkbox" role="switch" id="aceptar"
-                                name="aceptar">
-                        </div>
-                    </fieldset>
-                </div> --}}
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Primer Seguro</span>
@@ -1118,9 +984,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
-
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Tercer Seguro</span>
@@ -1135,7 +999,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-24">
                     <div class="input-group input-group-sm mb-3">
@@ -1153,21 +1016,6 @@
                         @enderror
                     </div>
                 </div>
-                {{-- <div class="col-12 col-md-6">
-                    <fieldset class="form-group">
-                        <legend class="form-label text-muted fs-6 text-uppercase text-center">Facultó expresamente
-                            a
-                            la FINANCIERA para ceder o descontar los documentos originados como consecuencia de la
-                            celebración del
-                            presente Contrato aun antes del vencimiento del Crédito.
-                        </legend>
-                        <div class="form-check form-switch">
-                            <label class="form-check-label" for="faculto">Si</label>
-                            <input class="form-check-input" type="checkbox" role="switch" id="faculto"
-                                name="faculto">
-                        </div>
-                    </fieldset>
-                </div> --}}
             </div>
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">FORMATO PARA SOLICITAR LA DOMICILIACIÓN</h3>
 
@@ -1191,9 +1039,7 @@
             <h3 class="mt-2 text-center mb-3 fw-bold fs-5 ">MANDATO DE DESCUENTO IRREVOCABLE</h3>
 
             <div class="row mb-3">
-
                 <div class="col-12 col-md-6">
-
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Numero de nomina</span>
                         <input type="text" class="form-control @error('numeronomina') is-invalid @enderror"
@@ -1209,31 +1055,28 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Numero de empleado</span>
-                        <input type="text" class="form-control @error('numerodeempleado') is-invalid @enderror"
-                            id="numerodeempleado" name="numerodeempleado" aria-describedby="numerodeempleadoError"
-                            placeholder="Numero de empleado"
-                            aria-label="Numero de empleado">{{ old('numerodeempleado') }}</input>
-                        @error('numerodeempleado')
-                            <div id="numerodeempleadoError" class="invalid-feedback">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">monto por parcialidades</span>
+                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
+                            id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
+                            placeholder="Parcialidades" aria-label="Parcialidades"
+                            aria-describedby="parcialidadesError">
+                        @error('parcialidades')
+                            <div id="parcialidadesError" class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
             </div>
-
             <!-- Botón de envío -->
             <div class="d-grid">
                 <button type="submit" class="btn btn-success btn-block">Enviar</button>
             </div>
     </form>
     </div>
-
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/helpers.js') }}"></script>
-
 </body>
 
 </html>
