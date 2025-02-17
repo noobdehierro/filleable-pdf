@@ -15,9 +15,13 @@ use mikehaertl\pdftk\Pdf;
 |
 */
 
-Route::get('/', [FormController::class, 'index'])->name('form.index');
+Route::get('/oaxaca', [FormController::class, 'oaxaca'])->name('form.oaxaca');
+Route::get('/morelos', [FormController::class, 'morelos'])->name('form.morelos');
+Route::get('/gerrero', [FormController::class, 'gerrero'])->name('form.gerrero');
 
 Route::post('/store', [FormController::class, 'store'])->name('form.store');
+Route::post('/storemorelos', [FormController::class, 'storemorelos'])->name('form.storemorelos');
+Route::post('/storegerrero', [FormController::class, 'storegerrero'])->name('form.storegerrero');
 
 // Route::get('/pdfnew', function () {
 //     $data = [
@@ -305,4 +309,21 @@ Route::get('/pdfnew', function () {
     // }, $fileName);
     // Mostrar el PDF en el navegador sin descargar
     return $pdf->send();
+});
+
+Route::get('/params', function () {
+    // Get form data fields
+    $pdf = new Pdf('pdfs/last_two_pages.pdf');
+    $data = $pdf->getDataFields();
+    if ($data === false) {
+        $error = $pdf->getError();
+    }
+
+    // foreach ($data as $nombreCampo => $valor) {
+    //     // Define la lógica para el nuevo nombre; aquí solo lo antepongo con "nuevo_"
+    //     $nuevoNombre = 'nuevo_' . $nombreCampo;
+    //     $dataRenombrado[$nuevoNombre] = $valor;
+    // }
+
+    dd($data);
 });

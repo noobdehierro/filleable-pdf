@@ -23,6 +23,8 @@
 
 <body class="bg-success p-2 text-dark bg-opacity-25">
     <form action="{{ route('form.store') }}" method="POST" novalidate>
+        <input type="text" id="asesor" name="lugar" value="OAXACA" >
+
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded ">
             <img style="display: block; margin: 0 auto" src="{{ asset('img/logo.png') }}" class="img-fluid"
                 alt="Logo">

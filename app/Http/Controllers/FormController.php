@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Luecano\NumeroALetras\NumeroALetras;
 use mikehaertl\pdftk\Pdf;
@@ -14,9 +15,9 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function oaxaca()
     {
-        return view('welcome');
+        return view('oaxaca');
     }
 
     /**
@@ -24,9 +25,19 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function morelos()
     {
-        //
+        return view('morelos');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gerrero()
+    {
+        return view('gerrero');
     }
 
     /**
@@ -37,390 +48,212 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->fechapagere);
-        // dd($request->all());
         setlocale(LC_TIME, 'es_MX.UTF-8', 'es_MX', 'spanish');
 
-        // if ($locale === false) {
-        //     dd("No se pudo establecer la localización.");
-        // } else {
-        //     dd("Localización aplicada: $locale <br/>");
-        // }
-        // dd($request->all());
+        $lugar = $request->lugar;
 
-        $montosolicitadotexto = isset($request->montosolicitado)
-            ? $this->numberToLetters(floatval($request->montosolicitado))
-            : '';
-        $montosolicitadoformat = isset($request->montosolicitado)
-            ? $this->formatNumber(floatval($request->montosolicitado), 2)
-            : '';
-        $parcialidadesformat = isset($request->parcialidades)
-            ? $this->formatNumber(floatval($request->parcialidades), 2)
-            : '';
+        // Conversión de montos y formato de números
+        $montosolicitado = floatval($request->montosolicitado ?? 0);
+        $montosolicitadotexto = $montosolicitado ? $this->numberToLetters($montosolicitado) : '';
+        $montosolicitadoformat = $montosolicitado ? $this->formatNumber($montosolicitado, 2) : '';
 
-        $montototalpagarformat = isset($request->montototalpagar)
-            ? $this->formatNumber(floatval($request->montototalpagar), 2)
-            : '';
+        $parcialidades = floatval($request->parcialidades ?? 0);
+        $parcialidadesformat = $parcialidades ? $this->formatNumber($parcialidades, 2) : '';
+        $parcialidadestexto = $parcialidades ? $this->numberToLetters($parcialidades) : '';
+        $decimal_parcialidades = $parcialidades ? $this->getDecimals($parcialidades) : '';
 
-        $sueldoformat = isset($request->sueldo)
-            ? $this->formatNumber(floatval($request->sueldo), 2)
-            : '';
+        // Mapeo del tipo de solicitud
+        $tiposolicitudMap = [
+            'Opción1' => ['nombre' => "CREDITO SIMPLE", 'codigo' => 'Opción8'],
+            'Opción2' => ['nombre' => "REFINANCIAMIENTO", 'codigo' => 'Opción10'],
+            'Opción3' => ['nombre' => "COMPRA DE CARTERA", 'codigo' => 'Opción9']
+        ];
+        $tipoData = $tiposolicitudMap[$request->tiposolicitud] ?? ['nombre' => '', 'codigo' => ''];
 
-        $parcialidadestexto = isset($request->parcialidades)
-            ? $this->numberToLetters(floatval($request->parcialidades))
-            : '';
+        // Formateo de fechas
+        $fecha_nac      = date('dmY', strtotime($request->fechanacimiento));
+        $fecha_ingreso  = date('dmY', strtotime($request->fechaingreso));
+        $fecha          = strftime('%d de %B de %Y', strtotime($request->lugaryfecha));
+        $fecha_corte    = strftime('%d de %B de %Y', strtotime($request->fechacortecredito));
+        $fecha_venc     = strftime('%d de %B de %Y', strtotime($request->fechavencimientocredito));
 
-        $montototalpagartexto = isset($request->montototalpagar)
-            ? $this->numberToLetters(floatval($request->montototalpagar))
-            : '';
-        $decimal_parcialidades = isset($request->parcialidades)
-            ? $this->getDecimals(floatval($request->parcialidades))
-            : '';
-        $tiposolicitudcodigo = '';
-        if ($request->tiposolicitud == 'Opción1') {
-            $tiposolicitud = "CREDITO SIMPLE";
-            $tiposolicitudcodigo = 'Opción8';
-        } elseif ($request->tiposolicitud == 'Opción2') {
-            $tiposolicitud = "REFINANCIAMIENTO";
-            $tiposolicitudcodigo = 'Opción10';
-        } elseif ($request->tiposolicitud == 'Opción3') {
-            $tiposolicitud = "COMPRA DE CARTERA";
-            $tiposolicitudcodigo = 'Opción9';
-        }
-
-        $curp = $request->curp; // Variable para curp 
-        $Text2 = $request->nombresolicitante; // Variable para Text2
-        $Text3 = $request->apellidopaterno; // Variable para Text3
-        $Text4 = $request->apellidomaterno; // Variable para Text4
-        $Text5 = $request->domicilio; // Variable para Text5
-        $colonia = $request->colonia; // Variable para colonia
-        $Asesor = $request->asesor; // Variable para nombre asesor
-        $delegacion = $request->delegacion; // Variable para delegacion
-        $ciudad = $request->ciudad; // Variable para ciudad
-        $edo = $request->estado; // Variable para edo
-        $cel = $request->celular; // Variable para cel
-        $Group13 = $request->tiposolicitud; // Variable para Group13
-        // $Group14 = $request->frecuencia; // Variable para Group14
-        $Group14 = "Opción4"; // Variable para Group14
-        // $tipo_credito = $request->tipocredito; // Variable para tipo de credito
-        // $tipo_credito = $request->tipocreditoproducto; // Variable para tipo de credito
-        $tipo_credito = $tiposolicitud; // Variable para tipo de credito
-        $Group15 = $request->genero; // Variable para Group15
-        $tel_fijo = $request->telefonofijo; // Variable para tel fijo
-        $fecha_nac =  date('dmY', strtotime($request->fechanacimiento)); // Variable para fecha nac cambiar fromato a solo nuemros
-        $ent_fed_de_nac = $request->entidadfederativa; // Variable para ent fed de nac
-        // $pais = $request->paisnacimiento; // Variable para pais
-        $pais = "MÉXICO"; // Variable para pais
-        $Text21 = $request->tiempoderesidir; // Variable para Text21
-        $Text22 = $request->nombrearrendador; // Variable para Text22
-        $Text23 = $request->apellidopaternoarrendador; // Variable para Text23
-        $Text24 = $request->apellidomaternoarrendador; // Variable para Text24
-        $Text25 = $request->celulararrendador; // Variable para Text25
-        // $fiel = $request->fiel; // Variable para fiel
-        $fiel = ""; // Variable para fiel
-        // $migratoria = $request->tipoynformamigratoria; // Variable para migratoria
-        $migratoria = ""; // Variable para migratoria
-        $Group16 = $request->tipovivienda; // Variable para Group16
-        // $convenio = $request->convenio; // Variable para convenio
-        $convenio = "GOBIERNO OAXACA"; // Variable para convenio
-        $lugar_de_trabajo = $request->centrotrabajo; // Variable para lugar de trabajo
-        $Text28 = $request->telefonolaboral; // Variable para Text28
-        $Text29 = $request->extencion; // Variable para Text29
-        $puesto = $request->puesto; // Variable para puesto
-        // $Text31 = $request->sueldo; // Variable para Text31
-        $Text31 = $sueldoformat; // Variable para Text31
-        $Text32 = date('dmY', strtotime($request->fechaingreso)); // Variable para Text32 cambiar fromato a solo nuemros $$request->fechaingreso; // Variable para Text32
-        $Text33 = $request->nombrereflaboral; // Variable para Text33
-        $Text34 = $request->apellidopaternoreflaboral; // Variable para Text34
-        $Text35 = $request->apellidomaternoreflaboral; // Variable para Text35
-        $Text36 = $request->celularreflaboral; // Variable para Text36
-        $Text37 = $request->telefonofijoreflaboral; // Variable para Text37
-        $Text38 = $request->direccionreflaboral; // Variable para Text38
-        // $Opcion2_1 = $request->origenrecursospago; // Variable para 1
-        $Opcion2_1 = "Opción2"; // Variable para 1
-        $Opcion8_2 = $request->destinorecursos; // Variable para 2
-        // $Opcion8_3 = $request->formapago; // Variable para 3
-        $Opcion8_3 = "Opción8";
-        // $Opcion11_4 = $request->montopago; // Variable para 4
-        $Opcion11_4 = "Opción11"; // Variable para 4
-        // $Opcion1_5 = $request->operacionesestimadas; // Variable para 5
-        $Opcion1_5 = "Opción1"; // Variable para 5
-        // $Opcion4_6 = $request->ocupacioneconomica; // Variable para 6
-        $Opcion4_6 = "Opción4"; // Variable para 6
-        $Opcion8_7 = $tiposolicitudcodigo; // Variable para 7
-        // $Opcion15_8 = $request->funcionespublicas; // Variable para 8
-        $Opcion15_8 = "Opción15"; // Variable para 8
-        // $Opcion11_9 = $request->funcionespublicasnacionalidad; // Variable para 9
-        $Opcion11_9 = 'Off'; // Variable para 9
-        // $Opcion18_10 = $request->nacionalidad; // Variable para 10
-        $Opcion18_10 = "Opción18"; // Variable para 10
-        // $Opcion21_11 = $request->algunprovedor; // Variable para 11
-        $Opcion21_11 = "Opción21"; // Variable para 11
-        // $Opcion23_12 = $request->parientespublicos; // Variable para 12
-        $Opcion23_12 = "Opción23"; // Variable para 12
-        // $Opcion24_13 = $request->inlineCheckbox1; // Variable para 13
-        $Opcion24_13 = "Opción24"; // Variable para 13
-        // $Opcion25_13a = $request->inlineCheckbox2; // Variable para 13a
-        $Opcion25_13a = "Opción25"; // Variable para 13a
-        // $Opcion26_13b = $request->inlineCheckbox3; // Variable para 13b
-        $Opcion26_13b = "Opción26"; // Variable para 13b
-        // $Opcion27_13c = $request->inlineCheckbox4; // Variable para 13c
-        $Opcion27_13c = "Opción27"; // Variable para 13c
-        // $Opcion29_14 = $request->requierefactura; // Variable para 14
-        $Opcion29_14 = "Opción29"; // Variable para 14
-        $Opcion30_15 = $request->autorizacion; // Variable para 15
-        $cp = $request->codigopostal; // Variable para cp
-        // $Nombre_y_Firma_del_Servidor_Publico = $request->nombreservidorpublico; // Variable para Nombre y Firma del Servidor Público
-        // $Nombre_y_Firma_del_Servidor_Publico = $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para Nombre y Firma del Servidor Público
-        $Nombre_y_Firma_del_Servidor_Publico = ""; // Variable para Nombre y Firma del Servidor Público
-        // $fecha = strftime('%A %d de %B de %Y');
-        $fecha = strftime('%d de %B de %Y', strtotime($request->lugaryfecha));
-        $funciones = $request->funciones; // Variable para funciones
-        // $na = $request->noaplicafunciones; // Variable para na
-        $na = "NO APLICA"; // Variable para na
-        $titular =  $request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno; // Variable para titular
-        $cat = $request->cat."%"; // Variable para cat
-        // $monto_solicitado = $request->montosolicitado; // Variable para monto solicitado
-        $monto_solicitado = $montosolicitadoformat; // Variable para monto solicitado
-        // $monto_solicitado_texto = $request->montosolicitadotexto; // Variable para monto solicitado texto
-        $monto_solicitado_texto = $montosolicitadotexto; // Variable para monto solicitado texto
-        $Plazo = $request->plazo; // Variable para plazo
-        // $Texto198765432345678 = $request->aseguradora; // Variable para Texto198765432345678
-        $Texto198765432345678 = 'NO APLICA'; // Variable para Texto198765432345678
-        $Texto1982347365736748RFJEHGF = isset($request->enviardomicilio) ? 'X' : ''; // Variable para Texto1982347365736748RFJEHGF
-        $Texto234567FDGJHKJ = isset($request->consultarinternet) ? 'X' : ''; // Variable para Texto234567FDGJHKJ
-        $Texto3Y54YTFHGV = isset($request->enviarcorreoelectronico) ? 'X' : ''; // Variable para Texto3Y54YTFHGV
-        // $diapor_definir = date('d', strtotime($request->fechavencimiento)); // Variable para diapor definir
-        // $mes_por_definir = date('m', strtotime($request->fechavencimiento)); // Variable para mes por definir
-        // $año_por_definir = date('Y', strtotime($request->fechavencimiento)); // Variable para año por definir
-        $diapor_definir = date('d', strtotime($request->fechavencimientocredito)); // Variable para diapor definir
-        $mes_por_definir = date('m', strtotime($request->fechavencimientocredito)); // Variable para mes por definir
-        $año_por_definir = date('Y', strtotime($request->fechavencimientocredito));
-        // $diapor_definir2 = date('d', strtotime($request->fechacorte)); // Variable para diapor definir2
-        // $mes_por_definir2 = date('m', strtotime($request->fechacorte)); // Variable para mes por definir2
-        // $año_por_definir2 = date('Y', strtotime($request->fechacorte)); // Variable para año por definir2
-        $diapor_definir2 = date('d', strtotime($request->fechacortecredito)); // Variable para diapor definir2
-        $mes_por_definir2 = date('m', strtotime($request->fechacortecredito)); // Variable para mes por definir2
-        $año_por_definir2 = date('Y', strtotime($request->fechacortecredito)); // Variable para año por definir2
-        $Text48 = $request->seidentificacon. " ". $request->numero_identificacion; // Variable para Text48
-        // $nacionalidad = $request->nacionalidad; // Variable para nacionalidad
-        $nacionalidad = 'MEXICANA'; // Variable para nacionalidad
-        // $Text50 = $request->domiciliogeneral; // Variable para Text50
-        $Text50 = $request->domicilio." ".$request->colonia." C.P. ".$request->codigopostal; // Variable para Text50
-        $rfc = $request->rfc; // Variable para rfc
-        $correo = $request->correoelectronico; // Variable para correo
-        $Text55 = strftime('%d de %B de %Y', strtotime($request->fechasdisposicion)); // // Variable para Text55
-        $cta_clabe = $request->ctaclabe; // Variable para cta clabe
-        $banco = $request->banco; // Variable para banco
-        $sucursal = "Corporporativo"; // Variable para sucursal
-        // $plazo2 = $request->plazocredito; // Variable para plazo2
-        $plazo2 = $request->plazo." QUINCENAS"; // Variable para plazo2
-        $fecha_corte = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para fecha corte
-        $Lugar_de_elaboración = "Oaxaca"; // Variable para Lugar de elaboración
-        $tasa_ordinaria = $request->tasaordinaria."%"; // Variable para tasa ordinaria
-        $tasa_moratoria = $request->tasamoratoria."%"; // Variable para tasa moratoria
-        $seg1 = $request->seg1; // Variable para seg1
-        $seg2 = $request->seg2; // Variable para seg2
-        // $Texto4BGFHGJGHTD655 = isset($request->aceptar) ? 'X' : ''; // Variable para Texto4BGFHGJGHTD655
-        // $Texto5MHGHFHTO87554 = isset($request->aceptar) ? '' : 'X'; // Variable para Texto5MHGHFHTO87554
-        $Texto4BGFHGJGHTD655 = 'X'; // Variable para Texto4BGFHGJGHTD655
-        $Texto5MHGHFHTO87554 = ''; // Variable para Texto5MHGHFHTO87554
-        // $lugar_y_fecha = "Oaxaca " . date('d/m/Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
-        $lugar_y_fecha = "Oaxaca " . strftime('%d de %B de %Y', strtotime($request->lugaryfecha)); // Variable para lugar y fecha
-        $seg3 = $request->seg3; // Variable para seg3
-        $na2 = $request->na2; // Variable para na2
-        // $Texto69878675 = isset($request->faculto) ? 'X' : ''; // Variable para Texto69878675
-        // $Texto712233DHGGHHH = isset($request->faculto) ? '' : 'X'; // Variable para Texto712233DHGGHHH
-        $Texto69878675 = 'X'; // Variable para Texto69878675
-        $Texto712233DHGGHHH = ''; // Variable para Texto712233DHGGHHH
-        // $monto_total_a_pagar = $request->montototalpagar; // Variable para monto total a pagar
-        $monto_total_a_pagar = $montototalpagarformat; // Variable para monto total a pagar
-        $año = substr(date('Y', strtotime($request->lugaryfecha)), -1); // Variable para año
-        // $periodicidad = $request->periodicidadpagos; // Variable para periodicidad
-        $periodicidad = "Quincenal"; // Variable para periodicidad
-        // $parcialidades = $request->parcialidades; // Variable para parcialidades
-        $parcialidades = $parcialidadesformat; // Variable para parcialidades
-        // $Text86 = date('d/m/Y', strtotime($request->fechacortecredito)); // Variable para Text86
-        $Text86 = strftime('%d de %B de %Y', strtotime($request->fechacortecredito)); // Variable para Text86
-        $fecha_vencimiento = strftime('%d de %B de %Y', strtotime($request->fechavencimientocredito)); // Variable para fecha vencimiento
-        $dia = date('d', strtotime($request->lugaryfecha)); // Variable para dia
-        $mes = date('m', strtotime($request->lugaryfecha)); // Variable para mes
-        // $Bien_servicio_o_credito_a_pagar_Credito_Simple = $request->biencredito; // Variable para Bien servicio o crédito a pagar Crédito Simple
-        $Bien_servicio_o_credito_a_pagar_Credito_Simple = ""; // Variable para Bien servicio o crédito a pagar Crédito Simple
-        $Aval_con_folio = $request->avalconfolio; // Variable para Aval con folio
-        // $undefined = $request->montomaximo; // Variable para undefined
-        $undefined = $parcialidadestexto; // Variable para undefined
-        // $cien_MN_Incluye_IVA = '$ ' . $request->cienmn; // Variable para 100 MN Incluye IVA
-        $cien_MN_Incluye_IVA = $decimal_parcialidades;
-        // $Por_este_conducto_autorizo_expresamente = $request->nombrequeautoriza; // Variable para Por este conducto autorizo expresamente
-        $Por_este_conducto_autorizo_expresamente = "ID Financiero"; // Variable para Por este conducto autorizo expresamente
-        // $Número_de_empleado = $request->numeroempleado; // Variable para Número de empleado
-        $Número_de_empleado = $request->numeronomina; // Variable para Número de empleado
-        // $Número_de_folio = $request->numerofolio; // Variable para Número de folio
-        $Número_de_folio = ""; // Variable para Número de folio
-        // $Para_uso_exclusivo_de = $request->usoexclusivo; // Variable para Para uso exclusivo de
-        $Para_uso_exclusivo_de = "ID Financiero"; // Variable para Para uso exclusivo de
-        // $año3 = substr(date('Y', strtotime($request->fechaautorizacion)), -2); // Variable para año        // Variable para año3
-        // $año3 = substr(date('Y', strtotime($fecha)), -2); // Variable para año        // Variable para año3
-        $año3 = substr(date('Y', strtotime($request->lugaryfecha)), -2); // Variable para año        // Variable para año3
-        // $año2 = date('Y', strtotime($request->fechadomiciliacion)); // Variable para año2
-        $año2 = date('Y', strtotime($request->lugaryfecha)); // Variable para año2
-        $parcialidades_texto = $parcialidadestexto; // Variable para parcialidades texto
-        // $Texto8PAGARE_MONTO_TOTAL_LETRA = $request->montopagareletra; // Variable para Texto8PAGARE MONTO TOTAL LETRA
-        $Texto8PAGARE_MONTO_TOTAL_LETRA = $montototalpagartexto; // Variable para Texto8PAGARE MONTO TOTAL LETRA
-        $Número_de_nómina = $request->numeronomina; // Variable para Número de nómina
-        // $monto_total_a_pagar_texto = $request->montototalpagartexto; // Variable para monto total a pagar texto
-        $monto_total_a_pagar_texto = $montototalpagartexto; // Variable para monto total a pagar texto
-        // $monto_total_a_pagar_texto2 = $request->montopagarirrevocabletexto; // Variable para monto total a pagar texto2
-        $monto_total_a_pagar_texto2 = $montototalpagartexto; // Variable para monto total a pagar texto2
-        $tazafijamensual = $request->tazafijamensual."%"; // Variable para tazafijamensual
-        $tazafijamensualmoratoria = $request->tazafijamensualmoratoria."%"; // Variable para tazafijamensualmoratoria
-
-
+        // Arreglo con los datos a rellenar en el PDF
         $data = [
-            "curp" => $curp,
-            "Text2" => $Text2,
-            "Text3" => $Text3,
-            "Text4" => $Text4,
-            "Text5" => $Text5,
-            "colonia" => $colonia,
-            "nombre asesor" => $Asesor,
-            "delegacion" => $delegacion,
-            "ciudad" => $ciudad,
-            "edo" => $edo,
-            "cel" => $cel,
-            "Group13" => $Group13,
-            "Group14" => $Group14,
-            "tipo de credito" => $tipo_credito,
-            "Group15" => $Group15,
-            "tel fijo" => $tel_fijo,
-            "fecha nac" => $fecha_nac,
-            "ent fed de nac" => $ent_fed_de_nac,
-            "pais" => $pais,
-            "Text21" => $Text21,
-            "Text22" => $Text22,
-            "Text23" => $Text23,
-            "Text24" => $Text24,
-            "Text25" => $Text25,
-            "fiel" => $fiel,
-            "migratoria" => $migratoria,
-            "Group16" => $Group16,
-            "convenio" => $convenio,
-            "lugar de trabajo" => $lugar_de_trabajo,
-            "Text28" => $Text28,
-            "Text29" => $Text29,
-            "puesto" => $puesto,
-            "Text31" => $Text31,
-            "Text32" => $Text32,
-            "Text33" => $Text33,
-            "Text34" => $Text34,
-            "Text35" => $Text35,
-            "Text36" => $Text36,
-            "Text37" => $Text37,
-            "Text38" => $Text38,
-            "1" => $Opcion2_1,
-            "2" => $Opcion8_2,
-            "3" => $Opcion8_3,
-            "4" => $Opcion11_4,
-            "5" => $Opcion1_5,
-            "6" => $Opcion4_6,
-            "7" => $Opcion8_7,
-            "8" => $Opcion15_8,
-            "9" => $Opcion11_9,
-            "10" => $Opcion18_10,
-            "11" => $Opcion21_11,
-            "12" => $Opcion23_12,
-            "13" => $Opcion24_13,
-            "13a" => $Opcion25_13a,
-            "13b" => $Opcion26_13b,
-            "13c" => $Opcion27_13c,
-            "14" => $Opcion29_14,
-            "15" => $Opcion30_15,
-            "cp" => $cp,
-            "Nombre y Firma del Servidor Público" => $Nombre_y_Firma_del_Servidor_Publico,
-            "fecha" => $fecha,
-            "funciones" => $funciones,
-            "na" => $na,
-            "titular" => $titular,
-            "cat" => $cat,
-            "monto solicitado" => $monto_solicitado,
-            "monto solicitado texto" => $monto_solicitado_texto,
-            "plazo" => $Plazo,
-            "Texto198765432345678" => $Texto198765432345678,
-            "Texto1982347365736748RFJEHGF" => $Texto1982347365736748RFJEHGF,
-            "Texto234567FDGJHKJ" => $Texto234567FDGJHKJ,
-            "Texto3Y54YTFHGV" => $Texto3Y54YTFHGV,
-            "diapor definir" => $diapor_definir,
-            "mes por definir" => $mes_por_definir,
-            "año por definir" => $año_por_definir,
-            "diapor definir2" => $diapor_definir2,
-            "mes por definir2" => $mes_por_definir2,
-            "año por definir2" => $año_por_definir2,
-            "Text48" => $Text48,
-            "nacionalidad" => $nacionalidad,
-            "Text50" => $Text50,
-            "rfc" => $rfc,
-            "correo" => $correo,
-            "Text55" => $Text55,
-            "cta clabe" => $cta_clabe,
-            "banco" => $banco,
-            "sucursal" => $sucursal,
-            "plazo2" => $plazo2,
-            "fecha corte" => $fecha_corte,
-            "Lugar de elaboración" => $Lugar_de_elaboración,
-            "tasa ordinaria" => $tasa_ordinaria,
-            "tasa moratoria" => $tasa_moratoria,
-            "seg1" => $seg1,
-            "seg2" => $seg2,
-            "Texto4BGFHGJGHTD655" => $Texto4BGFHGJGHTD655,
-            "Texto5MHGHFHTO87554" => $Texto5MHGHFHTO87554,
-            "lugar y fecha" => $lugar_y_fecha,
-            "seg3" => $seg3,
-            "na2" => $na2,
-            "Texto69878675" => $Texto69878675,
-            "Texto712233DHGGHHH" => $Texto712233DHGGHHH,
-            "monto total a pagar" => $monto_total_a_pagar,
-            "año" => $año,
-            "periodicidad" => $periodicidad,
-            "parcialidades" => $parcialidades,
-            "Text86" => $Text86,
-            "fecha vencimiento" => $fecha_vencimiento,
-            "dia" => $dia,
-            "mes" => $mes,
-            "Bien servicio o crédito a pagar Crédito Simple" => $Bien_servicio_o_credito_a_pagar_Credito_Simple,
-            "Aval con folio" => $Aval_con_folio,
-            "undefined" => $undefined,
-            "100 MN Incluye IVA" => $cien_MN_Incluye_IVA,
-            "Por este conducto autorizo expresamente" => $Por_este_conducto_autorizo_expresamente,
-            "Número de empleado" => $Número_de_empleado,
-            "Número de folio" => $Número_de_folio,
-            "Para uso exclusivo de" => $Para_uso_exclusivo_de,
-            "año3" => $año3,
-            "año2" => $año2,
-            "parcialidades texto" => $parcialidades_texto,
-            "Texto8PAGARE MONTO TOTAL LETRA" => $Texto8PAGARE_MONTO_TOTAL_LETRA,
-            "Número de nómina" => $Número_de_nómina,
-            "monto total a pagar texto" => $monto_total_a_pagar_texto,
-            "monto total a pagar texto2" => $monto_total_a_pagar_texto2,
-            "plazo3" => "QUINCENAS",
-            "dias naturales" => "15",
-            "tfm" => $tazafijamensual,
-            "tfmm" => $tazafijamensualmoratoria,
+            "curp"                               => $request->curp,
+            "Text2"                              => $request->nombresolicitante,
+            "Text3"                              => $request->apellidopaterno,
+            "Text4"                              => $request->apellidomaterno,
+            "Text5"                              => $request->domicilio,
+            "colonia"                            => $request->colonia,
+            "nombre asesor"                      => $request->asesor,
+            "delegacion"                         => $request->delegacion,
+            "ciudad"                             => $request->ciudad,
+            "edo"                                => $request->estado,
+            "cel"                                => $request->celular,
+            "Group13"                            => $request->tiposolicitud,
+            "Group14"                            => "Opción4",
+            "tipo de credito"                    => $tipoData['nombre'],
+            "Group15"                            => $request->genero,
+            "tel fijo"                           => $request->telefonofijo,
+            "fecha nac"                          => $fecha_nac,
+            "ent fed de nac"                     => $request->entidadfederativa,
+            "pais"                               => "MÉXICO",
+            "Text21"                             => $request->tiempoderesidir,
+            "Text22"                             => $request->nombrearrendador,
+            "Text23"                             => $request->apellidopaternoarrendador,
+            "Text24"                             => $request->apellidomaternoarrendador,
+            "Text25"                             => $request->celulararrendador,
+            "fiel"                               => "",
+            "migratoria"                         => "",
+            "Group16"                            => $request->tipovivienda,
+            "convenio"                           => "GOBIERNO " . $lugar,
+            "lugar de trabajo"                   => $request->centrotrabajo,
+            "Text28"                             => $request->telefonolaboral,
+            "Text29"                             => $request->extencion,
+            "puesto"                             => $request->puesto,
+            "Text31"                             => $this->formatNumber(floatval($request->sueldo ?? 0), 2),
+            "Text32"                             => $fecha_ingreso,
+            "Text33"                             => $request->nombrereflaboral,
+            "Text34"                             => $request->apellidopaternoreflaboral,
+            "Text35"                             => $request->apellidomaternoreflaboral,
+            "Text36"                             => $request->celularreflaboral,
+            "Text37"                             => $request->telefonofijoreflaboral,
+            "Text38"                             => $request->direccionreflaboral,
+            "1"                                  => "Opción2",
+            "2"                                  => $request->destinorecursos,
+            "3"                                  => "Opción8",
+            "4"                                  => "Opción11",
+            "5"                                  => "Opción1",
+            "6"                                  => "Opción4",
+            "7"                                  => $tipoData['codigo'],
+            "8"                                  => "Opción15",
+            "9"                                  => 'Off',
+            "10"                                 => "Opción18",
+            "11"                                 => "Opción21",
+            "12"                                 => "Opción23",
+            "13"                                 => "Opción24",
+            "13a"                                => "Opción25",
+            "13b"                                => "Opción26",
+            "13c"                                => "Opción27",
+            "14"                                 => "Opción29",
+            "15"                                 => $request->autorizacion,
+            "cp"                                 => $request->codigopostal,
+            "Nombre y Firma del Servidor Público" => "",
+            "fecha"                              => $fecha,
+            "funciones"                          => $request->funciones,
+            "na"                                 => "NO APLICA",
+            "titular"                            => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
+            "cat"                                => $request->cat . "%",
+            "monto solicitado"                   => $montosolicitadoformat,
+            "monto solicitado texto"             => $montosolicitadotexto,
+            "plazo"                              => $request->plazo,
+            "Texto198765432345678"               => 'NO APLICA',
+            "Texto1982347365736748RFJEHGF"        => isset($request->enviardomicilio) ? 'X' : '',
+            "Texto234567FDGJHKJ"                 => isset($request->consultarinternet) ? 'X' : '',
+            "Texto3Y54YTFHGV"                    => isset($request->enviarcorreoelectronico) ? 'X' : '',
+            "diapor definir"                     => date('d', strtotime($request->fechavencimientocredito)),
+            "mes por definir"                    => date('m', strtotime($request->fechavencimientocredito)),
+            "año por definir"                    => date('Y', strtotime($request->fechavencimientocredito)),
+            "diapor definir2"                    => date('d', strtotime($request->fechacortecredito)),
+            "mes por definir2"                   => date('m', strtotime($request->fechacortecredito)),
+            "año por definir2"                   => date('Y', strtotime($request->fechacortecredito)),
+            "Text48"                             => $request->seidentificacon . " " . $request->numero_identificacion,
+            "nacionalidad"                       => 'MEXICANA',
+            "Text50"                             => $request->domicilio . " " . $request->colonia . " C.P. " . $request->codigopostal,
+            "rfc"                                => $request->rfc,
+            "correo"                             => $request->correoelectronico,
+            "Text55"                             => strftime('%d de %B de %Y', strtotime($request->fechasdisposicion)),
+            "cta clabe"                          => $request->ctaclabe,
+            "banco"                              => $request->banco,
+            "sucursal"                           => "CORPORATIVO",
+            "plazo2"                             => $request->plazo . " QUINCENAS",
+            "fecha corte"                        => $fecha_corte,
+            "Lugar de elaboración"               => $lugar,
+            "tasa ordinaria"                     => $request->tasaordinaria . "%",
+            "tasa moratoria"                     => $request->tasamoratoria . "%",
+            "seg1"                               => $request->seg1,
+            "seg2"                               => $request->seg2,
+            "Texto4BGFHGJGHTD655"                => 'X',
+            "Texto5MHGHFHTO87554"                => '',
+            "lugar y fecha"                      => $lugar . " " . $fecha,
+            "seg3"                               => $request->seg3,
+            "na2"                                => $request->na2,
+            "Texto69878675"                      => 'X',
+            "Texto712233DHGGHHH"                 => '',
+            "monto total a pagar"                => $this->formatNumber(floatval($request->montototalpagar ?? 0), 2),
+            "año"                                => substr(date('Y', strtotime($request->lugaryfecha)), -1),
+            "periodicidad"                       => "Quincenal",
+            "parcialidades"                      => $parcialidadesformat,
+            "Text86"                             => strftime('%d de %B de %Y', strtotime($request->fechacortecredito)),
+            "fecha vencimiento"                  => $fecha_venc,
+            "dia"                                => date('d', strtotime($request->lugaryfecha)),
+            "mes"                                => date('m', strtotime($request->lugaryfecha)),
+            "Bien servicio o crédito a pagar Crédito Simple" => "",
+            "Aval con folio"                     => $request->avalconfolio,
+            "undefined"                          => $parcialidadestexto,
+            "100 MN Incluye IVA"                 => $decimal_parcialidades,
+            "Por este conducto autorizo expresamente" => "ID FINANCIERO",
+            "Número de empleado"                 => $request->numeronomina,
+            "Número de folio"                    => "",
+            "Para uso exclusivo de"              => "ID FINANCIERO",
+            "año3"                               => substr(date('Y', strtotime($request->lugaryfecha)), -2),
+            "año2"                               => date('Y', strtotime($request->lugaryfecha)),
+            "parcialidades texto"                => $parcialidadestexto,
+            "Texto8PAGARE MONTO TOTAL LETRA"     => $request->montototalpagar ? $this->numberToLetters(floatval($request->montototalpagar)) : '',
+            "Número de nómina"                   => $request->numeronomina,
+            "monto total a pagar texto"          => $request->montototalpagar ? $this->numberToLetters(floatval($request->montototalpagar)) : '',
+            "monto total a pagar texto2"         => $request->montototalpagar ? $this->numberToLetters(floatval($request->montototalpagar)) : '',
+            "plazo3"                             => "QUINCENAS",
+            "dias naturales"                     => "15",
+            "tfm"                                => $request->tazafijamensual . "%",
+            "tfmm"                               => $request->tazafijamensualmoratoria . "%",
+
+            "fechamd"                            =>  substr($fecha, 0, -7),
+            "suscritomd"                         => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
+            "nominamd"                           => $request->plazo,
+            "parcialidadesmd"                    => $parcialidadesformat,
+            "parcialidadestextomd"               => $parcialidadestexto,
+            "totalmd"                            => $this->formatNumber(floatval($request->montototalpagar ?? 0), 2),
+            "totaltextomd"                       => $request->montototalpagar ? $this->numberToLetters(floatval($request->montototalpagar)) : '',
+            "numerocreditomd"                    => $request->avalconfolio,
+            "nombremd"                           => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
+            "numeronominamd"                     => $request->numeronomina,
+
+
+            "diamorelos"                              => date('d', strtotime($request->lugaryfecha)),
+            "mesmorelos"                              => date('m', strtotime($request->lugaryfecha)),
+            "añomorelos"                              => date('Y', strtotime($request->lugaryfecha)),
+            "suscritomorelos"                         => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
+            "nominamorelos"                           => $request->plazo,
+            "parcialidadesmorelos"                    => $parcialidadesformat,
+            "parcialidadesletramorelos"               => $parcialidadestexto,
+            "numerocreditomorelos"                    => $request->avalconfolio,
+            "nombremorelos"                           => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
+            "numeronominamorelos"                     => $request->numeronomina
         ];
 
-        $pdf = new Pdf('pdfs/sample_request.pdf');
-        $pdf->fillForm($data)
-        ->needAppearances();
-        // Descargar el PDF directamente
-        // return response()->streamDownload(function () use ($pdf) {
-        //     echo $pdf->send();
-        // }, $fileName);
-        // Mostrar el PDF en el navegador sin descargar
+        // Genera y envía el PDF
+        // $pdf = new Pdf('pdfs/sample_request.pdf');
+        $pdf = null;
+
+        if ($lugar == "MORELOS" || $lugar == "Morelos") {
+            $pdf = new Pdf('pdfs/template.pdf');
+        } elseif ($lugar == "OAXACA" || $lugar == "Oaxaca") {
+            $pdf = new Pdf('pdfs/simple.pdf');
+        } elseif ($lugar == "GERRERO" || $lugar == "Gerrero") {
+            $pdf = new Pdf('pdfs/template.pdf');
+        } else {
+            throw new Exception("El valor de 'lugar' no es válido.");
+        }
+
+        if (!$pdf instanceof Pdf) {
+            throw new Exception("Error al instanciar el objeto Pdf.");
+        }
+
+        $pdf->fillForm($data)->needAppearances();
         return $pdf->send();
-
-
-        return back()->with('success', 'Formulario enviado correctamente');
     }
+
 
     /**
      * Display the specified resource.
@@ -477,7 +310,7 @@ class FormController extends Controller
         $decimalPart = explode('.', (string)$number);
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
-        return($formatter->toMoney($number, $decimals, $currency, $cents).' '.$decimal.'/100 M.N.');
+        return ($formatter->toMoney($number, $decimals, $currency, $cents) . ' ' . $decimal . '/100 M.N.');
     }
 
     public function formatNumber($number)
@@ -499,7 +332,8 @@ class FormController extends Controller
         return $formattedNumber;
     }
 
-    public function getDecimals($number) {
+    public function getDecimals($number)
+    {
         $decimalPart = explode('.', (string)$number);
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
         return $decimal;
