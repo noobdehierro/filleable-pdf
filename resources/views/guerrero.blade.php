@@ -35,7 +35,7 @@
 
 <body class="bg-success p-2 text-dark bg-opacity-25">
     <form action="{{ route('form.store') }}" method="POST" novalidate>
-        <input type="text" id="asesor" name="lugar" value="MORELOS" hidden>
+        <input type="text" id="asesor" name="lugar" value="GUERRERO" hidden>
 
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded ">
             <div class="row">
@@ -45,7 +45,7 @@
                         style="max-height: 100%; object-fit: contain;">
                 </div>
                 <div class="col-12 col-md-6 d-flex align-items-center justify-content-center responsive-img-container">
-                    <img src="{{ asset('img/morelos.png') }}" alt="Morelos" class="img-fluid"
+                    <img src="{{ asset('img/guerrero.jpg') }}" alt="Guerrero" class="img-fluid"
                         style="max-height: 100%; object-fit: contain;">
                 </div>
             </div>

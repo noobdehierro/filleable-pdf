@@ -35,9 +35,14 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function gerrero()
+    public function guerrero()
     {
-        return view('gerrero');
+        return view('guerrero');
+    }
+
+    public function salud_morelos()
+    {
+        return view('salud_morelos');
     }
 
     /**
@@ -106,7 +111,11 @@ class FormController extends Controller
             "fiel"                               => "",
             "migratoria"                         => "",
             "Group16"                            => $request->tipovivienda,
-            "convenio"                           => "GOBIERNO " . $lugar,
+            "convenio"                           => "GOBIERNO " . (
+                $lugar
+                ? ($lugar == 'SALUDMORELOS' ? 'MORELOS' : $lugar)
+                : ''
+            ),
             "lugar de trabajo"                   => $request->centrotrabajo,
             "Text28"                             => $request->telefonolaboral,
             "Text29"                             => $request->extencion,
@@ -168,14 +177,22 @@ class FormController extends Controller
             "sucursal"                           => "CORPORATIVO",
             "plazo2"                             => $request->plazo . " QUINCENAS",
             "fecha corte"                        => $fecha_corte,
-            "Lugar de elaboración"               => $lugar,
+            "Lugar de elaboración"               => (
+                $lugar
+                ? ($lugar == 'SALUDMORELOS' ? 'MORELOS' : $lugar)
+                : ''
+            ),
             "tasa ordinaria"                     => $request->tasaordinaria . "%",
             "tasa moratoria"                     => $request->tasamoratoria . "%",
             "seg1"                               => $request->seg1,
             "seg2"                               => $request->seg2,
             "Texto4BGFHGJGHTD655"                => 'X',
             "Texto5MHGHFHTO87554"                => '',
-            "lugar y fecha"                      => $lugar . " " . $fecha,
+            "lugar y fecha"                      => (
+                $lugar
+                ? ($lugar == 'SALUDMORELOS' ? 'MORELOS' : $lugar)
+                : ''
+            ) . " " . $fecha,
             "seg3"                               => $request->seg3,
             "na2"                                => $request->na2,
             "Texto69878675"                      => 'X',
@@ -235,13 +252,14 @@ class FormController extends Controller
         // Genera y envía el PDF
         // $pdf = new Pdf('pdfs/sample_request.pdf');
         $pdf = null;
-
-        if ($lugar == "MORELOS" || $lugar == "Morelos") {
-            $pdf = new Pdf('pdfs/template.pdf');
-        } elseif ($lugar == "OAXACA" || $lugar == "Oaxaca") {
-            $pdf = new Pdf('pdfs/simple.pdf');
-        } elseif ($lugar == "GERRERO" || $lugar == "Gerrero") {
-            $pdf = new Pdf('pdfs/template.pdf');
+        if ($lugar == "MORELOS") {
+            $pdf = new Pdf('pdfs/morelos.pdf');
+        } elseif ($lugar == "OAXACA") {
+            $pdf = new Pdf('pdfs/oaxaca.pdf');
+        } elseif ($lugar == "GUERRERO") {
+            $pdf = new Pdf('pdfs/guerrero.pdf');
+        } elseif ($lugar == "SALUDMORELOS") {
+            $pdf = new Pdf('pdfs/saludmorelos.pdf');
         } else {
             throw new Exception("El valor de 'lugar' no es válido.");
         }

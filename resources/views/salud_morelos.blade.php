@@ -18,16 +18,37 @@
             box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
             outline: none;
         }
+
+        /* Altura por defecto para pantallas medianas y grandes */
+        .responsive-img-container {
+            height: 150px;
+        }
+
+        /* Altura reducida para pantallas pequeñas */
+        @media (max-width: 576px) {
+            .responsive-img-container {
+                height: 100px;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-success p-2 text-dark bg-opacity-25">
     <form action="{{ route('form.store') }}" method="POST" novalidate>
-        <input type="text" id="asesor" name="lugar" value="GUERRERO" >
+        <input type="text" id="asesor" name="lugar" value="SALUDMORELOS" hidden>
 
         <div class="container mt-3 shadow-lg p-3 mb-5 bg-body rounded ">
-            <img style="display: block; margin: 0 auto" src="{{ asset('img/logo.png') }}" class="img-fluid"
-                alt="Logo">
+            <div class="row">
+                <!-- En pantallas pequeñas (col-12) se apilan; en medianas o más grandes (col-md-6) quedan lado a lado -->
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center responsive-img-container">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="img-fluid"
+                        style="max-height: 100%; object-fit: contain;">
+                </div>
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center responsive-img-container">
+                    <img src="{{ asset('img/salud_morelos.png') }}" alt="Salud Morelos" class="img-fluid"
+                        style="max-height: 100%; object-fit: contain;">
+                </div>
+            </div>
             <h2 class="text-center mb-4 mt-4">Formulario de solicitud de crédito</h2>
             @csrf
             <div class="row mb-3">
@@ -242,7 +263,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Monto solicitado</span>
-                        <input type="number" class="form-control @error('montosolicitado') is-invalid @enderror"
+                        <input type="text" class="form-control @error('montosolicitado') is-invalid @enderror"
                             id="montosolicitado" name="montosolicitado" value="{{ old('montosolicitado') }}"
                             placeholder="Monto solicitado" aria-label="Monto solicitado"
                             aria-describedby="montosolicitadoError">
@@ -581,7 +602,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Sueldo</span>
-                        <input type="number" class="form-control @error('sueldo') is-invalid @enderror"
+                        <input type="text" class="form-control @error('sueldo') is-invalid @enderror"
                             id="sueldo" name="sueldo" value="{{ old('sueldo') }}" placeholder="Sueldo"
                             aria-label="Sueldo" aria-describedby="sueldoError">
                         @error('sueldo')
@@ -801,7 +822,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Monto total a pagar</span>
-                        <input type="number" class="form-control @error('montototalpagar') is-invalid @enderror"
+                        <input type="text" class="form-control @error('montototalpagar') is-invalid @enderror"
                             id="montototalpagar" name="montototalpagar" value="{{ old('montototalpagar') }}"
                             placeholder="Monto total a pagar" aria-label="Monto total a pagar"
                             aria-describedby="montototalpagarError">
@@ -848,7 +869,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual</span>
-                        <input type="number" class="form-control @error('tazafijamensual') is-invalid @enderror"
+                        <input type="text" class="form-control @error('tazafijamensual') is-invalid @enderror"
                             id="tazafijamensual" name="tazafijamensual" value="{{ old('tazafijamensual') }}"
                             placeholder="Taza fija mensual" aria-label="Taza fija mensual"
                             aria-describedby="tazafijamensualError">
@@ -864,7 +885,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual moratoria</span>
-                        <input type="number"
+                        <input type="text"
                             class="form-control @error('tazafijamensualmoratoria') is-invalid @enderror"
                             id="tazafijamensualmoratoria" name="tazafijamensualmoratoria"
                             value="{{ old('tazafijamensualmoratoria') }}" placeholder="Taza fija mensual moratoria"
@@ -1058,7 +1079,7 @@
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-sm">monto por parcialidades</span>
-                        <input type="number" class="form-control @error('parcialidades') is-invalid @enderror"
+                        <input type="text" class="form-control @error('parcialidades') is-invalid @enderror"
                             id="parcialidades" name="parcialidades" value="{{ old('parcialidades') }}"
                             placeholder="Parcialidades" aria-label="Parcialidades"
                             aria-describedby="parcialidadesError">
