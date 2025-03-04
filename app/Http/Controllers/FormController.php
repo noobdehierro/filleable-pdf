@@ -225,7 +225,8 @@ class FormController extends Controller
             "tfm"                                => $request->tazafijamensual . "%",
             "tfmm"                               => $request->tazafijamensualmoratoria . "%",
 
-            "fechamd"                            =>  substr($fecha, 0, -7),
+            // "fechamd"                            =>  substr($fecha, 0, -7),
+            "fechamd"                            => $fecha,
             "suscritomd"                         => trim($request->nombresolicitante . " " . $request->apellidopaterno . " " . $request->apellidomaterno),
             "nominamd"                           => $request->plazo,
             "parcialidadesmd"                    => $parcialidadesformat,

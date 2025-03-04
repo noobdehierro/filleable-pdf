@@ -586,9 +586,9 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Extencion</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Extensión</span>
                         <input type="text" class="form-control @error('extencion') is-invalid @enderror"
-                            id="extencion" name="extencion" value="{{ old('extencion') }}" placeholder="Extencion"
+                            id="extencion" name="extencion" value="{{ old('extencion') }}" placeholder="Extensión"
                             aria-label="Extencion" aria-describedby="extencionError">
                         @error('extencion')
                             <div id="extencionError" class="invalid-feedback">
@@ -807,10 +807,10 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Tasa moratoria</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tasa moratoria anual</span>
                         <input type="text" class="form-control @error('tasamoratoria') is-invalid @enderror"
                             id="tasamoratoria" name="tasamoratoria" value="{{ old('tasamoratoria') }}"
-                            placeholder="Tasa moratoria" aria-label="Tasa moratoria"
+                            placeholder="Tasa moratoria anual" aria-label="Tasa moratoria anual"
                             aria-describedby="tasamoratoriaError">
                         @error('tasamoratoria')
                             <div id="tasamoratoriaError" class="invalid-feedback">
@@ -837,10 +837,10 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha corte credito</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha corte crédito</span>
                         <input type="date" class="form-control @error('fechacortecredito') is-invalid @enderror"
                             id="fechacortecredito" name="fechacortecredito" value="{{ old('fechacortecredito') }}"
-                            placeholder="Fecha corte credito" aria-label="Fecha corte credito"
+                            placeholder="Fecha corte crédito" aria-label="Fecha corte crédito"
                             aria-describedby="fechacortecreditoError">
                         @error('fechacortecredito')
                             <div id="fechacortecreditoError" class="invalid-feedback">
@@ -851,11 +851,11 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento credito</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha vencimiento crédito</span>
                         <input type="date"
                             class="form-control @error('fechavencimientocredito') is-invalid @enderror"
                             id="fechavencimientocredito" name="fechavencimientocredito"
-                            value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento credito"
+                            value="{{ old('fechavencimientocredito') }}" placeholder="Fecha vencimiento crédito"
                             aria-label="Fecha vencimiento credito" aria-describedby="fechavencimientocreditoError">
                         @error('fechavencimientocredito')
                             <div id="fechavencimientocreditoError" class="invalid-feedback">
@@ -868,10 +868,10 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tasa fija mensual</span>
                         <input type="text" class="form-control @error('tazafijamensual') is-invalid @enderror"
                             id="tazafijamensual" name="tazafijamensual" value="{{ old('tazafijamensual') }}"
-                            placeholder="Taza fija mensual" aria-label="Taza fija mensual"
+                            placeholder="Tasa fija mensual" aria-label="Taza fija mensual"
                             aria-describedby="tazafijamensualError">
                         @error('tazafijamensual')
                             <div id="tazafijamensualError" class="invalid-feedback">
@@ -884,11 +884,11 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Taza fija mensual moratoria</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Tasa fija mensual moratoria</span>
                         <input type="text"
                             class="form-control @error('tazafijamensualmoratoria') is-invalid @enderror"
                             id="tazafijamensualmoratoria" name="tazafijamensualmoratoria"
-                            value="{{ old('tazafijamensualmoratoria') }}" placeholder="Taza fija mensual moratoria"
+                            value="{{ old('tazafijamensualmoratoria') }}" placeholder="Tasa fija mensual moratoria"
                             aria-label="Taza fija mensual moratoria" aria-describedby="tazafijamensualmoratoriaError">
                         @error('tazafijamensualmoratoria')
                             <div id="tazafijamensualmoratoriaError" class="invalid-feedback">
