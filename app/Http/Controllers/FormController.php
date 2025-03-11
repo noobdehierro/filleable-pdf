@@ -329,25 +329,15 @@ class FormController extends Controller
         $decimalPart = explode('.', (string)$number);
         $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
 
-        return ($formatter->toMoney($number, $decimals, $currency, $cents) . ' ' . $decimal . '/100 M.N.');
+        return ($formatter->toMoney(floor($number), $decimals, $currency, $cents) . ' ' . $decimal . '/100 M.N.');
     }
 
     public function formatNumber($number)
     {
-        // Obtener la parte entera del número
-        // $integerPart = floor($number);
 
-        // Formatear solo la parte entera como moneda
         $formatter = new NumberFormatter('es_MX', NumberFormatter::CURRENCY);
         $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);  // Sin decimales
         $formattedNumber = $formatter->formatCurrency($number, 'MXN');
-
-        // Captura la parte decimal original
-        // $decimalPart = explode('.', (string)$number);
-        // $decimal = isset($decimalPart[1]) ? str_pad($decimalPart[1], 2, '0') : '00';
-
-        // Devuelve el resultado con el formato adecuado
-        // return $formattedNumber . ' ' . $decimal . '/100 MXN';
         return $formattedNumber;
     }
 
