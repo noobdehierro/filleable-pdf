@@ -45,6 +45,12 @@ class FormController extends Controller
         return view('salud_morelos');
     }
 
+
+    public function puebla()
+    {
+        return view('puebla');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -261,6 +267,8 @@ class FormController extends Controller
             $pdf = new Pdf('pdfs/guerrero.pdf');
         } elseif ($lugar == "SALUDMORELOS") {
             $pdf = new Pdf('pdfs/saludmorelos.pdf');
+        } elseif ($lugar == "PUEBLA") {
+            $pdf = new Pdf('pdfs/puebla.pdf');
         } else {
             throw new Exception("El valor de 'lugar' no es válido.");
         }

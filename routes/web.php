@@ -19,5 +19,7 @@ Route::get('/convenio-oaxaca', [FormController::class, 'oaxaca'])->name('form.oa
 Route::get('/convenio-morelos', [FormController::class, 'morelos'])->name('form.morelos');
 Route::get('/convenio-salud-morelos', [FormController::class, 'salud_morelos'])->name('form.salud_morelos');
 Route::get('/convenio-guerrero', [FormController::class, 'guerrero'])->name('form.guerrero');
+Route::get('/convenio-puebla', [FormController::class, 'puebla'])->name('form.puebla');
+
 
 Route::post('/store', [FormController::class, 'store'])->name('form.store');
