@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#curp")
-        .mask("AAAA000000AAAAAA00")
+        .mask("AAAA000000AAAAAA0A")
         .on("keyup", function () {
             var valor = $(this).val().toUpperCase(); // Convierte el valor a mayúsculas
             $(this).val(valor); // Actualiza el campo con el valor en mayúsculas
