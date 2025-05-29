@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#curp")
-        .mask("AAAA000000AAAAAA0A")
+        .mask("AAAA000000AAAAAAAA")
         .on("keyup", function () {
             var valor = $(this).val().toUpperCase(); // Convierte el valor a mayúsculas
             $(this).val(valor); // Actualiza el campo con el valor en mayúsculas
@@ -41,3 +41,5 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
       });
 });
+hegv000130mplrnra9
+real970615hdfyls02
